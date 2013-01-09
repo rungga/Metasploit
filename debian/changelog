@@ -1,0 +1,11 @@
+metasploit-framework (4.5.0-1kali1) unstable; urgency=low
+
+  * Prototype release for kali framework
+
+ -- Brandon Turner <bturner@localhost.localdomain>  Wed, 09 Jan 2013 17:22:39 -0600
+
+metasploit-framework (4.5.0-1) unstable; urgency=low
+
+  * Initial packaging
+
+ -- Brandon Turner <bt@metasploit.com>  Sat, 29 Dec 2012 18:13:16 -0600

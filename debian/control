@@ -1,0 +1,17 @@
+Source: metasploit-framework
+Section: net
+Priority: extra
+Maintainer: Brandon Turner <bt@metasploit.com>
+Build-Depends: debhelper (>= 8.0.0), ruby1.9.1, ruby1.9.1-dev, libpq-dev
+Standards-Version: 3.9.4
+Homepage: http://www.metasploit.com/
+
+Package: metasploit-framework
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, bison, curl, nmap, ruby1.9.1, wget
+Recommends: postgresql
+Suggests: java-runtime
+Description: The Metasploit Framework
+ The Metasploit Framework is an open source platform that supports
+ vulnerability research, exploit development, and the creation of custom
+ security tools.

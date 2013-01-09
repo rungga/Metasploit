@@ -1,0 +1,3 @@
+data external lib modules plugins scripts tools usr/lib/metasploit-framework
+Gemfile Gemfile.lock Rakefile usr/lib/metasploit-framework
+msf* armitage usr/lib/metasploit-framework
