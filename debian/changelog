@@ -1,3 +1,9 @@
+metasploit-framework (4.5.0-1kali5) kali; urgency=low
+
+  * Work in progress
+
+ -- Mati Aharoni <muts@kali.org>  Wed, 09 Jan 2013 22:50:08 -0500
+
 metasploit-framework (4.5.0-1kali4) kali; urgency=low
 
   * Updated rules to fix install
