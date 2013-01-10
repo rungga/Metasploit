@@ -16,9 +16,12 @@ override_dh_clean:
 	rm -rf debian/gemcache
 
 build: build_gems
+build-arch: build_gems
 
 # Build binary gems
 build_gems:
+	gem env
+	env
 	for gem in `ls lib/gemcache/ruby/1.9.1/arch/${DEB_BUILD_ARCH_OS}${DEB_BUILD_ARCH_BITS}`; do \
 		IFS='-' read -a gem_split <<< "$$gem" ; \
 		VERSION=$${gem_split[-1]} ; \
