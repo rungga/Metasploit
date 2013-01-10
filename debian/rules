@@ -30,10 +30,10 @@ override_dh_install:
 	dh_install
 	# Replace upstream binary gems
 	rm -r debian/metasploit-framework/usr/lib/metasploit-framework/lib/gemcache/ruby/1.9.1/{arch,arch-old}
-	cp -r debian/gemcache/* debian/metasploit-framework/usr/lib/metasploit-framework/lib/gemcache/ruby/1.9.1/
+	cp -r debian/gemcache/* $(CURDIR)/debian/metasploit-framework/usr/lib/metasploit-framework/lib/gemcache/ruby/1.9.1/
 	
 	for binary in `ls armitage msf*`; do \
-		ln -s ../lib/metasploit-framework/$${binary} debian/metasploit-framework/usr/bin/ ; \
+		ln -s ../lib/metasploit-framework/$${binary} $(CURDIR)/debian/metasploit-framework/usr/bin/ ; \
 	done
 
 override_dh_shlibdeps:
