@@ -13,7 +13,7 @@ GEM_COMMAND := $(shell if [[ $$(which rvm) ]]; then echo "rvm system do gem"; el
 
 override_dh_clean:
 	dh_clean --exclude=external/serialport/README.orig
-	rm -rf debian/gemcache
+	#rm -rf debian/gemcache
 
 build: build_gems
 
@@ -23,18 +23,19 @@ build_gems:
 		IFS='-' read -a gem_split <<< "$$gem" ; \
 		VERSION=$${gem_split[-1]} ; \
 		GEM_NAME=$${gem/-$${VERSION}/} ; \
-		[[ $$VERSION && $$GEM_NAME ]] && ${GEM_COMMAND} install --quiet --install-dir debian/gemcache --no-rdoc --no-ri -v "$$VERSION" $$GEM_NAME -- --with-cflags=\"-O2 -pipe -march=native -w\" ; \
+		[[ $$VERSION && $$GEM_NAME ]] && ${GEM_COMMAND} install --quiet --install-dir $(CURDIR)/debian/metasploit-framework/tmp/gemcache --no-rdoc --no-ri -v "$$VERSION" $$GEM_NAME -- --with-cflags=\"-O2 -pipe -march=native -w\" ; \
 	done
 
 override_dh_install:
 	dh_install
 	# Replace upstream binary gems
 	rm -r debian/metasploit-framework/usr/lib/metasploit-framework/lib/gemcache/ruby/1.9.1/{arch,arch-old}
-	cp -r debian/gemcache/* $(CURDIR)/debian/metasploit-framework/usr/lib/metasploit-framework/lib/gemcache/ruby/1.9.1/
+	cp -r $(CURDIR)/debian/metasploit-framework/tmp/gemcache/* $(CURDIR)/debian/metasploit-framework/usr/lib/metasploit-framework/lib/gemcache/ruby/1.9.1/
 	
 	for binary in `ls armitage msf*`; do \
 		ln -s ../lib/metasploit-framework/$${binary} $(CURDIR)/debian/metasploit-framework/usr/bin/ ; \
 	done
+	rm -rf $(CURDIR)/debian/metasploit-framework/tmp/gemcache
 
 override_dh_shlibdeps:
 	dh_shlibdeps --exclude=/data/ --exclude=/modules/
