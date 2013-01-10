@@ -1,3 +1,9 @@
+metasploit-framework (4.5.0-2013010901kali1) kali; urgency=low
+
+  * Bump version to weekly release 2013010901
+
+ -- Brandon Turner <brandon_turner@rapid7.com>  Thu, 10 Jan 2013 15:42:22 -0600
+
 metasploit-framework (4.5.0-1kali8) kali; urgency=low
 
   * Work in progress
