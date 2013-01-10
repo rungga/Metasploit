@@ -9,7 +9,7 @@ GEM_COMMAND := $(shell if [[ $$(which rvm) ]]; then echo "rvm system do gem"; el
 #export DH_VERBOSE=1
 
 %:
-  dh $@
+	dh $@
 
 override_dh_clean:
 	dh_clean --exclude=external/serialport/README.orig
