@@ -1,3 +1,9 @@
+metasploit-framework (4.5.0-1kali2) UNRELEASED; urgency=low
+
+  * Metasploit Framework Kali import
+
+ -- Mati Aharoni <muts@devel.localdomain>  Wed, 09 Jan 2013 19:39:53 -0500
+
 metasploit-framework (4.5.0-1kali1) unstable; urgency=low
 
   * Prototype release for kali framework
