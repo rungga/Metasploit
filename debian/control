@@ -2,7 +2,7 @@ Source: metasploit-framework
 Section: net
 Priority: extra
 Maintainer: Brandon Turner <bt@metasploit.com>
-Build-Depends: debhelper (>= 8.0.0), ruby1.9.1, ruby1.9.1-dev, libpq-dev, libxml2
+Build-Depends: debhelper (>= 8.0.0), ruby1.9.1, ruby1.9.1-dev, libpq-dev, libxml2-dev
 Standards-Version: 3.9.4
 Homepage: http://www.metasploit.com/
 
