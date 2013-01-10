@@ -1,3 +1,9 @@
+metasploit-framework (4.5.0-1kali8.2) kali; urgency=low
+
+  * Test update
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 10 Jan 2013 16:02:04 -0600
+
 metasploit-framework (4.5.0-1kali8) kali; urgency=low
 
   * Work in progress
