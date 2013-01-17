@@ -13,7 +13,3 @@ python-script-but-no-python-dep usr/share/metasploit-framework/external/source/m
 # require ruby-1.9.1.  Patching our code base to use ruby1.9.1 in every ruby
 # header seems unreasonable.
 ruby-script-but-no-ruby-dep
-
-# Ignore images in gemcache.  We may want to move the gemcache
-# to usr/share.
-image-file-in-usr-lib usr/share/metasploit-framework/lib/gemcache/*
