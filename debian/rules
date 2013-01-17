@@ -15,7 +15,7 @@ override_dh_clean:
 	dh_clean --exclude=external/serialport/README.orig
 	rm -rf debian/gemcache
 
-build: build_gems
+build: build-arch
 build-arch: build_gems
 
 # Build binary gems
