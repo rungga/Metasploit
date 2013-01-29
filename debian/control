@@ -10,7 +10,7 @@ Package: metasploit-framework
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, bison, curl, nmap, ruby1.9.1, wget
 Recommends: postgresql
-Suggests: java-runtime
+Suggests: java7-runtime-headless
 Description: The Metasploit Framework
  The Metasploit Framework is an open source platform that supports
  vulnerability research, exploit development, and the creation of custom
