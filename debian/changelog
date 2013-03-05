@@ -1,3 +1,9 @@
+metasploit-framework (4.5.2-2013022702-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Mon, 04 Mar 2013 21:47:33 -0600
+
 metasploit-framework (4.5.2-2013022701-1kali0) kali; urgency=low
 
   * Bump version
