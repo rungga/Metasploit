@@ -1,3 +1,9 @@
+metasploit-framework (4.5.3-2013032001-1kali2) kali; urgency=low
+
+  * Fix compilation on arm
+
+ -- Brandon Turner <bt@metasploit.com>  Sat, 23 Mar 2013 16:19:49 -0500
+
 metasploit-framework (4.5.3-2013032001-1kali1) kali; urgency=low
 
   * Fix John the Ripper

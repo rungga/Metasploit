@@ -42,15 +42,11 @@ build_john:
 		mkdir ../run && make clean linux-x86-mmx  && mv ../run ../run.linux.x86.mmx  ; \
 		mkdir ../run && make clean linux-x86-sse2 && mv ../run ../run.linux.x86.sse2 ; \
 		mkdir ../run && make clean linux-x86-any  && mv ../run ../run.linux.x86.any  ; \
-	else \
-		mkdir ../run && make clean generic        && mv ../run ../run.generic ; \
 	fi
 	cd debian/john ; \
 	for dir in $$(ls -d run*) ; do \
-		if [ -d ../../data/john/$${dir}/* ] ; then \
+		if [ -d ../../data/john/$${dir} ] ; then \
 			cp -n ../../data/john/$${dir}/* $${dir}/ ; \
-		else \
-			cp -n ../../data/john/run.linux.x64.mmx/* $${dir}/ ; \
 		fi ; \
 	done
 
@@ -64,7 +60,9 @@ override_dh_install:
 	# Replace John the Ripper
 	rm debian/metasploit-framework/usr/share/metasploit-framework/data/john/src.tar.bz2
 	rm -r debian/metasploit-framework/usr/share/metasploit-framework/data/john/run.*
-	cp -r debian/john/run.* debian/metasploit-framework/usr/share/metasploit-framework/data/john/
+	if ls debian/john/run.* &> /dev/null ; then \
+		cp -r debian/john/run.* debian/metasploit-framework/usr/share/metasploit-framework/data/john/ ; \
+	fi
 	
 	for binary in `ls msf*`; do \
 		ln -s ../share/metasploit-framework/$${binary} debian/metasploit-framework/usr/bin/ ; \
