@@ -22,20 +22,22 @@ build-arch: build_gems build_john
 
 # Build binary gems
 build_gems:
+	set -e ; \
 	GEM_TMP=$$( mktemp -d ) ; \
 	for gem in `ls lib/gemcache/ruby/1.9.1/arch/${DEB_BUILD_ARCH_OS}${DEB_BUILD_ARCH_BITS}`; do \
 		IFS='-' read -a gem_split <<< "$$gem" ; \
 		VERSION=$${gem_split[-1]} ; \
 		GEM_NAME=$${gem/-$${VERSION}/} ; \
-		[[ $$VERSION && $$GEM_NAME ]] && HOME=$$GEM_TMP ${GEM_COMMAND} install --quiet --no-user-install --install-dir debian/gemcache --no-rdoc --no-ri -v "$$VERSION" $$GEM_NAME -- --with-cflags=\"-O2 -pipe -march=native -w\" ; \
+		[[ $$VERSION && $$GEM_NAME ]] && HOME=$$GEM_TMP ${GEM_COMMAND} install --quiet --no-user-install --install-dir debian/gemcache --no-rdoc --no-ri -v "$$VERSION" $$GEM_NAME -- --with-cflags=\"-O2 -pipe -w\" ; \
 	done ; \
-	HOME=$$GEM_TMP ${GEM_COMMAND} install --quiet --no-user-install --install-dir debian/gemcache --no-rdoc --no-ri -v "0.11.3" pcaprub -- --with-cflags=\"-O2 -pipe -march=native -w\" ; \
+	HOME=$$GEM_TMP ${GEM_COMMAND} install --quiet --no-user-install --install-dir debian/gemcache --no-rdoc --no-ri -v "0.11.3" pcaprub -- --with-cflags=\"-O2 -pipe -w\" ; \
 	rm -rf $$GEM_TMP ;
 
 # Build John the Ripper Jumbo
 build_john:
 	mkdir -p debian/john
 	tar -C debian/john -xjf data/john/src.tar.bz2
+	set -e ; \
 	cd debian/john/src ; \
 	if [ "${DEB_BUILD_ARCH}" = "amd64" -o "${DEB_BUILD_ARCH}" = "x86_64" ]; then \
 		mkdir ../run && make clean linux-x86-64   && mv ../run ../run.linux.x64.mmx  ; \
@@ -44,6 +46,7 @@ build_john:
 		mkdir ../run && make clean linux-x86-sse2 && mv ../run ../run.linux.x86.sse2 ; \
 		mkdir ../run && make clean linux-x86-any  && mv ../run ../run.linux.x86.any  ; \
 	fi
+	set -e ; \
 	cd debian/john ; \
 	for dir in $$(ls -d run*) ; do \
 		if [ -d ../../data/john/$${dir} ] ; then \
@@ -61,10 +64,12 @@ override_dh_install:
 	# Replace John the Ripper
 	rm debian/metasploit-framework/usr/share/metasploit-framework/data/john/src.tar.bz2
 	rm -r debian/metasploit-framework/usr/share/metasploit-framework/data/john/run.*
+	set -e ; \
 	if ls debian/john/run.* &> /dev/null ; then \
 		cp -r debian/john/run.* debian/metasploit-framework/usr/share/metasploit-framework/data/john/ ; \
 	fi
 	
+	set -e ; \
 	for binary in `ls msf*`; do \
 		ln -s ../share/metasploit-framework/$${binary} debian/metasploit-framework/usr/bin/ ; \
 	done

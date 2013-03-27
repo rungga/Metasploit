@@ -1,3 +1,9 @@
+metasploit-framework (4.5.3-2013032001-1kali4) kali; urgency=low
+
+  * Ensure multi-statement bash scripts fail correctly 
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 26 Mar 2013 18:38:02 -0500
+
 metasploit-framework (4.5.3-2013032001-1kali3) kali; urgency=low
 
   * One more fix on arm
