@@ -5,6 +5,7 @@ DEB_BUILD_ARCH := $(shell dpkg-architecture -qDEB_BUILD_ARCH)
 DEB_BUILD_ARCH_OS := $(shell dpkg-architecture -qDEB_BUILD_ARCH_OS)
 DEB_BUILD_ARCH_BITS := $(shell dpkg-architecture -qDEB_BUILD_ARCH_BITS)
 GEM_COMMAND := $(shell if [[ $$(which rvm) ]]; then echo "rvm system do gem"; else echo "gem"; fi)
+BUNDLE_COMMAND := $(shell if [[ $$(which rvm) ]]; then echo "rvm system do bundle"; else echo "bundle"; fi)
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
@@ -14,8 +15,8 @@ GEM_COMMAND := $(shell if [[ $$(which rvm) ]]; then echo "rvm system do gem"; el
 
 override_dh_clean:
 	dh_clean --exclude=external/serialport/README.orig
-	rm -rf debian/gemcache
 	rm -rf debian/john
+	rm -rf vendor/bundle
 
 build: build-arch
 build-arch: build_gems build_john
@@ -24,13 +25,9 @@ build-arch: build_gems build_john
 build_gems:
 	set -e ; \
 	GEM_TMP=$$( mktemp -d ) ; \
-	for gem in `ls lib/gemcache/ruby/1.9.1/arch/${DEB_BUILD_ARCH_OS}${DEB_BUILD_ARCH_BITS}`; do \
-		IFS='-' read -a gem_split <<< "$$gem" ; \
-		VERSION=$${gem_split[-1]} ; \
-		GEM_NAME=$${gem/-$${VERSION}/} ; \
-		[[ $$VERSION && $$GEM_NAME ]] && HOME=$$GEM_TMP ${GEM_COMMAND} install --quiet --no-user-install --install-dir debian/gemcache --no-rdoc --no-ri -v "$$VERSION" $$GEM_NAME -- --with-cflags=\"-O2 -pipe -w\" ; \
-	done ; \
-	HOME=$$GEM_TMP ${GEM_COMMAND} install --quiet --no-user-install --install-dir debian/gemcache --no-rdoc --no-ri -v "0.11.3" pcaprub -- --with-cflags=\"-O2 -pipe -w\" ; \
+	HOME=$$GEM_TMP ${BUNDLE_COMMAND} config build.nokogiri --with-cflags=\"-O2 -pipe -w\" ; \
+	HOME=$$GEM_TMP ${BUNDLE_COMMAND} install --without development test --path vendor/bundle ; \
+	echo "BUNDLE_FROZEN: '1'" >> .bundle/config ; \
 	rm -rf $$GEM_TMP ;
 
 # Build John the Ripper Jumbo
@@ -57,10 +54,7 @@ build_john:
 
 
 override_dh_install:
-	dh_install --exclude=armitage --exclude=data/armitage
-	# Replace upstream binary gems
-	rm -r debian/metasploit-framework/usr/share/metasploit-framework/lib/gemcache/ruby/1.9.1/{arch,arch-old}
-	cp -r debian/gemcache/* debian/metasploit-framework/usr/share/metasploit-framework/lib/gemcache/ruby/1.9.1/
+	dh_install --exclude=armitage --exclude=data/armitage --exclude=msfgui --exclude=data/gui
 	# Replace John the Ripper
 	rm debian/metasploit-framework/usr/share/metasploit-framework/data/john/src.tar.bz2
 	rm -r debian/metasploit-framework/usr/share/metasploit-framework/data/john/run.*
