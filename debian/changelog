@@ -1,3 +1,9 @@
+metasploit-framework (4.6.0-2013041701-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 17 Apr 2013 11:30:04 -0500
+
 metasploit-framework (4.6.0-1-1kali1) kali; urgency=low
 
   * Add git as a dependency
