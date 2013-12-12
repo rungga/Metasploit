@@ -18,8 +18,8 @@ class Framework
 
   Major    = 4
   Minor    = 8
-  Point    = 1
-  Release  = "-2013120401"
+  Point    = 2
+  Release  = "-2013121101"
 
   if(Point)
     Version  = "#{Major}.#{Minor}.#{Point}#{Release}"
