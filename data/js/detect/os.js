@@ -212,7 +212,9 @@ window.os_detect.getVersion = function(){
 		// Thanks to developer.mozilla.org "Firefox for developers" series for most
 		// of these.
 		// Release changelogs: http://www.mozilla.org/en-US/firefox/releases/
-		if (css_is_valid('cursor', 'cursor', 'grab')) {
+		if (css_is_valid('flex-wrap', 'flexWrap', 'nowrap')) {
+			ua_version = '28.0';
+		} else if (css_is_valid('cursor', 'cursor', 'grab')) {
 			ua_version = '27.0';
 		} else if (css_is_valid('image-orientation',
 		                 'imageOrientation',
@@ -871,6 +873,42 @@ window.os_detect.getVersion = function(){
 				break;
 			case "9016470":
 				// IE 9.0.8112.16421 / Windows 7 SP1
+				ua_version = "9.0";
+				os_flavor = "7";
+				os_sp = "SP1";
+				break;
+			case "9016502":
+				// IE 9.0.8112.16502 / Windows 7 SP1
+				ua_version = "9.0";
+				os_flavor = "7";
+				os_sp = "SP1";
+				break;
+			case "9016506":
+				// IE 9.0.8112.16506 / Windows 7 SP1
+				ua_version = "9.0";
+				os_flavor = "7";
+				os_sp = "SP1";
+				break;
+			case "9016514":
+				// IE 9.0.8112.16514 / Windows 7 SP1
+				ua_version = "9.0";
+				os_flavor = "7";
+				os_sp = "SP1";
+				break;
+			case "9016520":
+				// IE 9.0.8112.16520 / Windows 7 SP1
+				ua_version = "9.0";
+				os_flavor = "7";
+				os_sp = "SP1";
+				break;
+			case "9016526":
+				// IE 9.0.8112.16526 / Windows 7 SP1
+				ua_version = "9.0";
+				os_flavor = "7";
+				os_sp = "SP1";
+				break;
+			case "9016533":
+				// IE 9.0.8112.16533 / Windows 7 SP1
 				ua_version = "9.0";
 				os_flavor = "7";
 				os_sp = "SP1";
