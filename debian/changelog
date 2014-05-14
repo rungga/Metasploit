@@ -1,3 +1,9 @@
+metasploit-framework (4.9.2-2014051401-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 14 May 2014 16:16:00 -0500
+
 metasploit-framework (4.9.2-2014050701-1kali0) kali; urgency=low
 
   * Bump version
