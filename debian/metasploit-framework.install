@@ -1,4 +1,4 @@
-data lib modules plugins scripts tools usr/share/metasploit-framework
-Gemfile Gemfile.lock Rakefile .bundle vendor usr/share/metasploit-framework
+app config data db lib modules plugins scripts tools usr/share/metasploit-framework
+Gemfile Gemfile.lock metasploit-framework.gemspec Rakefile .bundle vendor usr/share/metasploit-framework
 build_rev.txt usr/share/metasploit-framework
 msf* usr/share/metasploit-framework
