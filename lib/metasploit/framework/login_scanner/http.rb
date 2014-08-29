@@ -46,8 +46,17 @@ module Metasploit
           result_opts = {
             credential: credential,
             status: Metasploit::Model::Login::Status::INCORRECT,
-            proof: nil
+            proof: nil,
+            host: host,
+            port: port,
+            protocol: 'tcp'
           }
+
+          if ssl
+            result_opts[:service_name] = 'https'
+          else
+            result_opts[:service_name] = 'http'
+          end
 
           http_client = Rex::Proto::Http::Client.new(
             host, port, {}, ssl, ssl_version,
@@ -79,7 +88,7 @@ module Metasploit
             else
               result_opts.merge!(status: Metasploit::Model::Login::Status::NO_AUTH_REQUIRED)
             end
-          rescue ::EOFError, Rex::ConnectionError, ::Timeout::Error
+          rescue ::EOFError, Errno::ETIMEDOUT, Rex::ConnectionError, ::Timeout::Error
             result_opts.merge!(status: Metasploit::Model::Login::Status::UNABLE_TO_CONNECT)
           ensure
             http_client.close
