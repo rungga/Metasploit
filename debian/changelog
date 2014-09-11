@@ -1,3 +1,51 @@
+metasploit-framework (4.10.0-2014090301-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 03 Sep 2014 16:53:07 -0500
+
+metasploit-framework (4.10.0-2014082701-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Thu, 28 Aug 2014 21:34:57 -0500
+
+metasploit-framework (4.10.0-2014082101-1kali2) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Thu, 21 Aug 2014 16:36:33 -0500
+
+metasploit-framework (4.10.0-2014082101-1kali1) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Thu, 21 Aug 2014 16:28:39 -0500
+
+metasploit-framework (4.10.0-2014082003-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 20 Aug 2014 15:43:58 -0500
+
+metasploit-framework (4.10.0-2014082002-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 20 Aug 2014 10:51:15 -0500
+
+metasploit-framework (4.10.0-2014081302-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 14 Aug 2014 10:54:02 -0500
+
+metasploit-framework (4.10.0-2014081301-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 12 Aug 2014 17:18:41 -0500
+
 metasploit-framework (4.9.3-2014072301-1kali1) kali-dev; urgency=medium
 
   * Rebuild for kali-rolling.
