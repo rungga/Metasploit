@@ -29,6 +29,15 @@ module Metasploit
         #   @return [String] HTTP method, e.g. "GET", "POST"
         attr_accessor :method
 
+        # @!attribute user_agent
+        #   @return [String] the User-Agent to use for the HTTP requests
+        attr_accessor :user_agent
+
+        # @!attribute vhost
+        #   @return [String] the Virtual Host name for the target Web Server
+        attr_accessor :vhost
+
+
         validates :uri, presence: true, length: { minimum: 1 }
 
         validates :method,
@@ -44,15 +53,22 @@ module Metasploit
             'uri' => uri,
             'method' => method
           )
-          # Use _send_recv instead of send_recv to skip automatiu
-          # authentication
-          response = http_client._send_recv(request)
+
+          begin
+            # Use _send_recv instead of send_recv to skip automatiu
+            # authentication
+            response = http_client._send_recv(request)
+          rescue ::EOFError, Errno::ETIMEDOUT, Rex::ConnectionError, ::Timeout::Error
+            error_message = "Unable to connect to target"
+          end
 
           if !(response && response.code == 401 && response.headers['WWW-Authenticate'])
-            "No authentication required"
+            error_message = "No authentication required"
           else
-            false
+            error_message = false
           end
+
+          error_message
         end
 
         # Attempt a single login with a single credential against the target.
@@ -82,6 +98,9 @@ module Metasploit
             host, port, {}, ssl, ssl_version,
             nil, credential.public, credential.private
           )
+
+          http_client = config_client(http_client)
+
           if credential.realm
             http_client.set_config('domain' => credential.realm)
           end
@@ -107,6 +126,14 @@ module Metasploit
         end
 
         private
+
+        def config_client(client)
+          client.set_config(
+            'vhost' => vhost || host,
+            'agent' => user_agent
+          )
+          client
+        end
 
         # This method sets the sane defaults for things
         # like timeouts and TCP evasion options
