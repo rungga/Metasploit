@@ -9,153 +9,171 @@ module Msf
 ###
 module Auxiliary::UDPScanner
 
-	include Auxiliary::Scanner
+  include Auxiliary::Scanner
 
-	#
-	# Initializes an instance of an auxiliary module that scans UDP
-	#
+  #
+  # Initializes an instance of an auxiliary module that scans UDP
+  #
 
-	def initialize(info = {})
-		super
+  def initialize(info = {})
+    super
 
-		register_options(
-		[
-			Opt::CHOST,
-			OptInt.new('BATCHSIZE', [true, 'The number of hosts to probe in each set', 256]),
-		], self.class)
+    register_options(
+    [
+      Opt::CHOST,
+      OptInt.new('BATCHSIZE', [true, 'The number of hosts to probe in each set', 256]),
+    ], self.class)
 
-		register_advanced_options(
-		[
-			OptInt.new('ScannerRecvInterval', [true, 'The maximum numbers of sends before entering the processing loop', 30]),
-			OptInt.new('ScannerMaxResends', [true, 'The maximum times to resend a packet when out of buffers', 10]),
-			OptInt.new('ScannerRecvQueueLimit', [true, 'The maximum queue size before breaking out of the processing loop', 100]),
-			OptInt.new('ScannerRecvWindow', [true, 'The number of seconds to wait post-scan to catch leftover replies', 15]),
+    register_advanced_options(
+    [
+      OptInt.new('ScannerRecvInterval', [true, 'The maximum numbers of sends before entering the processing loop', 30]),
+      OptInt.new('ScannerMaxResends', [true, 'The maximum times to resend a packet when out of buffers', 10]),
+      OptInt.new('ScannerRecvQueueLimit', [true, 'The maximum queue size before breaking out of the processing loop', 100]),
+      OptInt.new('ScannerRecvWindow', [true, 'The number of seconds to wait post-scan to catch leftover replies', 15]),
 
-		], self.class)
-	end
+    ], self.class)
+  end
 
 
-	# Define our batch size
-	def run_batch_size
-		datastore['BATCHSIZE'].to_i
-	end
+  # Define our batch size
+  def run_batch_size
+    datastore['BATCHSIZE'].to_i
+  end
 
-	# Start scanning a batch of IP addresses
-	def run_batch(batch)
-		@udp_sock = Rex::Socket::Udp.create({
-			'LocalHost' => datastore['CHOST'] || nil,
-			'Context'   => { 'Msf' => framework, 'MsfExploit' => self }
-		})
-		add_socket(@udp_sock)
+  # Start scanning a batch of IP addresses
+  def run_batch(batch)
+    @udp_sock = Rex::Socket::Udp.create({
+      'LocalHost' => datastore['CHOST'] || nil,
+      'Context'   => { 'Msf' => framework, 'MsfExploit' => self }
+    })
+    add_socket(@udp_sock)
 
-		@udp_send_count = 0
+    @udp_send_count = 0
 
-		# Provide a hook for pre-scanning setup
-		scanner_prescan(batch)
+    # Provide a hook for pre-scanning setup
+    scanner_prescan(batch)
 
-		# Call the including module once per IP
-		batch.each do |ip|
-			scan_host(ip)
-		end
+    # Call the including module once per IP
+    batch.each do |ip|
+      scan_host(ip)
+    end
 
-		# Catch any stragglers
-		stime = Time.now.to_f
+    # Catch any stragglers
+    stime = Time.now.to_f
 
-		while Time.now.to_f < ( stime + datastore['ScannerRecvWindow'] )
-			scanner_recv(1.0)
-		end
+    while Time.now.to_f < ( stime + datastore['ScannerRecvWindow'] )
+      scanner_recv(1.0)
+    end
 
-		# Provide a hook for post-scanning processing
-		scanner_postscan(batch)
-	end
+    # Provide a hook for post-scanning processing
+    scanner_postscan(batch)
+  end
 
-	# Send a packet to a given host and port
-	def scanner_send(data, ip, port)
+  # Send a spoofed packet to a given host and port
+  def scanner_spoof_send(data, ip, port, srcip, num_packets=1)
+    open_pcap
+    p = PacketFu::UDPPacket.new
+    p.ip_saddr = srcip
+    p.ip_daddr = ip
+    p.ip_ttl = 255
+    p.udp_src = (rand((2**16)-1024)+1024).to_i
+    p.udp_dst = port
+    p.payload = data
+    p.recalc
+    print_status("Sending #{num_packets} packet(s) to #{ip} from #{srcip}")
+    1.upto(num_packets) do |x|
+      capture_sendto(p, ip)
+    end
+    close_pcap
+  end
 
-		resend_count = 0
-		begin
+  # Send a packet to a given host and port
+  def scanner_send(data, ip, port)
 
-			@udp_sock.sendto(data, ip, port, 0)
+    resend_count = 0
+    begin
 
-		rescue ::Errno::ENOBUFS
-			resend_count += 1
-			if resend_count > datastore['ScannerMaxResends']
-				vprint_error("#{ip}:#{port} Max resend count hit sending #{data.length}")
-				return false
-			end
+      @udp_sock.sendto(data, ip, port, 0)
 
-			scanner_recv(0.1)
+    rescue ::Errno::ENOBUFS
+      resend_count += 1
+      if resend_count > datastore['ScannerMaxResends']
+        vprint_error("#{ip}:#{port} Max resend count hit sending #{data.length}")
+        return false
+      end
 
-			::IO.select(nil, nil, nil, 0.25)
+      scanner_recv(0.1)
 
-			retry
+      ::IO.select(nil, nil, nil, 0.25)
 
-		rescue ::Rex::ConnectionError
-			# This fires for host unreachable, net unreachable, and broadcast sends
-			# We can safely ignore all of these for UDP sends
-		end
+      retry
 
-		@udp_send_count += 1
+    rescue ::Rex::ConnectionError
+      # This fires for host unreachable, net unreachable, and broadcast sends
+      # We can safely ignore all of these for UDP sends
+    end
 
-		if @udp_send_count % datastore['ScannerRecvInterval'] == 0
-			scanner_recv(0.1)
-		end
+    @udp_send_count += 1
 
-		true
-	end
+    if @udp_send_count % datastore['ScannerRecvInterval'] == 0
+      scanner_recv(0.1)
+    end
 
-	# Process incoming packets and dispatch to the module
-	# Ensure a response flood doesn't trap us in a loop
-	# Ignore packets outside of our project's scope
-	def scanner_recv(timeout=0.1)
-		queue = []
-		while (res = @udp_sock.recvfrom(65535, timeout))
+    true
+  end
 
-			# Ignore invalid responses
-			break if not res[1]
+  # Process incoming packets and dispatch to the module
+  # Ensure a response flood doesn't trap us in a loop
+  # Ignore packets outside of our project's scope
+  def scanner_recv(timeout=0.1)
+    queue = []
+    while (res = @udp_sock.recvfrom(65535, timeout))
 
-			# Ignore empty responses
-			next if not (res[0] and res[0].length > 0)
+      # Ignore invalid responses
+      break if not res[1]
 
-			# Trim the IPv6-compat prefix off if needed
-			shost = res[1].sub(/^::ffff:/, '')
+      # Ignore empty responses
+      next if not (res[0] and res[0].length > 0)
 
-			# Ignore the response if we have a boundary
-			next unless inside_workspace_boundary?(shost)
+      # Trim the IPv6-compat prefix off if needed
+      shost = res[1].sub(/^::ffff:/, '')
 
-			queue << [res[0], shost, res[2]]
+      # Ignore the response if we have a boundary
+      next unless inside_workspace_boundary?(shost)
 
-			if queue.length > datastore['ScannerRecvQueueLimit']
-				break
-			end
-		end
+      queue << [res[0], shost, res[2]]
 
-		queue.each do |q|
-			scanner_process(*q)
-		end
+      if queue.length > datastore['ScannerRecvQueueLimit']
+        break
+      end
+    end
 
-		queue.length
-	end
+    queue.each do |q|
+      scanner_process(*q)
+    end
 
-	#
-	# The including module override these methods
-	#
+    queue.length
+  end
 
-	# Called for each IP in the batch
-	def scan_host(ip)
-	end
+  #
+  # The including module override these methods
+  #
 
-	# Called for each response packet
-	def scanner_process(data, shost, sport)
-	end
+  # Called for each IP in the batch
+  def scan_host(ip)
+  end
 
-	# Called before the scan block
-	def scanner_prescan(batch)
-	end
+  # Called for each response packet
+  def scanner_process(data, shost, sport)
+  end
 
-	# Called after the scan block
-	def scanner_postscan(batch)
-	end
+  # Called before the scan block
+  def scanner_prescan(batch)
+  end
+
+  # Called after the scan block
+  def scanner_postscan(batch)
+  end
 
 end
 end
