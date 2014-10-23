@@ -1,5 +1,5 @@
 ##
-# This module requires Metasploit: http//metasploit.com/download
+# This module requires Metasploit: http://metasploit.com/download
 # Current source: https://github.com/rapid7/metasploit-framework
 ##
 
@@ -88,7 +88,7 @@ class Metasploit3 < Msf::Auxiliary
         next
       when Metasploit::Model::Login::Status::UNABLE_TO_CONNECT
         if datastore['VERBOSE']
-          print_brute :level => :verror, :ip => ip, :msg => "Could not connect"
+          print_brute :level => :verror, :ip => ip, :msg => "Could not connect: #{result.proof}"
         end
       when Metasploit::Model::Login::Status::INCORRECT
         if datastore['VERBOSE']
