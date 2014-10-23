@@ -1,5 +1,5 @@
 ##
-# This module requires Metasploit: http//metasploit.com/download
+# This module requires Metasploit: http://metasploit.com/download
 # Current source: https://github.com/rapid7/metasploit-framework
 ##
 
@@ -34,6 +34,7 @@ class Metasploit3 < Msf::Auxiliary
     deregister_options('RHOST')
     register_options(
       [
+        Opt::Proxies,
         OptInt.new('LoginTimeOut', [ true, "Timout on login", 23 ]),
         OptBool.new('RECORD_GUEST', [ false, "Record guest login to the database", false]),
         OptBool.new('CHECK_GUEST', [ false, "Check for guest login", true])
@@ -53,6 +54,8 @@ class Metasploit3 < Msf::Auxiliary
         username: datastore['USERNAME'],
         user_as_pass: datastore['USER_AS_PASS'],
     )
+
+    cred_collection = prepend_db_passwords(cred_collection)
 
     scanner = Metasploit::Framework::LoginScanner::AFP.new(
         host: ip,
@@ -77,7 +80,7 @@ class Metasploit3 < Msf::Auxiliary
         print_good "#{ip}:#{rport} - LOGIN SUCCESSFUL: #{result.credential}"
       else
         invalidate_login(credential_data)
-        print_status "#{ip}:#{rport} - LOGIN FAILED: #{result.credential} (#{result.status}: #{result.proof})"
+        vprint_error "#{ip}:#{rport} - LOGIN FAILED: #{result.credential} (#{result.status}: #{result.proof})"
       end
     end
   end

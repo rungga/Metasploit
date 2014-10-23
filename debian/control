@@ -2,13 +2,13 @@ Source: metasploit-framework
 Section: net
 Priority: extra
 Maintainer: Brandon Turner <bt@metasploit.com>
-Build-Depends: bundler (>= 1.1.0), debhelper (>= 8.0.0), git, ruby, ruby-dev, libpcap-dev, libpq-dev, libsqlite3-dev, libxml2-dev, libxslt-dev
+Build-Depends: bundler (>= 1.1.0), debhelper (>= 8.0.0), git, ruby1.9.1, ruby1.9.1-dev, libpcap-dev, libpq-dev, libsqlite3-dev, libxml2-dev, libxslt-dev
 Standards-Version: 3.9.4
 Homepage: http://www.metasploit.com/
 
 Package: metasploit-framework
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ruby, bison, bundler (>= 1.1.0), curl, git, nmap, wget
+Depends: ${shlibs:Depends}, ${misc:Depends}, bison, bundler (>= 1.1.0), curl, git, nmap, ruby1.9.1, wget, libpcap0.8, libsqlite3-0
 Recommends: postgresql
 Suggests: java7-runtime-headless
 Description: Framework for exploit development and vulnerability research
