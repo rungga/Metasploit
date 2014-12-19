@@ -1,3 +1,9 @@
+metasploit-framework (4.11.0-2014121601-1kali0.1) kali-dev; urgency=medium
+
+  * Rebuild in kali-dev.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Fri, 19 Dec 2014 15:58:54 +0100
+
 metasploit-framework (4.11.0-2014121601-1kali0) kali; urgency=medium
 
   * Bump version
