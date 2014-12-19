@@ -11,8 +11,8 @@ Build-Depends:
  libsqlite3-dev,
  libxml2-dev,
  libxslt-dev,
- ruby1.9.1,
- ruby1.9.1-dev,
+ ruby,
+ ruby-dev,
 Standards-Version: 3.9.4
 Homepage: http://www.metasploit.com/
 
@@ -23,10 +23,8 @@ Depends:
  bundler (>= 1.1.0),
  curl,
  git,
- libpcap0.8,
- libsqlite3-0,
  nmap,
- ruby1.9.1,
+ ruby,
  wget,
  ${misc:Depends},
  ${shlibs:Depends},
