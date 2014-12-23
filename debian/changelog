@@ -1,3 +1,9 @@
+metasploit-framework (4.11.0-2014122301-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Tue, 23 Dec 2014 16:30:24 -0600
+
 metasploit-framework (4.11.0-2014121601-1kali0) kali; urgency=medium
 
   * Bump version
