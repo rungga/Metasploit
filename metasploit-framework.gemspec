@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.authors = ["Metasploit Hackers"]
   s.bindir = "."
-  s.date = "2015-01-28"
+  s.date = "2015-01-30"
   s.description = "metasploit-framework"
   s.email = ["metasploit-hackers@lists.sourceforge.net"]
   s.executables = ["msfbinscan", "msfcli", "msfconsole", "msfd", "msfelfscan", "msfencode", "msfmachscan", "msfpayload", "msfpescan", "msfrop", "msfrpc", "msfrpcd", "msfupdate", "msfvenom"]
