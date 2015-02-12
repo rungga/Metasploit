@@ -3,7 +3,6 @@ Section: net
 Priority: extra
 Maintainer: Brandon Turner <bt@metasploit.com>
 Build-Depends:
-  bundler (>= 1.1.0),
   debhelper (>= 8.0.0),
   git,
   libpcap-dev,
@@ -11,8 +10,7 @@ Build-Depends:
   libsqlite3-dev,
   libxml2-dev,
   libxslt-dev,
-  ruby,
-  ruby-dev,
+  metasploit-common,
 Standards-Version: 3.9.4
 Homepage: http://www.metasploit.com/
 
@@ -20,11 +18,12 @@ Package: metasploit-framework
 Architecture: any
 Depends:
   bison,
-  bundler (>= 1.1.0),
   curl,
   git,
+  libpcap0.8,
+  libsqlite3-0,
+  metasploit-common,
   nmap,
-  ruby,
   wget,
   ${misc:Depends},
   ${shlibs:Depends},

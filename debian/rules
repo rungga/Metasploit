@@ -4,8 +4,8 @@ SHELL := /bin/bash
 DEB_BUILD_ARCH := $(shell dpkg-architecture -qDEB_BUILD_ARCH)
 DEB_BUILD_ARCH_OS := $(shell dpkg-architecture -qDEB_BUILD_ARCH_OS)
 DEB_BUILD_ARCH_BITS := $(shell dpkg-architecture -qDEB_BUILD_ARCH_BITS)
-GEM_COMMAND := $(shell if [[ $$(which rvm) ]]; then echo "rvm system do gem"; else echo "gem"; fi)
-BUNDLE_COMMAND := $(shell if [[ $$(which rvm) ]]; then echo "rvm system do bundle"; else echo "bundle"; fi)
+GEM_COMMAND := $(shell if [[ $$(which rvm) ]]; then echo "rvm system do gem"; else echo "GEM_HOME=/opt/metasploit/ruby /opt/metasploit/ruby/bin/ruby /opt/metasploit/ruby/bin/gem"; fi)
+BUNDLE_COMMAND := $(shell if [[ $$(which rvm) ]]; then echo "rvm system do bundle"; else echo "GEM_HOME=/opt/metasploit/ruby /opt/metasploit/ruby/bin/ruby /opt/metasploit/ruby/bin/bundle"; fi)
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
