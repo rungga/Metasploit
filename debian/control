@@ -6,6 +6,7 @@ Build-Depends:
   ca-certificates,
   debhelper (>= 8.0.0),
   git,
+  libgmp-dev,
   libpcap-dev,
   libpq-dev,
   libsqlite3-dev,
