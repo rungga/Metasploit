@@ -3,6 +3,7 @@ Section: net
 Priority: extra
 Maintainer: Brandon Turner <bt@metasploit.com>
 Build-Depends:
+  ca-certificates,
   debhelper (>= 8.0.0),
   git,
   libpcap-dev,
