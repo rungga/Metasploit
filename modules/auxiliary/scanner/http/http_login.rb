@@ -22,10 +22,6 @@ class Metasploit3 < Msf::Auxiliary
     super(
       'Name'           => 'HTTP Login Utility',
       'Description'    => 'This module attempts to authenticate to an HTTP service.',
-      'References'  =>
-        [
-
-        ],
       'Author'         => [ 'hdm' ],
       'References'     =>
         [
@@ -74,6 +70,7 @@ class Metasploit3 < Msf::Auxiliary
         /auth/
         /manager/
         /Management.asp
+        /ews/
       }
     end
 
