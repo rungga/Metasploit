@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Metasploit Hackers"]
-  s.date = "2015-03-01"
+  s.date = "2015-03-02"
   s.description = "Gems needed to capture packets in metasploit-framework"
   s.email = ["metasploit-hackers@lists.sourceforge.net"]
   s.homepage = "https://www.metasploit.com"
