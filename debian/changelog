@@ -4,20 +4,804 @@ metasploit-framework (4.11.1-2015022303-1kali1) kali; urgency=medium
 
  -- Metasploit <metasploit@rapid7.com>  Tue, 03 Mar 2015 13:10:03 -0800
 
-metasploit-framework (4.11.1-2015022303-1) unstable; urgency=low
+metasploit-framework (4.11.1-2015022302-1kali0) kali; urgency=medium
 
-  * Bump version.
+  * Bump version
 
- -- Metasploit <metasploit@rapid7.com>  Mon, 02 Mar 2015 15:32:32 -0800
+ -- Metasploit <metasploit@rapid7.com>  Sun, 01 Mar 2015 16:21:56 -0800
 
-metasploit-framework (4.5.1-1) unstable; urgency=low
+metasploit-framework (4.11.1-2015022301-1kali0) kali; urgency=medium
 
-  * Version bump
+  * Bump version
 
- -- Brandon Turner <bt@metasploit.com>  Thu, 17 Jan 2013 16:19:43 -0600
+ -- Metasploit <metasploit@rapid7.com>  Wed, 25 Feb 2015 16:18:23 -0600
+
+metasploit-framework (4.11.1-2015021901-1kali2) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 19 Feb 2015 20:49:28 -0600
+
+metasploit-framework (4.11.1-2015021901-1kali1) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 19 Feb 2015 17:07:01 -0600
+
+metasploit-framework (4.11.1-2015021901-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 19 Feb 2015 16:40:11 -0600
+
+metasploit-framework (4.11.1-2015021203-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Fri, 13 Feb 2015 12:37:59 -0600
+
+metasploit-framework (4.11.1-2015021202-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Fri, 13 Feb 2015 06:54:27 -0600
+
+metasploit-framework (4.11.1-2015021201-1kali1) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 12 Feb 2015 21:02:34 -0600
+
+metasploit-framework (4.11.1-2015021201-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 12 Feb 2015 16:14:14 -0600
+
+metasploit-framework (4.11.0-2015013101-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Fri, 30 Jan 2015 12:30:42 -0600
+
+metasploit-framework (4.11.0-2015012901-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 29 Jan 2015 14:46:59 -0600
+
+metasploit-framework (4.11.0-2015011401-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 15 Jan 2015 14:09:26 -0600
+
+metasploit-framework (4.11.0-2014122301-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Tue, 23 Dec 2014 16:30:24 -0600
+
+metasploit-framework (4.11.0-2014121601-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Tue, 16 Dec 2014 13:34:07 -0600
+
+metasploit-framework (4.10.2-2014120301-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Tue, 02 Dec 2014 15:47:26 -0600
+
+metasploit-framework (4.10.2-2014111901-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 20 Nov 2014 12:09:27 -0600
+
+metasploit-framework (4.10.1-2014111001-1kali1) kali; urgency=low
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Mon, 10 Nov 2014 16:20:11 -0600
+
+metasploit-framework (4.10.1-2014111001-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Mon, 10 Nov 2014 13:58:54 -0600
+
+metasploit-framework (4.10.0-2014102901-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 30 Oct 2014 10:11:32 -0500
+
+metasploit-framework (4.10.0-2014102201-1kali1) kali; urgency=low
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 23 Oct 2014 15:14:30 -0500
+
+metasploit-framework (4.10.0-2014090301-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 03 Sep 2014 16:53:07 -0500
+
+metasploit-framework (4.10.0-2014082701-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Thu, 28 Aug 2014 21:34:57 -0500
+
+metasploit-framework (4.10.0-2014082101-1kali2) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Thu, 21 Aug 2014 16:36:33 -0500
+
+metasploit-framework (4.10.0-2014082101-1kali1) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Thu, 21 Aug 2014 16:28:39 -0500
+
+metasploit-framework (4.10.0-2014082003-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 20 Aug 2014 15:43:58 -0500
+
+metasploit-framework (4.10.0-2014082002-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 20 Aug 2014 10:51:15 -0500
+
+metasploit-framework (4.10.0-2014081302-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 14 Aug 2014 10:54:02 -0500
+
+metasploit-framework (4.10.0-2014081301-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 12 Aug 2014 17:18:41 -0500
+
+metasploit-framework (4.9.3-2014072301-1kali1) kali-dev; urgency=medium
+
+  * Rebuild for kali-rolling.
+  * Drop dependencies and build dependencies on ruby1.9.1 in favor of generic
+    ruby / ruby-dev dependencies. Drop hardcoded dependencies on C libraries
+    which are already generated by dpkg-shlibdeps.
+
+ -- RaphaÃ«l Hertzog <buxy@kali.org>  Tue, 05 Aug 2014 12:44:28 +0000
+
+metasploit-framework (4.9.3-2014072301-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 23 Jul 2014 14:02:55 -0500
+
+metasploit-framework (4.9.3-2014071601-1kali2) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 16 Jul 2014 14:26:15 -0500
+
+metasploit-framework (4.9.3-2014071601-1kali1) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 16 Jul 2014 14:13:18 -0500
+
+metasploit-framework (4.9.3-2014071601-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 16 Jul 2014 13:37:10 -0500
+
+metasploit-framework (4.9.3-2014070901-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 09 Jul 2014 14:57:15 -0500
+
+metasploit-framework (4.9.3-2014070201-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 02 Jul 2014 13:57:57 -0500
+
+metasploit-framework (4.9.3-2014062501-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 25 Jun 2014 13:37:04 -0500
+
+metasploit-framework (4.9.3-2014061801-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 18 Jun 2014 15:45:32 -0500
+
+metasploit-framework (4.9.3-2014061101-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 11 Jun 2014 08:42:01 -0500
+
+metasploit-framework (4.9.3-2014060501-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Fri, 06 Jun 2014 10:26:05 -0500
+
+metasploit-framework (4.9.2-2014060401-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 04 Jun 2014 16:07:51 -0500
+
+metasploit-framework (4.9.2-2014052801-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 28 May 2014 15:42:40 -0500
+
+metasploit-framework (4.9.2-2014052101-1kali1) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 22 May 2014 08:36:53 -0500
+
+metasploit-framework (4.9.2-2014052101-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 22 May 2014 01:36:48 -0500
+
+metasploit-framework (4.9.2-2014051401-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 14 May 2014 16:16:00 -0500
+
+metasploit-framework (4.9.2-2014050701-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Thu, 08 May 2014 08:44:41 -0500
+
+metasploit-framework (4.9.2-2014043001-1kali1) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 30 Apr 2014 15:09:36 -0500
+
+metasploit-framework (4.9.2-2014043001-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 30 Apr 2014 15:02:26 -0500
+
+metasploit-framework (4.9.2-2014042301-1kali1) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 23 Apr 2014 15:52:49 -0500
+
+metasploit-framework (4.9.2-2014042301-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 23 Apr 2014 15:39:18 -0500
+
+metasploit-framework (4.9.2-2014041601-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 17 Apr 2014 11:14:07 -0500
+
+metasploit-framework (4.9.2-2014040906-1kali1) kali; urgency=low
+
+  * Bump version due to failed build.  No changes.
+
+ -- Brandon Turner <bt@metasploit.com>  Fri, 11 Apr 2014 14:42:31 -0500
+
+metasploit-framework (4.9.2-2014040906-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Fri, 11 Apr 2014 12:15:31 -0500
+
+metasploit-framework (4.9.1-2014040901-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 10 Apr 2014 08:28:45 -0500
+
+metasploit-framework (4.9.0-2014032601-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 25 Mar 2014 22:36:45 -0500
+
+metasploit-framework (4.8.2-2014031901-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 19 Mar 2014 13:16:53 -0500
+
+metasploit-framework (4.8.2-2014031201-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 12 Mar 2014 16:07:35 -0500
+
+metasploit-framework (4.8.2-2014030501-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 05 Mar 2014 13:47:26 -0600
+
+metasploit-framework (4.8.2-2014022601-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Wed, 26 Feb 2014 15:37:12 -0600
+
+metasploit-framework (4.8.2-2014021901-1kali1) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Thu, 20 Feb 2014 14:40:19 -0600
+
+metasploit-framework (4.8.2-2014021901-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Chris Doughty <cdoughty77@gmail.com>  Thu, 20 Feb 2014 14:16:08 -0600
+
+metasploit-framework (4.8.2-2014021201-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 12 Feb 2014 21:07:10 -0600
+
+metasploit-framework (4.8.2-2014020502-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Mon, 10 Feb 2014 12:41:22 -0600
+
+metasploit-framework (4.8.2-2014020501-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 06 Feb 2014 16:36:24 -0600
+
+metasploit-framework (4.8.2-2014012201-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 23 Jan 2014 11:32:32 -0600
+
+metasploit-framework (4.8.2-2014011501-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 16 Jan 2014 12:19:25 -0600
+
+metasploit-framework (4.8.2-2014010801-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 09 Jan 2014 10:30:28 -0600
+
+metasploit-framework (4.8.2-2014010101-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 31 Dec 2013 12:54:13 -0600
+
+metasploit-framework (4.8.2-2013121801-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Fri, 20 Dec 2013 10:00:11 -0600
+
+metasploit-framework (4.8.2-2013121101-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 12 Dec 2013 11:40:23 -0600
+
+metasploit-framework (4.8.1-2013120401-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 04 Dec 2013 14:39:38 -0600
+
+metasploit-framework (4.8.1-2013112701-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 26 Nov 2013 11:44:46 -0600
+
+metasploit-framework (4.8.0-2013112001-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 20 Nov 2013 15:47:05 -0600
+
+metasploit-framework (4.8.0-2013111301-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 13 Nov 2013 08:18:03 -0600
+
+metasploit-framework (4.7.2-2013110601-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 06 Nov 2013 14:34:23 -0600
+
+metasploit-framework (4.7.2-2013103001-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 30 Oct 2013 13:39:32 -0500
+
+metasploit-framework (4.7.2-2013101601-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 17 Oct 2013 13:13:38 -0500
+
+metasploit-framework (4.7.1-2013100901-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 09 Oct 2013 14:03:25 -0500
+
+metasploit-framework (4.7.1-2013100201-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 03 Oct 2013 12:05:50 -0500
+
+metasploit-framework (4.7.0-2013092501-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 25 Sep 2013 15:22:03 -0500
+
+metasploit-framework (4.7.0-2013091801-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 18 Sep 2013 12:22:50 -0500
+
+metasploit-framework (4.7.0-2013091101-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 11 Sep 2013 13:42:34 -0500
+
+metasploit-framework (4.7.0-2013090401-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 05 Sep 2013 10:54:50 -0500
+
+metasploit-framework (4.7.0-2013082802-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 29 Aug 2013 18:05:04 -0500
+
+metasploit-framework (4.7.0-2013082801-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 28 Aug 2013 18:17:29 -0500
+
+metasploit-framework (4.7.0-2013082102-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 21 Aug 2013 19:23:12 -0500
+
+metasploit-framework (4.7.0-2013082101-1kali1) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 21 Aug 2013 17:16:35 -0500
+
+metasploit-framework (4.7.0-2013082101-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 21 Aug 2013 14:51:35 -0500
+
+metasploit-framework (4.7.0-2013081401-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 14 Aug 2013 16:37:19 -0500
+
+metasploit-framework (4.7.0-2013080701-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 07 Aug 2013 14:03:12 -0500
+
+metasploit-framework (4.7.0-2013073101-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 31 Jul 2013 09:50:10 -0500
+
+metasploit-framework (4.7.0-2013072401-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 23 Jul 2013 07:39:21 -0500
+
+metasploit-framework (4.7.0-2013071701-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 16 Jul 2013 17:16:12 -0500
+
+metasploit-framework (4.6.2-2013071001-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 10 Jul 2013 11:37:42 -0500
+
+metasploit-framework (4.6.2-2013070301-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 03 Jul 2013 13:04:42 -0500
+
+metasploit-framework (4.6.2-2013062601-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 26 Jun 2013 12:30:02 -0500
+
+metasploit-framework (4.6.2-2013061901-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 20 Jun 2013 08:45:48 -0500
+
+metasploit-framework (4.6.2-2013061201-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 13 Jun 2013 10:17:39 -0500
+
+metasploit-framework (4.6.2-2013060501-1kali1) kali; urgency=low
+
+  * Version bump due to ARM build errors
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 06 Jun 2013 13:27:49 -0500
+
+metasploit-framework (4.6.2-2013060501-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 06 Jun 2013 10:08:14 -0500
+
+metasploit-framework (4.6.2-2013052901-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 30 May 2013 16:06:58 -0500
+
+metasploit-framework (4.6.1-2013052201-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 21 May 2013 14:40:39 -0500
+
+metasploit-framework (4.6.0-2013050801-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 08 May 2013 13:31:35 -0500
+
+metasploit-framework (4.6.0-2013050101-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 02 May 2013 09:45:59 -0500
+
+metasploit-framework (4.6.0-2013041701-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 17 Apr 2013 11:30:04 -0500
+
+metasploit-framework (4.6.0-1-1kali1) kali; urgency=low
+
+  * Add git as a dependency
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 10 Apr 2013 06:37:14 -0500
+
+metasploit-framework (4.6.0-1-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 09 Apr 2013 17:49:51 -0500
+
+metasploit-framework (4.5.3-2013040301-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 03 Apr 2013 09:05:14 -0500
+
+metasploit-framework (4.5.3-2013032701-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 28 Mar 2013 10:05:33 -0500
+
+metasploit-framework (4.5.3-2013032001-1kali4) kali; urgency=low
+
+  * Ensure multi-statement bash scripts fail correctly 
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 26 Mar 2013 18:38:02 -0500
+
+metasploit-framework (4.5.3-2013032001-1kali3) kali; urgency=low
+
+  * One more fix on arm
+
+ -- Brandon Turner <bt@metasploit.com>  Sat, 23 Mar 2013 17:22:17 -0500
+
+metasploit-framework (4.5.3-2013032001-1kali2) kali; urgency=low
+
+  * Fix compilation on arm
+
+ -- Brandon Turner <bt@metasploit.com>  Sat, 23 Mar 2013 16:19:49 -0500
+
+metasploit-framework (4.5.3-2013032001-1kali1) kali; urgency=low
+
+  * Fix John the Ripper
+
+ -- Brandon Turner <bt@metasploit.com>  Sat, 23 Mar 2013 13:52:50 -0500
+
+metasploit-framework (4.5.3-2013032001-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Wed, 20 Mar 2013 15:01:00 -0500
+
+metasploit-framework (4.5.2-2013031101-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 07 Mar 2013 14:33:34 -0600
+
+metasploit-framework (4.5.2-2013022703-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Tue, 05 Mar 2013 15:41:45 -0600
+
+metasploit-framework (4.5.2-2013022702-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Mon, 04 Mar 2013 21:47:33 -0600
+
+metasploit-framework (4.5.2-2013022701-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 28 Feb 2013 14:23:31 -0600
+
+metasploit-framework (4.5.2-2013022001-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Sat, 23 Feb 2013 13:56:12 -0600
+
+metasploit-framework (4.5.2-2013021302-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Fri, 15 Feb 2013 14:32:41 -0600
+
+metasploit-framework (4.5.2-2013021301-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 14 Feb 2013 09:46:04 -0600
+
+metasploit-framework (4.5.2-2013013001-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Fri, 01 Feb 2013 11:55:08 -0600
+
+metasploit-framework (4.5.1-2013012801-1kali0) kali; urgency=low
+
+  * Bump version
+
+ -- Brandon Turner <bt@metasploit.com>  Mon, 28 Jan 2013 18:08:39 -0600
+
+metasploit-framework (4.5.1-1kali0) kali; urgency=low
+
+  * Upstream version update
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 17 Jan 2013 17:26:48 -0600
+
+metasploit-framework (4.5.0-1kali8.2) kali; urgency=low
+
+  * Test update
+
+ -- Brandon Turner <bt@metasploit.com>  Thu, 10 Jan 2013 16:02:04 -0600
+
+metasploit-framework (4.5.0-1kali8) kali; urgency=low
+
+  * Work in progress
+
+ -- Mati Aharoni <muts@kali.org>  Thu, 10 Jan 2013 00:08:43 -0500
+
+metasploit-framework (4.5.0-1kali7) kali; urgency=low
+
+  * Work in progress
+
+ -- Mati Aharoni <muts@kali.org>  Wed, 09 Jan 2013 23:46:21 -0500
+
+metasploit-framework (4.5.0-1kali6) kali; urgency=low
+
+  * Work in progress
+
+ -- Mati Aharoni <muts@kali.org>  Wed, 09 Jan 2013 23:22:52 -0500
+
+metasploit-framework (4.5.0-1kali5) kali; urgency=low
+
+  * Work in progress
+
+ -- Mati Aharoni <muts@kali.org>  Wed, 09 Jan 2013 22:50:08 -0500
+
+metasploit-framework (4.5.0-1kali4) kali; urgency=low
+
+  * Updated rules to fix install
+
+ -- Devon Kearns <dookie@kali.org>  Wed, 09 Jan 2013 19:27:33 -0700
+
+metasploit-framework (4.5.0-1kali3) kali; urgency=low
+
+  * Updated rules for install
+
+ -- Devon Kearns <dookie@kali.org>  Wed, 09 Jan 2013 19:06:47 -0700
+
+metasploit-framework (4.5.0-1kali2) kali; urgency=low
+
+  * Metasploit Framework Kali import
+
+ -- Mati Aharoni <muts@kali.org>  Wed, 09 Jan 2013 19:39:53 -0500
+
+metasploit-framework (4.5.0-1kali1) unstable; urgency=low
+
+  * Prototype release for kali framework
+
+ -- Brandon Turner <bturner@localhost.localdomain>  Wed, 09 Jan 2013 17:22:39 -0600
 
 metasploit-framework (4.5.0-1) unstable; urgency=low
 
   * Initial packaging
 
  -- Brandon Turner <bt@metasploit.com>  Sat, 29 Dec 2012 18:13:16 -0600
+
