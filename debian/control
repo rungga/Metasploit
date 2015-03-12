@@ -12,7 +12,7 @@ Build-Depends:
   libsqlite3-dev,
   libxml2-dev,
   libxslt-dev,
-  metasploit-common,
+  metasploit-common (>= 1.0.1),
 Standards-Version: 3.9.4
 Homepage: http://www.metasploit.com/
 
@@ -24,7 +24,7 @@ Depends:
   git,
   libpcap0.8,
   libsqlite3-0,
-  metasploit-common,
+  metasploit-common (>= 1.0.1),
   nmap,
   wget,
   ${misc:Depends},
