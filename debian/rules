@@ -74,6 +74,10 @@ override_dh_install:
 	for binfile in $$(ls -d -1 debian/metasploit-framework/usr/share/metasploit-framework/tools/*.rb); do \
 	  sed -i $${binfile} -e '1,1s=#!.*ruby=#!'"/opt/metasploit/ruby/bin/framework-ruby=" ; \
 	done
+	# Hard code shebang for msf* scripts
+	for binfile in $$(ls -d -1 debian/metasploit-framework/usr/share/metasploit-framework/msf*); do \
+	  sed -i $${binfile} -e '1,1s=#!.*ruby=#!'"/opt/metasploit/ruby/bin/framework-ruby=" ; \
+	done
 
 override_dh_shlibdeps:
 	dh_shlibdeps --exclude=/data/ --exclude=/modules/
