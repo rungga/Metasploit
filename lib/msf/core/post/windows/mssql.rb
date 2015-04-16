@@ -54,9 +54,9 @@ module Msf
         end
 
         # Identifies a valid SQL Server command line client on the host and sets
-        # @sql_client
+        # sql_client
         #
-        # @see #sql_client
+        # @see sql_client
         # @return [String, nil] the SQL command line client
         def get_sql_client
           client = nil
@@ -155,7 +155,7 @@ module Msf
             return false unless username
 
             session.core.use('incognito') unless session.incognito
-            vprint_status("Attemping to impersonate user: #{username}")
+            vprint_status("Attempting to impersonate user: #{username}")
             res = session.incognito.incognito_impersonate_token(username)
 
             if res =~ /Successfully/i
