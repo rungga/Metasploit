@@ -286,6 +286,26 @@ describe 'modules/payloads', :content do
                           reference_name: 'bsd/x64/exec'
   end
 
+  context 'bsd/x64/shell_bind_tcp' do
+    it_should_behave_like 'payload cached size is consistent',
+                          ancestor_reference_names: [
+                              'singles/bsd/x64/shell_bind_tcp'
+                          ],
+                          dynamic_size: false,
+                          modules_pathname: modules_pathname,
+                          reference_name: 'bsd/x64/shell_bind_tcp'
+  end
+
+  context 'bsd/x64/shell_reverse_tcp' do
+    it_should_behave_like 'payload cached size is consistent',
+                          ancestor_reference_names: [
+                              'singles/bsd/x64/shell_reverse_tcp'
+                          ],
+                          dynamic_size: false,
+                          modules_pathname: modules_pathname,
+                          reference_name: 'bsd/x64/shell_reverse_tcp'
+  end
+
   context 'bsdi/x86/shell/bind_tcp' do
     it_should_behave_like 'payload cached size is consistent',
                           ancestor_reference_names: [
@@ -736,6 +756,26 @@ describe 'modules/payloads', :content do
                           dynamic_size: false,
                           modules_pathname: modules_pathname,
                           reference_name: 'cmd/windows/generic'
+  end
+
+  context 'cmd/windows/powershell_bind_tcp' do
+    it_should_behave_like 'payload cached size is consistent',
+                          ancestor_reference_names: [
+                              'singles/cmd/windows/powershell_bind_tcp'
+                          ],
+                          dynamic_size: false,
+                          modules_pathname: modules_pathname,
+                          reference_name: 'cmd/windows/powershell_bind_tcp'
+  end
+
+  context 'cmd/windows/powershell_reverse_tcp' do
+    it_should_behave_like 'payload cached size is consistent',
+                          ancestor_reference_names: [
+                              'singles/cmd/windows/powershell_reverse_tcp'
+                          ],
+                          dynamic_size: false,
+                          modules_pathname: modules_pathname,
+                          reference_name: 'cmd/windows/powershell_reverse_tcp'
   end
 
   context 'cmd/windows/reverse_lua' do
@@ -1308,7 +1348,7 @@ describe 'modules/payloads', :content do
                               'stagers/linux/x86/bind_tcp',
                               'stages/linux/x86/meterpreter'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'linux/x86/meterpreter/bind_tcp'
   end
@@ -1415,7 +1455,7 @@ describe 'modules/payloads', :content do
                               'stagers/linux/x86/bind_tcp',
                               'stages/linux/x86/shell'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'linux/x86/shell/bind_tcp'
   end
@@ -2245,7 +2285,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/bind_tcp',
                               'stages/windows/dllinject'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/dllinject/bind_tcp'
   end
@@ -2531,7 +2571,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/bind_tcp',
                               'stages/windows/meterpreter'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/meterpreter/bind_tcp'
   end
@@ -2749,7 +2789,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/bind_tcp',
                               'stages/windows/patchupdllinject'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/patchupdllinject/bind_tcp'
   end
@@ -2892,7 +2932,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/bind_tcp',
                               'stages/windows/patchupmeterpreter'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/patchupmeterpreter/bind_tcp'
   end
@@ -3035,7 +3075,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/bind_tcp',
                               'stages/windows/shell'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/shell/bind_tcp'
   end
@@ -3228,7 +3268,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/bind_tcp',
                               'stages/windows/upexec'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/upexec/bind_tcp'
   end
@@ -3371,7 +3411,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/bind_tcp',
                               'stages/windows/vncinject'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/vncinject/bind_tcp'
   end
@@ -3512,7 +3552,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/x64/bind_tcp',
                               'stages/windows/x64/meterpreter'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/x64/meterpreter/bind_tcp'
   end
@@ -3534,7 +3574,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/x64/reverse_tcp',
                               'stages/windows/x64/meterpreter'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/x64/meterpreter/reverse_tcp'
   end
@@ -3595,7 +3635,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/x64/bind_tcp',
                               'stages/windows/x64/shell'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/x64/shell/bind_tcp'
   end
@@ -3606,7 +3646,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/x64/reverse_tcp',
                               'stages/windows/x64/shell'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/x64/shell/reverse_tcp'
   end
@@ -3637,7 +3677,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/x64/bind_tcp',
                               'stages/windows/x64/vncinject'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/x64/vncinject/bind_tcp'
   end
@@ -3648,7 +3688,7 @@ describe 'modules/payloads', :content do
                               'stagers/windows/x64/reverse_tcp',
                               'stages/windows/x64/vncinject'
                           ],
-                          dynamic_size: false,
+                          dynamic_size: true,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/x64/vncinject/reverse_tcp'
   end
@@ -3772,6 +3812,26 @@ describe 'modules/payloads', :content do
                           dynamic_size: false,
                           modules_pathname: modules_pathname,
                           reference_name: 'windows/patchupmeterpreter/bind_hidden_ipknock_tcp'
+  end
+
+  context 'windows/powershell_bind_tcp' do
+    it_should_behave_like 'payload cached size is consistent',
+                          ancestor_reference_names: [
+                            'singles/windows/powershell_bind_tcp'
+                          ],
+                          dynamic_size: false,
+                          modules_pathname: modules_pathname,
+                          reference_name: 'windows/powershell_bind_tcp'
+  end
+
+  context 'windows/powershell_reverse_tcp' do
+    it_should_behave_like 'payload cached size is consistent',
+                          ancestor_reference_names: [
+                            'singles/windows/powershell_reverse_tcp'
+                          ],
+                          dynamic_size: false,
+                          modules_pathname: modules_pathname,
+                          reference_name: 'windows/powershell_reverse_tcp'
   end
 
   context 'windows/shell/bind_hidden_ipknock_tcp' do
