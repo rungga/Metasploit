@@ -4,7 +4,7 @@ module Metasploit
       MAJOR = 4
       MINOR = 11
       PATCH = 3
-      PRERELEASE = '2015063001'
+      PRERELEASE = '2015070901'
     end
 
     VERSION = "#{Version::MAJOR}.#{Version::MINOR}.#{Version::PATCH}-#{Version::PRERELEASE}"
