@@ -1,3 +1,177 @@
+metasploit-framework (4.11.4-2015071402-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 16 Jul 2015 07:11:50 -0700
+
+metasploit-framework (4.11.3-2015070901-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Mon, 13 Jul 2015 08:19:27 -0700
+
+metasploit-framework (4.11.3-2015063001-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Wed, 01 Jul 2015 14:36:57 -0700
+
+metasploit-framework (4.11.3-2015062101-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Tue, 23 Jun 2015 13:24:23 -0700
+
+metasploit-framework (4.11.3-2015061001-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Tue, 16 Jun 2015 08:46:49 -0700
+
+metasploit-framework (4.11.2-2015052901-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Mon, 01 Jun 2015 09:25:46 -0700
+
+metasploit-framework (4.11.2-2015051401-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 14 May 2015 19:27:17 -0700
+
+metasploit-framework (4.11.1-2015050601-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 07 May 2015 14:54:28 -0700
+
+metasploit-framework (4.11.1-2015042001-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Wed, 22 Apr 2015 19:31:33 -0700
+
+metasploit-framework (4.11.1-2015041601-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 16 Apr 2015 14:28:26 -0700
+
+metasploit-framework (4.11.1-2015040202-1kali1) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Fri, 03 Apr 2015 06:42:33 -0700
+
+metasploit-framework (4.11.1-2015032401-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Mon, 30 Mar 2015 08:00:08 -0700
+
+metasploit-framework (4.11.1-2015031701-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 19 Mar 2015 13:58:40 -0700
+
+metasploit-framework (4.11.1-2015031001-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 12 Mar 2015 07:30:38 -0700
+
+metasploit-framework (4.11.1-2015030501-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 05 Mar 2015 15:35:27 -0800
+
+metasploit-framework (4.11.1-2015022303-1kali1) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Tue, 03 Mar 2015 13:10:03 -0800
+
+metasploit-framework (4.11.1-2015022302-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Sun, 01 Mar 2015 16:21:56 -0800
+
+metasploit-framework (4.11.1-2015022301-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Wed, 25 Feb 2015 16:18:23 -0600
+
+metasploit-framework (4.11.1-2015021901-1kali2) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 19 Feb 2015 20:49:28 -0600
+
+metasploit-framework (4.11.1-2015021901-1kali1) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 19 Feb 2015 17:07:01 -0600
+
+metasploit-framework (4.11.1-2015021901-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 19 Feb 2015 16:40:11 -0600
+
+metasploit-framework (4.11.1-2015021203-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Fri, 13 Feb 2015 12:37:59 -0600
+
+metasploit-framework (4.11.1-2015021202-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Fri, 13 Feb 2015 06:54:27 -0600
+
+metasploit-framework (4.11.1-2015021201-1kali1) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 12 Feb 2015 21:02:34 -0600
+
+metasploit-framework (4.11.1-2015021201-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 12 Feb 2015 16:14:14 -0600
+
+metasploit-framework (4.11.0-2015013101-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Fri, 30 Jan 2015 12:30:42 -0600
+
+metasploit-framework (4.11.0-2015012901-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 29 Jan 2015 14:46:59 -0600
+
+metasploit-framework (4.11.0-2015011401-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Thu, 15 Jan 2015 14:09:26 -0600
+
+metasploit-framework (4.11.0-2014122301-1kali0) kali; urgency=medium
+
+  * Bump version
+
+ -- Metasploit <metasploit@rapid7.com>  Tue, 23 Dec 2014 16:30:24 -0600
+
 metasploit-framework (4.11.0-2014121601-1kali0.1) kali-dev; urgency=medium
 
   * Rebuild in kali-dev.
@@ -107,7 +281,7 @@ metasploit-framework (4.9.3-2014072301-1kali1) kali-dev; urgency=medium
     ruby / ruby-dev dependencies. Drop hardcoded dependencies on C libraries
     which are already generated by dpkg-shlibdeps.
 
- -- Raphaël Hertzog <buxy@kali.org>  Tue, 05 Aug 2014 12:44:28 +0000
+ -- RaphaÃ«l Hertzog <buxy@kali.org>  Tue, 05 Aug 2014 12:44:28 +0000
 
 metasploit-framework (4.9.3-2014072301-1kali0) kali; urgency=low
 
@@ -732,3 +906,4 @@ metasploit-framework (4.5.0-1) unstable; urgency=low
   * Initial packaging
 
  -- Brandon Turner <bt@metasploit.com>  Sat, 29 Dec 2012 18:13:16 -0600
+

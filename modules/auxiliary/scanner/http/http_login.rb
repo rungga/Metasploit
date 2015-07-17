@@ -22,17 +22,13 @@ class Metasploit3 < Msf::Auxiliary
     super(
       'Name'           => 'HTTP Login Utility',
       'Description'    => 'This module attempts to authenticate to an HTTP service.',
-      'References'  =>
-        [
-
-        ],
       'Author'         => [ 'hdm' ],
       'References'     =>
         [
           [ 'CVE', '1999-0502'] # Weak password
         ],
       'License'        => MSF_LICENSE,
-      # See https://dev.metasploit.com/redmine/issues/8814
+      # See https://github.com/rapid7/metasploit-framework/issues/3811
       #'DefaultOptions' => {
       #  'USERPASS_FILE' => File.join(Msf::Config.data_directory, "wordlists", "http_default_userpass.txt"),
       #  'USER_FILE' => File.join(Msf::Config.data_directory, "wordlists", "http_default_users.txt"),
@@ -74,6 +70,7 @@ class Metasploit3 < Msf::Auxiliary
         /auth/
         /manager/
         /Management.asp
+        /ews/
       }
     end
 
@@ -153,17 +150,14 @@ class Metasploit3 < Msf::Auxiliary
     cred_collection = prepend_db_passwords(cred_collection)
 
     scanner = Metasploit::Framework::LoginScanner::HTTP.new(
-      host: ip,
-      port: rport,
-      uri: @uri,
-      method: datastore['REQUESTTYPE'],
-      proxies: datastore["PROXIES"],
-      cred_details: cred_collection,
-      stop_on_success: datastore['STOP_ON_SUCCESS'],
-      bruteforce_speed: datastore['BRUTEFORCE_SPEED'],
-      connection_timeout: 5,
-      user_agent: datastore['UserAgent'],
-      vhost: datastore['VHOST']
+      configure_http_login_scanner(
+        uri: @uri,
+        method: datastore['REQUESTTYPE'],
+        cred_details: cred_collection,
+        stop_on_success: datastore['STOP_ON_SUCCESS'],
+        bruteforce_speed: datastore['BRUTEFORCE_SPEED'],
+        connection_timeout: 5
+      )
     )
 
     msg = scanner.check_setup

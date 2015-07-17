@@ -9,7 +9,7 @@ binary-from-other-architecture usr/share/metasploit-framework/data/*
 # Meterpreter doesn't need python on the local system
 python-script-but-no-python-dep usr/share/metasploit-framework/external/source/meterpreter/*
 
-# Ignore generic ruby requirement.  Ruby 1.8.7 end of life is June 2013.  We
-# require ruby-1.9.1.  Patching our code base to use ruby1.9.1 in every ruby
+# Ignore generic ruby requirement.  Metasploit requires ruby 2.1.
+# Patching our code base to use ruby1.9.1 in every ruby
 # header seems unreasonable.
 ruby-script-but-no-ruby-dep

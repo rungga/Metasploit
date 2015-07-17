@@ -62,6 +62,7 @@ describe Msf::PayloadGenerator do
         reference_name: 'x86/shikata_ga_nai'
     )
   }
+  let(:var_name) { 'buf' }
 
   subject(:payload_generator) {
     described_class.new(generator_opts)
@@ -482,7 +483,7 @@ describe Msf::PayloadGenerator do
       let(:format) { 'c' }
 
       it 'applies the appropriate transform format' do
-        ::Msf::Simple::Buffer.should_receive(:transform).with(shellcode, format)
+        ::Msf::Simple::Buffer.should_receive(:transform).with(shellcode, format, var_name)
         payload_generator.format_payload(shellcode)
       end
     end
@@ -605,7 +606,7 @@ describe Msf::PayloadGenerator do
       }
 
       it 'calls generate_java_payload' do
-        payload_generator.should_receive(:generate_java_payload)
+        payload_generator.should_receive(:generate_java_payload).and_call_original
         payload_generator.generate_payload
       end
     end
