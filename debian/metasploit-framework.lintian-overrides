@@ -5,11 +5,3 @@ statically-linked-binary usr/share/metasploit-framework/data/*
 unstripped-binary-or-object usr/share/metasploit-framework/data/*
 embedded-library usr/share/metasploit-framework/data/*
 binary-from-other-architecture usr/share/metasploit-framework/data/*
-
-# Meterpreter doesn't need python on the local system
-python-script-but-no-python-dep usr/share/metasploit-framework/external/source/meterpreter/*
-
-# Ignore generic ruby requirement.  Metasploit requires ruby 2.1.
-# Patching our code base to use ruby1.9.1 in every ruby
-# header seems unreasonable.
-ruby-script-but-no-ruby-dep

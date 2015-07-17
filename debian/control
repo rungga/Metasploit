@@ -1,10 +1,10 @@
 Source: metasploit-framework
 Section: net
 Priority: extra
-Maintainer: Brandon Turner <bt@metasploit.com>
+Maintainer: Raphaël Hertzog <buxy@kali.org>
 Build-Depends:
   ca-certificates,
-  debhelper (>= 8.0.0),
+  debhelper (>= 9),
   git,
   libgmp-dev,
   libpcap-dev,
@@ -13,7 +13,7 @@ Build-Depends:
   libxml2-dev,
   libxslt-dev,
   metasploit-common (>= 1.0.1),
-Standards-Version: 3.9.4
+Standards-Version: 3.9.6
 Homepage: http://www.metasploit.com/
 
 Package: metasploit-framework

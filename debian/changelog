@@ -1,3 +1,11 @@
+metasploit-framework (4.11.4+2015071402-0kali1) sana; urgency=medium
+
+  * Build for sana.
+  * Add a watch file.
+  * Switch to debhelper 9.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Fri, 17 Jul 2015 15:36:37 +0200
+
 metasploit-framework (4.11.4-2015071402-1kali0) kali; urgency=medium
 
   * Bump version
