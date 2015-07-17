@@ -1,42 +1,39 @@
-# -*- encoding: utf-8 -*-
-# stub: metasploit-framework-db 4.11.3 ruby lib
+# coding: utf-8
 
-Gem::Specification.new do |s|
-  s.name = "metasploit-framework-db"
-  s.version = "4.11.3"
+# During build, the Gemfile is temporarily moved and
+# we must manually define the project root
+if ENV['MSF_ROOT']
+  lib = File.realpath(File.expand_path('lib', ENV['MSF_ROOT']))
+else
+  # have to use realpath as metasploit-framework is often loaded through a symlink and tools like Coverage and debuggers
+  # require realpaths.
+  lib = File.realpath(File.expand_path('../lib', __FILE__))
+end
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.require_paths = ["lib"]
-  s.authors = ["Metasploit Hackers"]
-  s.date = "2015-07-14"
-  s.description = "Gems needed to access the PostgreSQL database in metasploit-framework"
-  s.email = ["metasploit-hackers@lists.sourceforge.net"]
-  s.homepage = "https://www.metasploit.com"
-  s.licenses = ["BSD-3-clause"]
-  s.rubygems_version = "2.4.3"
-  s.summary = "metasploit-framework Database dependencies"
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'metasploit/framework/version'
+require 'metasploit/framework/rails_version_constraint'
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 4
+Gem::Specification.new do |spec|
+  spec.name          = 'metasploit-framework-db'
+  spec.version       = Metasploit::Framework::GEM_VERSION
+  spec.authors       = ['Metasploit Hackers']
+  spec.email         = ['metasploit-hackers@lists.sourceforge.net']
+  spec.summary       = 'metasploit-framework Database dependencies'
+  spec.description   = 'Gems needed to access the PostgreSQL database in metasploit-framework'
+  spec.homepage      = 'https://www.metasploit.com'
+  spec.license       = 'BSD-3-clause'
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activerecord>, ["< 4.1.0", ">= 4.0.9"])
-      s.add_runtime_dependency(%q<metasploit-credential>, ["= 1.0.0"])
-      s.add_runtime_dependency(%q<metasploit_data_models>, ["= 1.2.5"])
-      s.add_runtime_dependency(%q<metasploit-framework>, ["= 4.11.3"])
-      s.add_runtime_dependency(%q<pg>, [">= 0.11"])
-    else
-      s.add_dependency(%q<activerecord>, ["< 4.1.0", ">= 4.0.9"])
-      s.add_dependency(%q<metasploit-credential>, ["= 1.0.0"])
-      s.add_dependency(%q<metasploit_data_models>, ["= 1.2.5"])
-      s.add_dependency(%q<metasploit-framework>, ["= 4.11.3"])
-      s.add_dependency(%q<pg>, [">= 0.11"])
-    end
-  else
-    s.add_dependency(%q<activerecord>, ["< 4.1.0", ">= 4.0.9"])
-    s.add_dependency(%q<metasploit-credential>, ["= 1.0.0"])
-    s.add_dependency(%q<metasploit_data_models>, ["= 1.2.5"])
-    s.add_dependency(%q<metasploit-framework>, ["= 4.11.3"])
-    s.add_dependency(%q<pg>, [">= 0.11"])
-  end
+  # no files, just dependencies
+  spec.files         = []
+
+  spec.add_runtime_dependency 'activerecord', *Metasploit::Framework::RailsVersionConstraint::RAILS_VERSION
+  # Metasploit::Credential database models
+  spec.add_runtime_dependency 'metasploit-credential', '1.0.0'
+  # Database models shared between framework and Pro.
+  spec.add_runtime_dependency 'metasploit_data_models', '1.2.5'
+  # depend on metasploit-framewrok as the optional gems are useless with the actual code
+  spec.add_runtime_dependency 'metasploit-framework', "= #{spec.version}"
+  # Needed for module caching in Mdm::ModuleDetails
+  spec.add_runtime_dependency 'pg', '>= 0.11'
 end
