@@ -32,8 +32,8 @@ module Metasploit
 
       MAJOR = 4
       MINOR = 11
-      PATCH = 4
-      PRERELEASE = '2015071402'
+      PATCH = 3
+      PRERELEASE = 'dev'
       HASH = get_hash
     end
 

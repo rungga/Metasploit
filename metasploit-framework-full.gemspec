@@ -1,39 +1,36 @@
-# -*- encoding: utf-8 -*-
-# stub: metasploit-framework-full 4.11.3 ruby lib
+# coding: utf-8
 
-Gem::Specification.new do |s|
-  s.name = "metasploit-framework-full"
-  s.version = "4.11.3"
+# During build, the Gemfile is temporarily moved and
+# we must manually define the project root
+if ENV['MSF_ROOT']
+  lib = File.realpath(File.expand_path('lib', ENV['MSF_ROOT']))
+else
+  # have to use realpath as metasploit-framework is often loaded through a symlink and tools like Coverage and debuggers
+  # require realpaths.
+  lib = File.realpath(File.expand_path('../lib', __FILE__))
+end
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.require_paths = ["lib"]
-  s.authors = ["Metasploit Hackers"]
-  s.date = "2015-07-14"
-  s.description = "Gems needed to access the PostgreSQL database in metasploit-framework"
-  s.email = ["metasploit-hackers@lists.sourceforge.net"]
-  s.homepage = "https://www.metasploit.com"
-  s.licenses = ["BSD-3-clause"]
-  s.rubygems_version = "2.4.3"
-  s.summary = "metasploit-framework with all optional dependencies"
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'metasploit/framework/version'
+require 'metasploit/framework/rails_version_constraint'
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 4
+Gem::Specification.new do |spec|
+  spec.name          = 'metasploit-framework-full'
+  spec.version       = Metasploit::Framework::GEM_VERSION
+  spec.authors       = ['Metasploit Hackers']
+  spec.email         = ['metasploit-hackers@lists.sourceforge.net']
+  spec.summary       = 'metasploit-framework with all optional dependencies'
+  spec.description   = 'Gems needed to access the PostgreSQL database in metasploit-framework'
+  spec.homepage      = 'https://www.metasploit.com'
+  spec.license       = 'BSD-3-clause'
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, ["< 4.1.0", ">= 4.0.9"])
-      s.add_runtime_dependency(%q<metasploit-framework>, ["= 4.11.3"])
-      s.add_runtime_dependency(%q<metasploit-framework-db>, ["= 4.11.3"])
-      s.add_runtime_dependency(%q<metasploit-framework-pcap>, ["= 4.11.3"])
-    else
-      s.add_dependency(%q<rails>, ["< 4.1.0", ">= 4.0.9"])
-      s.add_dependency(%q<metasploit-framework>, ["= 4.11.3"])
-      s.add_dependency(%q<metasploit-framework-db>, ["= 4.11.3"])
-      s.add_dependency(%q<metasploit-framework-pcap>, ["= 4.11.3"])
-    end
-  else
-    s.add_dependency(%q<rails>, ["< 4.1.0", ">= 4.0.9"])
-    s.add_dependency(%q<metasploit-framework>, ["= 4.11.3"])
-    s.add_dependency(%q<metasploit-framework-db>, ["= 4.11.3"])
-    s.add_dependency(%q<metasploit-framework-pcap>, ["= 4.11.3"])
-  end
+  # no files, just dependencies
+  spec.files         = []
+
+  metasploit_framework_version_constraint = "= #{spec.version}"
+
+  spec.add_runtime_dependency 'rails', *Metasploit::Framework::RailsVersionConstraint::RAILS_VERSION
+  spec.add_runtime_dependency 'metasploit-framework', metasploit_framework_version_constraint
+  spec.add_runtime_dependency 'metasploit-framework-db', metasploit_framework_version_constraint
+  spec.add_runtime_dependency 'metasploit-framework-pcap', metasploit_framework_version_constraint
 end
