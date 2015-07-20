@@ -3,8 +3,11 @@ Section: net
 Priority: extra
 Maintainer: Raphaël Hertzog <buxy@kali.org>
 Build-Depends:
-  ca-certificates,
   debhelper (>= 9),
+# Dependencies needed to fetch and build the gems in a bundle
+  ruby-dev,
+  bundler,
+  ca-certificates,
   git,
   libgmp-dev,
   libpcap-dev,
@@ -12,23 +15,25 @@ Build-Depends:
   libsqlite3-dev,
   libxml2-dev,
   libxslt-dev,
-  metasploit-common (>= 1.0.1),
 Standards-Version: 3.9.6
 Homepage: http://www.metasploit.com/
 
 Package: metasploit-framework
 Architecture: any
 Depends:
+  ruby | ruby-interpreter,
+  bundler,
   bison,
   curl,
   git,
-  libpcap0.8,
-  libsqlite3-0,
-  metasploit-common (>= 1.0.1),
   nmap,
   wget,
+  john,
   ${misc:Depends},
   ${shlibs:Depends},
+# Conflict and break old packaging in moto...
+Conflicts: metasploit-common
+Breaks: metasploit (<= 4.11.4-2015071402-1kali0)
 Recommends: postgresql
 Suggests: java7-runtime-headless
 Description: Framework for exploit development and vulnerability research
