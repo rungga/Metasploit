@@ -43,6 +43,7 @@ user_exists() {
 }
 
 init_db() {
+    start_db
     if [ -e $DB_CONF ]; then
 	echo "A database appears to be already configured, skipping initialization" 
 	return
@@ -88,9 +89,15 @@ EOF
 
 delete_db() {
     start_db
-    pg_cmd dropdb $DB_NAME
-    pg_cmd ${DB_NAME}_test
-    pg_cmd dropuser $DB_USER
+    if db_exists $DB_NAME; then
+	pg_cmd dropdb $DB_NAME
+    fi
+    if db_exists ${DB_NAME}_test; then
+	pg_cmd dropdb ${DB_NAME}_test
+    fi
+    if user_exists $DB_USER; then
+	pg_cmd dropuser $DB_USER
+    fi
     rm -f $DB_CONF
 }
 
