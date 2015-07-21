@@ -32,7 +32,7 @@ override_dh_auto_build:
 	echo "BUNDLE_FROZEN: '1'" >> .bundle/config
 
 override_dh_install:
-	dh_install --exclude=data/gui
+	dh_install --exclude=data/gui --exclude=LICENSE --exclude=LICENCE --exclude=LICENSE.txt
 	echo "Note: The presence of this file tells msfupdate to rely on apt-get to install updates" > debian/metasploit-framework/usr/share/metasploit-framework/.apt
 	# Hard code shebang for ruby scripts
 	for binfile in $$(ls -d -1 debian/metasploit-framework/usr/share/metasploit-framework/tools/*.rb debian/metasploit-framework/usr/share/metasploit-framework/msf*); do \
