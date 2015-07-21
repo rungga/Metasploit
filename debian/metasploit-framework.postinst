@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+BINS="msfbinscan msfconsole msfd msfdb msfelfscan msfmachscan msfpescan msfrop msfrpc msfrpcd msfupdate msfvenom"
+
+if [ "$1" = "configure" ]; then
+    for BIN in $BINS; do
+	update-alternatives --install /usr/bin/$BIN $BIN /usr/share/metasploit-framework/$BIN 50
+    done
+fi
+
+#DEBHELBER#
+
+exit 0

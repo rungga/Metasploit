@@ -22,19 +22,21 @@ Package: metasploit-framework
 Architecture: any
 Depends:
   ruby | ruby-interpreter,
+  postgresql,
   bundler,
-  bison,
+  john,
+  nmap,
   curl,
   git,
-  nmap,
   wget,
-  john,
+# For our own msfdb
+  openssl,
+# Generic dependencies 
   ${misc:Depends},
   ${shlibs:Depends},
 # Conflict and break old packaging in moto...
 Conflicts: metasploit-common
 Breaks: metasploit (<= 4.11.4-2015071402-1kali0)
-Recommends: postgresql
 Suggests: java7-runtime-headless
 Description: Framework for exploit development and vulnerability research
  The Metasploit Framework is an open source platform that supports
