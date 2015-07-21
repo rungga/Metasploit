@@ -4,8 +4,8 @@ include /usr/share/dpkg/pkg-info.mk
 
 MSF_MAJOR=$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d . -f 1)
 MSF_MINOR=$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d . -f 2)
-MSF_PATCH=$(shell echo $(DEB_VERSION_UPSTREAM) | sed -e 's/[0-9]\+\.[0-9]\+\./' -e 's/[-+].*//')
-MSF_PRERELEASE=$(shell echo $(DEB_VERSION_UPSTREAM) | sed -e 's/[0-9]\+\.[0-9]\+\.[0-9]\+[-+]?//')
+MSF_PATCH=$(shell echo $(DEB_VERSION_UPSTREAM) | sed -e 's/^[0-9]\+\.[0-9]\+\.//' -e 's/[-+].*//')
+MSF_PRERELEASE=$(shell echo $(DEB_VERSION_UPSTREAM) | sed -e 's/^[0-9]\+\.[0-9]\+\.[0-9]\+[-+]\?//')
 
 %:
 	dh $@
