@@ -84,7 +84,7 @@ test:
 EOF
     echo "Creating initial database schema"
     cd $METASPLOIT_BASEDIR
-    bundle exec rake db:migrate
+    bundle exec rake db:migrate >/dev/null
 }
 
 delete_db() {
