@@ -3,7 +3,6 @@
 # for violating policies
 statically-linked-binary usr/share/metasploit-framework/data/*
 unstripped-binary-or-object usr/share/metasploit-framework/data/*
-embedded-library usr/share/metasploit-framework/data/*
 binary-from-other-architecture usr/share/metasploit-framework/data/*
 arch-dependent-file-in-usr-share usr/share/metasploit-framework/data/*
 binary-has-unneeded-section usr/share/metasploit-framework/data/*
@@ -41,6 +40,7 @@ codeless-jar usr/share/metasploit-framework/vendor/bundle/*
 unusual-interpreter usr/share/metasploit-framework/vendor/bundle/* *
 missing-dep-for-interpreter rackup => ruby-rack *
 wrong-path-for-interpreter usr/share/metasploit-framework/vendor/bundle/* *
+interpreter-not-absolute usr/share/metasploit-framework/vendor/bundle/* *
 
 # The executable jars are a mistake
 missing-dep-on-jarwrapper
@@ -49,9 +49,8 @@ missing-dep-on-jarwrapper
 script-not-executable *
 unusual-interpreter */Rakefile *
 unusual-interpreter */Rakefile.cross *
-
-# We don't care about external/* it's not used
-ancient-libtool external/*
+possible-documentation-but-no-doc-base-registration
+arch-dep-package-has-big-usr-share *
 
 # We have a custom ruby interpreter
 wrong-path-for-interpreter usr/share/metasploit-framework/msf* *
