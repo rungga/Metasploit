@@ -25,6 +25,7 @@ Depends:
   postgresql,
   bundler,
   john,
+  nasm,
   nmap,
   curl,
   git,

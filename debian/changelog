@@ -1,3 +1,10 @@
+metasploit-framework (4.11.4-2015071403-0kali2) sana; urgency=medium
+
+  * Add nasm to Depends.
+  * Small fixup in msfdb.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Tue, 21 Jul 2015 21:05:02 +0200
+
 metasploit-framework (4.11.4-2015071403-0kali1) sana; urgency=medium
 
   * Build for sana.

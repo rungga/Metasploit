@@ -36,7 +36,7 @@ db_exists() {
 }
 
 user_exists() {
-    if pg_cmd "psql -qt \"SELECT usename FROM pg_user WHERE user='$1'\"" | grep -qw $1; then
+    if echo "SELECT usename FROM pg_user;" | pg_cmd "psql -qt postgres" | grep -qw $1; then
 	return 0
     fi
     return 1
@@ -51,10 +51,10 @@ init_db() {
     DB_PASS=$(pw_gen)
     if user_exists $DB_USER; then
 	echo "Resetting password of database user '$DB_USER'"
-	printf "ALTER ROLE $DB_USER WITH PASSWORD '$DB_PASS';\n" | pg_cmd psql postgres
+	printf "ALTER ROLE $DB_USER WITH PASSWORD '$DB_PASS';\n" | pg_cmd psql postgres >/dev/null
     else
 	echo "Creating database user '$DB_USER'"
-	printf "%s\n%s\n" "$DB_PASS" "$DB_PASS" | pg_cmd createuser -P $DB_USER
+	printf "%s\n%s\n" "$DB_PASS" "$DB_PASS" | pg_cmd createuser -P $DB_USER >/dev/null
     fi
     echo "Creating databases '$DB_NAME' and '${DB_NAME}_test'"
     if ! db_exists $DB_NAME; then
