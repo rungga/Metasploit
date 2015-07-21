@@ -6,6 +6,7 @@ MSF_MAJOR=$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d . -f 1)
 MSF_MINOR=$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d . -f 2)
 MSF_PATCH=$(shell echo $(DEB_VERSION_UPSTREAM) | sed -e 's/^[0-9]\+\.[0-9]\+\.//' -e 's/[-+].*//')
 MSF_PRERELEASE=$(shell echo $(DEB_VERSION_UPSTREAM) | sed -e 's/^[0-9]\+\.[0-9]\+\.[0-9]\+[-+]\?//')
+MSF_GEMVERSION=$(MSF_MAJOR).$(MSF_MINOR).$(MSF_PATCH)
 
 %:
 	dh $@
@@ -18,6 +19,14 @@ override_dh_auto_configure:
 	# Do nothing
 
 override_dh_auto_build:
+	# Update version information as the content of the git repository
+	# might not match the tag name...
+	sed -i  -e 's/MAJOR *=.*/MAJOR = $(MSF_MAJOR)/' \
+		-e 's/MINOR *=.*/MINOR = $(MSF_MINOR)/' \
+		-e 's/PATCH *=.*/PATCH = $(MSF_PATCH)/' \
+	        -e "s/PRERELEASE *=.*/PRERELEASE = '$(MSF_PRERELEASE)'/" \
+		lib/metasploit/framework/version.rb
+	sed -i -e 's/\(metasploit-framework\(\|-db\|-pcap\)\) (\( *= *\)\?[.0-9]\+)/\1 (\3$(MSF_GEMVERSION))/' Gemfile.lock
 	# Build binary gems
 	bundle install --without development test --path vendor/bundle
 	echo "BUNDLE_FROZEN: '1'" >> .bundle/config
@@ -29,13 +38,6 @@ override_dh_install:
 	for binfile in $$(ls -d -1 debian/metasploit-framework/usr/share/metasploit-framework/tools/*.rb debian/metasploit-framework/usr/share/metasploit-framework/msf*); do \
 	  sed -i $${binfile} -e '1,1s|#!.*ruby|#!/usr/share/metasploit-framework/ruby|' ; \
 	done
-	# Update version information as the content of the git repository
-	# might not match the tag name...
-	sed -i  -e 's/MAJOR *=.*/MAJOR = $(MSF_MAJOR)/' \
-		-e 's/MINOR *=.*/MINOR = $(MSF_MINOR)/' \
-		-e 's/PATCH *=.*/PATCH = $(MSF_PATCH)/' \
-	        -e "s/PRERELEASE *=.*/PRERELEASE = '$(MSF_PRERELEASE)'/" \
-		debian/metasploit-framework/usr/share/metasploit-framework/lib/metasploit/framework/version.rb
 
 override_dh_shlibdeps:
 	dh_shlibdeps --exclude=/data/ --exclude=/modules/
