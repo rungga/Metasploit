@@ -3,6 +3,7 @@ metasploit-framework (4.11.4+2015071402-0kali1) sana; urgency=medium
   * Build for sana.
   * Add a watch file.
   * Switch to debhelper 9.
+  * Avoid call to git ls-files in .gemspec.
 
  -- Raphaël Hertzog <hertzog@debian.org>  Fri, 17 Jul 2015 15:36:37 +0200
 
