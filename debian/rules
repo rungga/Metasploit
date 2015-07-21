@@ -1,5 +1,12 @@
 #!/usr/bin/make -f
 
+include /usr/share/dpkg/pkg-info.mk
+
+MSF_MAJOR=$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d . -f 1)
+MSF_MINOR=$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d . -f 2)
+MSF_PATCH=$(shell echo $(DEB_VERSION_UPSTREAM) | sed -e 's/[0-9]\+\.[0-9]\+\./' -e 's/[-+].*//')
+MSF_PRERELEASE=$(shell echo $(DEB_VERSION_UPSTREAM) | sed -e 's/[0-9]\+\.[0-9]\+\.[0-9]\+[-+]?//')
+
 %:
 	dh $@
 
@@ -22,6 +29,13 @@ override_dh_install:
 	for binfile in $$(ls -d -1 debian/metasploit-framework/usr/share/metasploit-framework/tools/*.rb debian/metasploit-framework/usr/share/metasploit-framework/msf*); do \
 	  sed -i $${binfile} -e '1,1s|#!.*ruby|#!/usr/share/metasploit-framework/ruby|' ; \
 	done
+	# Update version information as the content of the git repository
+	# might not match the tag name...
+	sed -i  -e 's/MAJOR *=.*/MAJOR = $(MSF_MAJOR)/' \
+		-e 's/MINOR *=.*/MINOR = $(MSF_MINOR)/' \
+		-e 's/PATCH *=.*/PATCH = $(MSF_PATCH)/' \
+	        -e "s/PRERELEASE *=.*/PRERELEASE = '$(MSF_PRERELEASE)'/" \
+		debian/metasploit-framework/usr/share/metasploit-framework/lib/metasploit/framework/version.rb
 
 override_dh_shlibdeps:
 	dh_shlibdeps --exclude=/data/ --exclude=/modules/
