@@ -1,4 +1,4 @@
-metasploit-framework (4.11.4+2015071402-0kali1) sana; urgency=medium
+metasploit-framework (4.11.4-2015071403-0kali1) sana; urgency=medium
 
   * Build for sana.
   * Add a watch file.
