@@ -15,17 +15,9 @@ License: BSD-3-clause
 # Last updated: 2013-Nov-04
 #
 
-Files: data/templates/to_mem_pshreflection.ps1.template
-Copyright: 2012, Matthew Graeber
-License: BSD-3-clause
-
 Files: data/john/*
 Copyright: 1996-2011 Solar Designer.
-License: GPL-2
-
-Files: external/pcaprub/*
-Copyright: 2007-2008, Alastair Houghton
-License: LGPL-2.1
+License: GPL-2+
 
 Files: external/ruby-kissfft/*
 Copyright: 2003-2010 Mark Borgerding
@@ -34,7 +26,7 @@ License: BSD-3-clause
 
 Files: external/source/exploits/IE11SandboxEscapes/*
 Copyright: James Forshaw, 2014
-License: GPLv3
+License: GPL-3+
 
 Files: external/source/byakugan/*
 Copyright: Lurene Grenier, 2009
@@ -43,11 +35,7 @@ License: BSD-3-clause
 Files: external/source/ipwn/*
 Copyright: 2004-2005 vlad902 <vlad902 [at] gmail.com>
            2007 H D Moore <hdm [at] metasploit.com>
-License: GPL-2 and Artistic
-
-Files: external/source/ReflectiveDLLInjection/*
-Copyright: 2011, Stephen Fewer of Harmony Security (www.harmonysecurity.com)
-License: BSD-3-clause
+License: GPL-2+ and Artistic
 
 Files: external/source/metsvc/*
 Copyright: 2007, Determina Inc.
@@ -73,7 +61,7 @@ Copyright: 1999 AT&T Laboratories Cambridge.
            2001-2004 HorizonLive.com, Inc.
            2000-2006 Constantin Kaplinsky.
            2000-2009 TightVNC Group
-License: GPL-2
+License: GPL-2+
 
 Files: lib/anemone.rb lib/anemone/*
 Copyright: 2009 Vertive, Inc.
@@ -99,10 +87,6 @@ Files: lib/net/ssh.rb lib/net/ssh/*
 Copyright: 2008 Jamis Buck <jamis@37signals.com>
 License: MIT
 
-Files: lib/packetfu.rb lib/packetfu/*
-Copyright: 2008-2012 Tod Beardsley
-License: BSD-3-clause
-
 Files: lib/postgres_msf.rb lib/postgres/postgres-pr/message.rb lib/postgres/postgres-pr/connection.rb
 Copyright: 2005 Michael Neumann
 License: BSD-3-clause or Ruby
@@ -119,14 +103,6 @@ Files: lib/rbmysql.rb lib/rbmysql/*
 Copyright: 2009 tommy
 License: Ruby
 
-Files: lib/rbreadline.rb
-Copyright: 2009 Park Heesob
-License: BSD-3-clause
-
-Files: lib/rkelly/*
-Copyright: 2007, 2008, 2009 Aaron Patternson, John Barnette
-License: MIT
-
 Files: lib/snmp.rb lib/snmp/*
 Copyright: 2004, David R. Halliday
 License: Ruby
@@ -139,10 +115,6 @@ Files: lib/windows_console_color_support.rb
 Copyright: 2011 Michael 'mihi' Schierl
 License: BSD-3-clause
 
-Files: lib/zip.rb lib/zip/*
-Copyright: 2002-2004, Thomas Sandergaard
-License: Ruby
-
 Files: modules/payloads/singles/windows/speak_pwned.rb
 Copyright: 2009-2010 Berend-Jan "SkyLined" Wever <berendjanwever@gmail.com>
 License: BSD-3-clause
@@ -150,154 +122,6 @@ License: BSD-3-clause
 Files: data/webcam/api.js
 Copyright: Copyright 2013 Muaz Khan<@muazkh>.
 License: MIT
-
-
-#
-# Gems
-#
-
-Files: activemodel
-Copyright: 2004-2011 David Heinemeier Hansson
-License: MIT
-
-Files: activerecord
-Copyright: 2004-2011 David Heinemeier Hansson
-License: MIT
-
-Files: activesupport
-Copyright: 2005-2011 David Heinemeier Hansson
-License: MIT
-
-Files: arel
-Copyright: 2007-2010 Nick Kallen, Bryan Helmkamp, Emilio Tagua, Aaron Patterson
-License: MIT
-
-Files: bcrypt
-Copyright: 2007-2011 Coda Hale
-License: MIT
-
-Files: builder
-Copyright: 2003-2012 Jim Weirich (jim.weirich@gmail.com)
-License: MIT
-
-Files: database_cleaner
-Copyright: 2009 Ben Mabey
-License: MIT
-
-Files: diff-lcs
-Copyright: 2004-2011 Austin Ziegler
-License: MIT
-
-Files: factory_girl
-Copyright: 2008-2013 Joe Ferris and thoughtbot, inc.
-License: MIT
-
-Files: fivemat
-Copyright: 2012 Tim Pope
-License: MIT
-
-Files: i18n
-Copyright: 2008 The Ruby I18n team
-License: MIT
-
-Files: json
-Copyright: Daniel Luz <dev at mernen dot com>
-License: Ruby
-
-Files: metasploit_data_models
-Copyright: 2012 Rapid7, Inc.
-License: MIT
-
-Files: mini_portile
-Copyright: 2011 Luis Lavena
-License: MIT
-
-Files: msgpack
-Copyright: Austin Ziegler
-License: Ruby
-
-Files: multi_json
-Copyright: 2010 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober, and Intridea, Inc.
-License: MIT
-
-Files: network_interface
-Copyright: 2012, Rapid7, Inc.
-License: MIT
-
-Files: nokogiri
-Copyright: 2008 - 2012 Aaron Patterson, Mike Dalessio, Charles Nutter, Sergio Arbeo, Patrick Mahoney, Yoko Harada
-License: MIT
-
-Files: packetfu
-Copyright: 2008-2012 Tod Beardsley
-License: BSD-3-clause
-
-Files: pcaprub
-Copyright: 2007-2008, Alastair Houghton
-License: LGPL-2.1
-
-Files: pg
-Copyright: 1997-2012 by the authors
-License: Ruby
-
-Files: rake
-Copyright: 2003, 2004 Jim Weirich
-License: MIT
-
-Files: redcarpet
-Copyright: 2009 Natacha Porté
-License: MIT
-
-Files: robots
-Copyright: 2008 Kyle Maxwell, contributors
-License: MIT
-
-Files: rspec
-Copyright: 2009 Chad Humphries, David Chelimsky
-License: MIT
-
-Files: shoulda-matchers
-Copyright: 2006-2013, Tammer Saleh, thoughtbot, inc.
-License: MIT
-
-Files: simplecov
-Copyright: 2010-2012 Christoph Olszowka
-License: MIT
-
-Files: timecop
-Copyright: 2012 Travis Jeffery, John Trupiano
-License: MIT
-
-Files: tzinfo
-Copyright: 2005-2006 Philip Ross
-License: MIT
-
-Files: yard
-Copyright: 2007-2013 Loren Segal
-License: MIT
-
-
-License: BSD-2-clause
- Redistribution and use in source and binary forms, with or without modification,
- are permitted provided that the following conditions are met:
- .
- Redistributions of source code must retain the above copyright notice, this
- list of conditions and the following disclaimer.
- .
- Redistributions in binary form must reproduce the above copyright notice, this
- list of conditions and the following disclaimer in the documentation and/or
- other materials provided with the distribution.
- .
- THIS SOFTWARE IS PROVIDED BY {{THE COPYRIGHT HOLDERS AND CONTRIBUTORS}} "AS IS"
- AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- DISCLAIMED. IN NO EVENT SHALL {{THE COPYRIGHT HOLDER OR CONTRIBUTORS}} BE
- LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
- GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 License: BSD-3-clause
  Redistribution and use in source and binary forms, with or without modification,
@@ -405,7 +229,7 @@ License: Ruby
     WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR
     PURPOSE.
 
-License: GPL-2
+License: GPL-2+
  This program is free software; you can redistribute it
  and/or modify it under the terms of the GNU General Public
  License as published by the Free Software Foundation; either
@@ -427,6 +251,29 @@ License: GPL-2
  License version 2 can be found in the file
  `/usr/share/common-licenses/GPL-2'.
 
+License: GPL-3+
+ This program is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public
+ License as published by the Free Software Foundation; either
+ version 3 of the License, or (at your option) any later
+ version.
+ .
+ This program is distributed in the hope that it will be
+ useful, but WITHOUT ANY WARRANTY; without even the implied
+ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ PURPOSE.  See the GNU General Public License for more
+ details.
+ .
+ You should have received a copy of the GNU General Public
+ License along with this package; if not, write to the Free
+ Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ Boston, MA  02110-1301 USA
+ .
+ On Debian systems, the full text of the GNU General Public
+ License version 3 can be found in the file
+ `/usr/share/common-licenses/GPL-3'.
+
+
 License: LGPL-2.1
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -441,109 +288,6 @@ License: LGPL-2.1
  You should have received a copy of the GNU Lesser General Public
  License along with this library; if not, write to the Free Software
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-
-License: OpenSSL
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions
- are met:
- .
- 1. Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
- .
- 2. Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the
-    distribution.
- .
- 3. All advertising materials mentioning features or use of this
-    software must display the following acknowledgment:
-    "This product includes software developed by the OpenSSL Project
-    for use in the OpenSSL Toolkit. (http://www.openssl.org/)"
- .
- 4. The names "OpenSSL Toolkit" and "OpenSSL Project" must not be used to
-    endorse or promote products derived from this software without
-    prior written permission. For written permission, please contact
-    openssl-core@openssl.org.
- .
- 5. Products derived from this software may not be called "OpenSSL"
-    nor may "OpenSSL" appear in their names without prior written
-    permission of the OpenSSL Project.
- .
- 6. Redistributions of any form whatsoever must retain the following
-    acknowledgment:
-    "This product includes software developed by the OpenSSL Project
-    for use in the OpenSSL Toolkit (http://www.openssl.org/)"
- .
- THIS SOFTWARE IS PROVIDED BY THE OpenSSL PROJECT `AS IS'' AND ANY
- EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE OpenSSL PROJECT OR
- ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
- NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
- STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
- OF THE POSSIBILITY OF SUCH DAMAGE.
- .
- This product includes cryptographic software written by Eric Young
- (eay@cryptsoft.com).  This product includes software written by Tim
- Hudson (tjh@cryptsoft.com).
-
-License: SSLeay
- This package is an SSL implementation written
- by Eric Young (eay@cryptsoft.com).
- The implementation was written so as to conform with Netscapes SSL.
- .
- This library is free for commercial and non-commercial use as long as
- the following conditions are aheared to.  The following conditions
- apply to all code found in this distribution, be it the RC4, RSA,
- lhash, DES, etc., code; not just the SSL code.  The SSL documentation
- included with this distribution is covered by the same copyright terms
- except that the holder is Tim Hudson (tjh@cryptsoft.com).
- .
- Copyright remains Eric Young's, and as such any Copyright notices in
- the code are not to be removed.
- If this package is used in a product, Eric Young should be given attribution
- as the author of the parts of the library used.
- This can be in the form of a textual message at program startup or
- in documentation (online or textual) provided with the package.
- .
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions
- are met:
- 1. Redistributions of source code must retain the copyright
-    notice, this list of conditions and the following disclaimer.
- 2. Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the
-    documentation and/or other materials provided with the distribution.
- 3. All advertising materials mentioning features or use of this software
-    must display the following acknowledgement:
-    "This product includes cryptographic software written by
-    Eric Young (eay@cryptsoft.com)"
-    The word 'cryptographic' can be left out if the rouines from the library
-    being used are not cryptographic related :-).
- 4. If you include any Windows specific code (or a derivative thereof) from
-    the apps directory (application code) you must include an acknowledgement:
-    "This product includes software written by Tim Hudson (tjh@cryptsoft.com)"
- .
- THIS SOFTWARE IS PROVIDED BY ERIC YOUNG `AS IS'' AND
- ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
- FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
- OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
- OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- SUCH DAMAGE.
- .
- The licence and distribution terms for any publically available version or
- derivative of this code cannot be changed.  i.e. this code cannot simply be
- copied and put under another distribution licence
- [including the GNU Public Licence.]
 
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining
@@ -966,20 +710,3 @@ License: Apache
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
-
-License: Zlib
- This software is provided 'as-is', without any express or implied
- warranty.  In no event will the authors be held liable for any damages
- arising from the use of this software.
- .
- Permission is granted to anyone to use this software for any purpose,
- including commercial applications, and to alter it and redistribute it
- freely, subject to the following restrictions:
- .
- 1. The origin of this software must not be misrepresented; you must not
-    claim that you wrote the original software. If you use this software
-    in a product, an acknowledgment in the product documentation would be
-    appreciated but is not required.
- 2. Altered source versions must be plainly marked as such, and must not be
-    misrepresented as being the original software.
- 3. This notice may not be removed or altered from any source distribution.
