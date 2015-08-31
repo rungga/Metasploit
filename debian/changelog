@@ -1,3 +1,12 @@
+metasploit-framework (4.11.4-2015071403-0kali3) sana; urgency=medium
+
+  * Add -S -D -R options to createuser call to avoid unwanted prompts. They
+    were not needed in Kali 2 proper but apparently they are needed with
+    older versions of the createuser tool that you might still have when
+    you do an upgrade.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Mon, 31 Aug 2015 13:38:46 +0200
+
 metasploit-framework (4.11.4-2015071403-0kali2) sana; urgency=medium
 
   * Add nasm to Depends.

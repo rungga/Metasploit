@@ -54,7 +54,7 @@ init_db() {
 	printf "ALTER ROLE $DB_USER WITH PASSWORD '$DB_PASS';\n" | pg_cmd psql postgres >/dev/null
     else
 	echo "Creating database user '$DB_USER'"
-	printf "%s\n%s\n" "$DB_PASS" "$DB_PASS" | pg_cmd createuser -P $DB_USER >/dev/null
+	printf "%s\n%s\n" "$DB_PASS" "$DB_PASS" | pg_cmd createuser -S -D -R -P $DB_USER >/dev/null
     fi
     echo "Creating databases '$DB_NAME' and '${DB_NAME}_test'"
     if ! db_exists $DB_NAME; then
