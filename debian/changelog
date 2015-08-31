@@ -1,3 +1,11 @@
+metasploit-framework (4.11.4-2015071403-0kali4) sana; urgency=medium
+
+  * Do not create a YAML file using internal redirections to accomodate
+    some third party tools that do not handle them well. (FS#2587)
+  * Add some manual pages (FS#174).
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Mon, 31 Aug 2015 14:00:58 +0200
+
 metasploit-framework (4.11.4-2015071403-0kali3) sana; urgency=medium
 
   * Add -S -D -R options to createuser call to avoid unwanted prompts. They

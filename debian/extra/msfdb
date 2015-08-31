@@ -65,7 +65,7 @@ init_db() {
     fi
     echo "Creating configuration file in $DB_CONF"
     cat > $DB_CONF <<-EOF
-development: &pgsql
+development:
   adapter: postgresql
   database: $DB_NAME
   username: $DB_USER
@@ -75,12 +75,25 @@ development: &pgsql
   pool: 5
   timeout: 5
 
-production: &production
-  <<: *pgsql
+production:
+  adapter: postgresql
+  database: $DB_NAME
+  username: $DB_USER
+  password: $DB_PASS
+  host: localhost
+  port: $DB_PORT
+  pool: 5
+  timeout: 5
 
 test:
-  <<: *pgsql
+  adapter: postgresql
   database: ${DB_NAME}_test
+  username: $DB_USER
+  password: $DB_PASS
+  host: localhost
+  port: $DB_PORT
+  pool: 5
+  timeout: 5
 EOF
     echo "Creating initial database schema"
     cd $METASPLOIT_BASEDIR
