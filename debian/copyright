@@ -63,6 +63,14 @@ Copyright: 1999 AT&T Laboratories Cambridge.
            2000-2009 TightVNC Group
 License: GPL-2+
 
+Files: external/source/exploits/cve-2015-0016/*
+Copyright: 2011-2012 Stephen Fewer of Harmony Security (www.harmonysecurity.com)
+License: BSD-3-clause
+
+Files: external/source/flash_detector/bin/js/swfobject.js
+Copyright: 2007-2008 Adobe Systems Incorporated and its licensors
+License: MIT
+
 Files: lib/anemone.rb lib/anemone/*
 Copyright: 2009 Vertive, Inc.
 License: MIT
