@@ -1,3 +1,9 @@
+metasploit-framework (4.11.4-2015102101-0kali1) sana; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Thu, 22 Oct 2015 16:28:06 +0200
+
 metasploit-framework (4.11.4-2015101401-0kali1) sana; urgency=medium
 
   * Import new upstream release
