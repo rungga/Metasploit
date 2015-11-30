@@ -1,9 +1,9 @@
-metasploit-framework (4.11.5-2015111801-0kali1) kali-dev; urgency=medium
+metasploit-framework (4.11.5-2015111801-0kali1~r1u1) sana; urgency=medium
 
   * Import new upstream release 
   * Update debian/copyright
 
- -- Sophie Brun <sophie@freexian.com>  Mon, 30 Nov 2015 09:33:21 +0100
+ -- Sophie Brun <sophie@freexian.com>  Mon, 30 Nov 2015 15:48:38 +0100
 
 metasploit-framework (4.11.5-2015110801-0kali1) sana; urgency=medium
 
