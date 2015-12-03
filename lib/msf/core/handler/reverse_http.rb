@@ -344,6 +344,7 @@ protected
       when :init_native
         print_status("#{cli.peerhost}:#{cli.peerport} (UUID: #{uuid.to_s}) Staging Native payload ...")
         url = payload_uri(req) + conn_id + "/\x00"
+        uri = URI(payload_uri(req) + conn_id)
 
         resp['Content-Type'] = 'application/octet-stream'
 
@@ -351,7 +352,9 @@ protected
         # we don't get new ones generated.
         blob = obj.stage_payload(
           uuid: uuid,
-          uri:  conn_id
+          uri:  conn_id,
+          lhost: uri.host,
+          lport: uri.port
         )
 
         resp.body = encode_stage(blob)
