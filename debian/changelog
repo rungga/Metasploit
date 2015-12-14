@@ -1,3 +1,9 @@
+metasploit-framework (4.11.5-2015120901-0kali1~r1u1) sana; urgency=medium
+
+  * Rebuild for sana
+
+ -- Sophie Brun <sophie@freexian.com>  Mon, 14 Dec 2015 09:42:48 +0100
+
 metasploit-framework (4.11.5-2015120901-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
