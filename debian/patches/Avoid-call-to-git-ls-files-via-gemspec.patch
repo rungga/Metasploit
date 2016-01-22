@@ -8,8 +8,6 @@ on a package setup that does not have any .git metadata.
  metasploit-framework.gemspec | 3 ---
  1 file changed, 3 deletions(-)
 
-diff --git a/metasploit-framework.gemspec b/metasploit-framework.gemspec
-index 4a4436e..a37a0ea 100644
 --- a/metasploit-framework.gemspec
 +++ b/metasploit-framework.gemspec
 @@ -24,9 +24,6 @@ Gem::Specification.new do |spec|
@@ -17,8 +15,8 @@ index 4a4436e..a37a0ea 100644
    spec.license       = 'BSD-3-clause'
  
 -  spec.files         = `git ls-files`.split($/).reject { |file|
--    file =~ /^config/
+-    file =~ /^documentation|^data\/gui|^external/
 -  }
    spec.bindir = '.'
-   spec.executables   = [
-       'msfbinscan',
+   if ENV['CREATE_BINSTUBS']
+     spec.executables   = [
