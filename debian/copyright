@@ -2,7 +2,7 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: http://www.metasploit.com/
 
 Files: *
-Copyright: 2006-2015, Rapid7, Inc.
+Copyright: 2006-2016, Rapid7, Inc.
 License: BSD-3-clause
 
 # The Metasploit Framework is provided under the 3-clause BSD license provided
@@ -15,7 +15,7 @@ License: BSD-3-clause
 # Last updated: 2013-Nov-04
 #
 
-Files: data/john/*
+Files: data/john.conf
 Copyright: 1996-2011 Solar Designer.
 License: GPL-2+
 
