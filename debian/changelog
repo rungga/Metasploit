@@ -1,3 +1,11 @@
+metasploit-framework (4.11.9-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+  * debian/rules: drop the update of information version as upstream changed
+    the version management 
+
+ -- Sophie Brun <sophie@freexian.com>  Wed, 10 Feb 2016 08:55:49 +0100
+
 metasploit-framework (4.11.8-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
