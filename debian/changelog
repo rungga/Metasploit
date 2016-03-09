@@ -1,3 +1,11 @@
+metasploit-framework (4.11.14-0kali2) kali-dev; urgency=medium
+
+  * Improve the way we build the bundle to include all gems, even those
+    available system-wide so that when the system-wide gem gets upgraded,
+    metasploit doesn't break.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Wed, 09 Mar 2016 18:32:55 +0100
+
 metasploit-framework (4.11.14-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release

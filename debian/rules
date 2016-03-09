@@ -12,8 +12,12 @@ override_dh_auto_configure:
 
 override_dh_auto_build:
 	# Build binary gems
-	bundle install --without development test --path vendor/bundle
-	echo "BUNDLE_FROZEN: '1'" >> .bundle/config
+	bundle config --local path vendor/bundle
+	bundle config --local without development:test
+	bundle install --force || true  # Currently fails
+	bundle install
+	bundle config --local frozen true
+	find vendor
 
 override_dh_install:
 	dh_install --exclude=data/gui --exclude=LICENSE --exclude=LICENCE --exclude=LICENSE.txt
