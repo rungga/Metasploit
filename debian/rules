@@ -12,7 +12,7 @@ override_dh_auto_configure:
 
 override_dh_auto_build:
 	# Build binary gems
-	bundle install --without development test --path vendor/bundle
+	bundle install --without development test --path vendor/bundle --force
 	echo "BUNDLE_FROZEN: '1'" >> .bundle/config
 
 override_dh_install:

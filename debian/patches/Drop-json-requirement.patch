@@ -1,0 +1,37 @@
+Description: Drop requirement of json
+ Don't use bundler to install json because it fails.
+ We drop the requirements of json in Gemfile.lock and gemspec.
+Author: Sophie Brun <sophie@freexian.com>
+Forwarded: not-needed
+Last-Update: 2016-03-14
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -8,7 +8,6 @@ PATH
+       bcrypt
+       filesize
+       jsobfu (~> 0.4.1)
+-      json
+       metasm (~> 1.0.2)
+       metasploit-concern (= 1.0.0)
+       metasploit-credential (= 1.0.1)
+@@ -104,7 +103,6 @@ GEM
+     i18n (0.7.0)
+     jsobfu (0.4.1)
+       rkelly-remix (= 0.0.6)
+-    json (1.8.3)
+     mail (2.6.3)
+       mime-types (>= 1.16, < 3)
+     metasm (1.0.2)
+--- a/metasploit-framework.gemspec
++++ b/metasploit-framework.gemspec
+@@ -54,7 +54,7 @@ Gem::Specification.new do |spec|
+   # Needed for Javascript obfuscation
+   spec.add_runtime_dependency 'jsobfu', '~> 0.4.1'
+   # Needed for some admin modules (scrutinizer_add_user.rb)
+-  spec.add_runtime_dependency 'json'
++#  spec.add_runtime_dependency 'json'
+   # Metasm compiler/decompiler/assembler
+   spec.add_runtime_dependency 'metasm', '~> 1.0.2'
+   # Metasploit::Concern hooks
