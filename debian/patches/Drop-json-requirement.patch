@@ -14,8 +14,8 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
        jsobfu (~> 0.4.1)
 -      json
        metasm (~> 1.0.2)
-       metasploit-concern (= 1.0.0)
-       metasploit-credential (= 1.0.1)
+       metasploit-concern
+       metasploit-credential (= 1.1.0)
 @@ -104,7 +103,6 @@ GEM
      i18n (0.7.0)
      jsobfu (0.4.1)

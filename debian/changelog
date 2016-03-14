@@ -1,3 +1,13 @@
+metasploit-framework (4.11.15-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+  * debian/rules: add --force to bundle install to avoid failure when a new
+    version of rake uploaded in kali
+  * Add a patch to drop install via bundler of json (it fails): use the debian
+    package ruby-json
+
+ -- Sophie Brun <sophie@freexian.com>  Mon, 14 Mar 2016 10:56:32 +0100
+
 metasploit-framework (4.11.14-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
