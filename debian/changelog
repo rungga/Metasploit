@@ -1,3 +1,73 @@
+metasploit-framework (4.11.26-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Mon, 09 May 2016 15:37:57 +0200
+
+metasploit-framework (4.11.24-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Wed, 04 May 2016 10:26:37 +0200
+
+metasploit-framework (4.11.23-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Mon, 02 May 2016 11:33:12 +0200
+
+metasploit-framework (4.11.22-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Mon, 25 Apr 2016 12:02:32 +0200
+
+metasploit-framework (4.11.21-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Mon, 18 Apr 2016 16:23:57 +0200
+
+metasploit-framework (4.11.20-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Tue, 12 Apr 2016 09:42:44 +0200
+
+metasploit-framework (4.11.19-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Wed, 30 Mar 2016 11:40:07 +0200
+
+metasploit-framework (4.11.18-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Tue, 29 Mar 2016 09:24:51 +0200
+
+metasploit-framework (4.11.17-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Thu, 24 Mar 2016 09:37:02 +0100
+
+metasploit-framework (4.11.16-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Tue, 22 Mar 2016 09:18:43 +0100
+
+metasploit-framework (4.11.15-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+  * debian/rules: add --force to bundle install to avoid failure when a new
+    version of rake uploaded in kali
+  * Add a patch to drop install via bundler of json (it fails): use the debian
+    package ruby-json
+
+ -- Sophie Brun <sophie@freexian.com>  Mon, 14 Mar 2016 10:56:32 +0100
+
 metasploit-framework (4.11.14-0kali2) kali-dev; urgency=medium
 
   * Improve the way we build the bundle to include all gems, even those
