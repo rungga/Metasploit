@@ -40,7 +40,7 @@ Depends:
 # Conflict and break old packaging in moto...
 Conflicts: metasploit-common
 Breaks: metasploit (<= 4.11.4-2015071402-1kali0)
-Suggests: java7-runtime-headless
+Suggests: java7-runtime-headless, clamav, clamav-daemon
 Description: Framework for exploit development and vulnerability research
  The Metasploit Framework is an open source platform that supports
  vulnerability research, exploit development, and the creation of custom
