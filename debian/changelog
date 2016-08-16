@@ -1,3 +1,9 @@
+metasploit-framework (4.12.20-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Tue, 16 Aug 2016 14:17:29 +0200
+
 metasploit-framework (4.12.15-0kali2) kali-dev; urgency=medium
 
   * debian/rules: change ruby interpreter for ruby scripts in tools/exploit
