@@ -132,6 +132,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rex-arch'
   # Library for working with OLE.
   spec.add_runtime_dependency 'rex-ole'
+  # Library for creating and/or parsing MIME messages.
+  spec.add_runtime_dependency 'rex-mime'
 
   # rb-readline doesn't work with Ruby Installer due to error with Fiddle:
   #   NoMethodError undefined method `dlopen' for Fiddle:Module
@@ -153,4 +155,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'filesize'
   # Needed for openvas plugin
   spec.add_runtime_dependency 'openvas-omp'
+  # Needed by metasploit nessus bridge
+  spec.add_runtime_dependency 'nessus_rest'
 end
