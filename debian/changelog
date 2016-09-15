@@ -1,6 +1,8 @@
 metasploit-framework (4.12.25-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
+  * Update postinst, postrm and manpages since upstream removed binaries:
+    msfbinscan, msfelfscan, msfmachscan, msfpescan
 
  -- Sophie Brun <sophie@freexian.com>  Thu, 15 Sep 2016 09:03:35 +0200
 
