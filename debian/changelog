@@ -1,6 +1,7 @@
 metasploit-framework (4.12.26-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
+  * Update postinst, postrm and manpage since upstream removed binary: msfrop
 
  -- Sophie Brun <sophie@freexian.com>  Mon, 19 Sep 2016 14:14:27 +0200
 
