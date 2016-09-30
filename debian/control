@@ -22,7 +22,7 @@ Homepage: http://www.metasploit.com/
 Package: metasploit-framework
 Architecture: any
 Depends:
-  ruby | ruby-interpreter,
+  ${ruby:Depends},
   postgresql,
   bundler,
   john,
