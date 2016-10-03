@@ -1,8 +1,9 @@
-metasploit-framework (4.12.28-0kali2) kali-dev; urgency=medium
+metasploit-framework (4.12.29-0kali1) kali-dev; urgency=medium
 
   * Add a stronger dependency on a ruby version (closes: 3626)
+  * Import new upstream release
 
- -- Sophie Brun <sophie@freexian.com>  Thu, 29 Sep 2016 10:23:26 +0200
+ -- Sophie Brun <sophie@freexian.com>  Mon, 03 Oct 2016 11:02:30 +0200
 
 metasploit-framework (4.12.28-0kali1) kali-dev; urgency=medium
 
