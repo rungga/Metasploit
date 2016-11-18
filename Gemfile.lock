@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    metasploit-framework (4.12.41)
+    metasploit-framework (4.12.42)
       actionpack (~> 4.2.6)
       activerecord (~> 4.2.6)
       activesupport (~> 4.2.6)
@@ -14,7 +14,7 @@ PATH
       metasploit-concern
       metasploit-credential
       metasploit-model
-      metasploit-payloads (= 1.1.26)
+      metasploit-payloads (= 1.1.29)
       metasploit_data_models
       metasploit_payloads-mettle (= 0.0.8)
       msgpack
@@ -169,7 +169,7 @@ GEM
       activemodel (~> 4.2.6)
       activesupport (~> 4.2.6)
       railties (~> 4.2.6)
-    metasploit-payloads (1.1.26)
+    metasploit-payloads (1.1.29)
     metasploit_data_models (2.0.6)
       activerecord (~> 4.2.6)
       activesupport (~> 4.2.6)
@@ -216,7 +216,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     public_suffix (2.0.4)
-    rack (1.6.4)
+    rack (1.6.5)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails-deprecated_sanitizer (1.0.3)
@@ -234,10 +234,10 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (11.3.0)
     rb-readline-r7 (0.5.2.0)
-    recog (2.0.23)
+    recog (2.0.24)
       nokogiri
     redcarpet (3.3.4)
-    rex-arch (0.1.1)
+    rex-arch (0.1.2)
       rex-text
     rex-bin_tools (0.1.1)
       metasm
@@ -279,7 +279,7 @@ GEM
       rex-socket
       rex-text
     rex-struct2 (0.1.0)
-    rex-text (0.2.4)
+    rex-text (0.2.5)
     rex-zip (0.1.0)
       rex-text
     rkelly-remix (0.0.6)
