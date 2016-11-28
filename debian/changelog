@@ -1,6 +1,7 @@
 metasploit-framework (4.13.1-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
+  * Add zlib1g-dev as Build-depends (missing for nokogiri gem)
 
  -- Sophie Brun <sophie@freexian.com>  Mon, 28 Nov 2016 15:01:20 +0100
 
