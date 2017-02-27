@@ -1,3 +1,9 @@
+metasploit-framework (4.14.0-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Mon, 27 Feb 2017 10:48:33 +0100
+
 metasploit-framework (4.13.25-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
