@@ -17,7 +17,7 @@ Build-Depends:
   libxslt-dev,
   ruby-json (>= 1.8.3),
   zlib1g-dev,
-Standards-Version: 3.9.6
+Standards-Version: 3.9.8
 Homepage: http://www.metasploit.com/
 
 Package: metasploit-framework
