@@ -39,3 +39,6 @@ override_dh_shlibdeps:
 
 override_dh_strip:
 	dh_strip --exclude=/data/ --exclude=/modules/ --exclude=/vendor/bundle/
+
+override_dh_compress:
+	dh_compress --exclude=/modules/
