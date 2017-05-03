@@ -1,12 +1,13 @@
-metasploit-framework (4.14.14-0kali2) kali-dev; urgency=medium
+metasploit-framework (4.14.15-0kali1) kali-dev; urgency=medium
 
   * Fix installation of documentation (see 3975):
     - add a symlink between /usr/share/metasploit-framework/documentation and
     /usr/share/doc/metasploit-framework
     - debian/rules: don't compress documentation (to use info -d on the
     documented modules)
+  * Import new upstream release
 
- -- Sophie Brun <sophie@freexian.com>  Tue, 02 May 2017 15:06:16 +0200
+ -- Sophie Brun <sophie@freexian.com>  Wed, 03 May 2017 16:02:04 +0200
 
 metasploit-framework (4.14.14-0kali1) kali-dev; urgency=medium
 
