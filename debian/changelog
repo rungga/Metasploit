@@ -1,6 +1,8 @@
 metasploit-framework (4.14.22-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
+  * Drop installation of upstream script msfupdate: update with apt is no
+    longer supported.
 
  -- Sophie Brun <sophie@freexian.com>  Mon, 29 May 2017 15:37:47 +0200
 
