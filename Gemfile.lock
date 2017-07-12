@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    metasploit-framework (4.14.27)
+    metasploit-framework (4.14.28)
       actionpack (~> 4.2.6)
       activerecord (~> 4.2.6)
       activesupport (~> 4.2.6)
@@ -30,7 +30,7 @@ PATH
       packetfu
       patch_finder
       pcaprub
-      pg
+      pg (= 0.20.0)
       railties
       rb-readline
       recog
@@ -109,7 +109,7 @@ GEM
     bindata (2.4.0)
     bit-struct (0.16)
     builder (3.2.3)
-    capybara (2.14.2)
+    capybara (2.14.3)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -262,12 +262,12 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (12.0.0)
     rb-readline (0.5.4)
-    recog (2.1.8)
+    recog (2.1.9)
       nokogiri
     redcarpet (3.4.0)
-    rex-arch (0.1.8)
+    rex-arch (0.1.9)
       rex-text
-    rex-bin_tools (0.1.3)
+    rex-bin_tools (0.1.4)
       metasm
       rex-arch
       rex-core
@@ -312,6 +312,10 @@ GEM
       rex-text
     rkelly-remix (0.0.7)
     robots (0.10.1)
+    rspec (3.6.0)
+      rspec-core (~> 3.6.0)
+      rspec-expectations (~> 3.6.0)
+      rspec-mocks (~> 3.6.0)
     rspec-core (3.6.0)
       rspec-support (~> 3.6.0)
     rspec-expectations (3.6.0)
@@ -328,6 +332,8 @@ GEM
       rspec-expectations (~> 3.6.0)
       rspec-mocks (~> 3.6.0)
       rspec-support (~> 3.6.0)
+    rspec-rerun (1.1.0)
+      rspec (~> 3.0)
     rspec-support (3.6.0)
     ruby_smb (0.0.18)
       bindata
@@ -381,6 +387,7 @@ DEPENDENCIES
   rake
   redcarpet
   rspec-rails
+  rspec-rerun
   shoulda-matchers
   simplecov
   timecop
