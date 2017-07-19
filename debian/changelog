@@ -1,6 +1,7 @@
 metasploit-framework (4.15.2-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
+  * Add autopkgtests provided by root boy
 
  -- Sophie Brun <sophie@freexian.com>  Wed, 19 Jul 2017 11:01:21 +0200
 
