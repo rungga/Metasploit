@@ -16,11 +16,7 @@ override_dh_auto_configure:
 
 override_dh_auto_build:
 	# Build binary gems
-	bundle config --local path vendor/bundle
-	bundle config --local without development:test
-	# Work-around failure to install json via bundle install...
-	gem install json -v 1.8.3 --install-dir vendor/bundle/ruby/2.3.0
-	bundle install --force
+	bundle install --without development test --path vendor/bundle
 	bundle config --local frozen true
 
 override_dh_gencontrol:
