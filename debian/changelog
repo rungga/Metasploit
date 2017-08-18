@@ -1,3 +1,9 @@
+metasploit-framework (4.15.7-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Fri, 18 Aug 2017 20:42:21 +0200
+
 metasploit-framework (4.15.5-0kali3) kali-dev; urgency=medium
 
   * Update debian/rules to fix issue:
