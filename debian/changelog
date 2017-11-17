@@ -1,6 +1,7 @@
 metasploit-framework (4.16.17-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
+  * Remove execution rights on wordlists (see 4352)
 
  -- Sophie Brun <sophie@freexian.com>  Thu, 16 Nov 2017 11:06:49 +0100
 
