@@ -1,6 +1,6 @@
 Source: metasploit-framework
 Section: net
-Priority: extra
+Priority: optional
 Maintainer: Raphaël Hertzog <buxy@kali.org>
 Build-Depends:
   debhelper (>= 9),
@@ -18,7 +18,7 @@ Build-Depends:
   libffi-dev,
   ruby-json (>= 1.8.3),
   zlib1g-dev,
-Standards-Version: 3.9.8
+Standards-Version: 4.1.1
 Homepage: http://www.metasploit.com/
 
 Package: metasploit-framework
