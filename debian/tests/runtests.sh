@@ -53,8 +53,9 @@ EOF
 
 	chmod 755 $AUTOPKGTEST_TMP/run_nasm_shell
 	$AUTOPKGTEST_TMP/run_nasm_shell
-	echo -e "\nTesting msu_finder..."
-	/usr/share/metasploit-framework/tools/exploit/msu_finder.rb -q "ms15-100" -r x86
+#	disabled because it's temporarily broken: see https://github.com/rapid7/metasploit-framework/issues/9219
+#	echo -e "\nTesting msu_finder..."
+#	/usr/share/metasploit-framework/tools/exploit/msu_finder.rb -q "ms15-100" -r x86
 	msfvenom -p linux/x64/meterpreter/reverse_tcp LPORT=4444 -f exe > $AUTOPKGTEST_TMP/reverse.exe
 	echo "Testing exe2vba.rb..."
 	/usr/share/metasploit-framework/tools/exploit/exe2vba.rb $AUTOPKGTEST_TMP/reverse.exe $AUTOPKGTEST_TMP/reverse.vba
