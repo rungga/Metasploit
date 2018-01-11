@@ -1,1 +1,2 @@
 drop-installation-msfupdate.patch
+dont-remove-libsodium-dependency.patch

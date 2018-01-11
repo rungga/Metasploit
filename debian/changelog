@@ -1,3 +1,10 @@
+metasploit-framework (4.16.30-0kali3) kali-dev; urgency=medium
+
+  * Drop the Conflicts on ruby-rbnacl and add a patch to keep dependency on
+    rbnacl-libsodium
+
+ -- Sophie Brun <sophie@freexian.com>  Thu, 11 Jan 2018 11:23:52 +0100
+
 metasploit-framework (4.16.30-0kali2) kali-dev; urgency=medium
 
   * Add a Conflicts on ruby-rbnacl (new version in Kali conflicts with version
