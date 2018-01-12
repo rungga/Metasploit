@@ -1,3 +1,9 @@
+metasploit-framework (4.16.31-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Fri, 12 Jan 2018 10:47:39 +0100
+
 metasploit-framework (4.16.30-0kali3) kali-dev; urgency=medium
 
   * Drop the Conflicts on ruby-rbnacl and add a patch to keep dependency on
