@@ -2,7 +2,7 @@
 
 set -e
 
-BINS="msfconsole msfd msfdb msfrpc msfrpcd msfupdate msfvenom metasm_shell nasm_shell pattern_create pattern_offset exe2vba exe2vbs"
+BINS="msfconsole msfd msfdb msfrpc msfrpcd msfupdate msfvenom metasm_shell nasm_shell pattern_create pattern_offset exe2vba exe2vbs pdf2xdp"
 OLD_BINS="msfbinscan msfelfscan msfmachscan msfpescan msfrop"
 
 if [ "$1" = "configure" ]; then
