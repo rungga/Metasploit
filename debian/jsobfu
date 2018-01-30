@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /usr/share/metasploit-framework/tools/exploit/
+./jsobfu.rb $@
