@@ -5,6 +5,7 @@ debian/metasm_shell usr/share/metasploit-framework/
 debian/nasm_shell usr/share/metasploit-framework/
 debian/pattern_create usr/share/metasploit-framework/
 debian/pattern_offset usr/share/metasploit-framework/
+debian/exe2vba usr/share/metasploit-framework/
 debian/msfupdate usr/share/metasploit-framework/
 debian/extra/ruby usr/share/metasploit-framework/
 debian/extra/msfdb usr/share/metasploit-framework/
