@@ -11,6 +11,7 @@ debian/pdf2xdp usr/share/metasploit-framework/
 debian/msf_irb_shell usr/share/metasploit-framework/
 debian/find_badchars usr/share/metasploit-framework/
 debian/java_deserializer usr/share/metasploit-framework/
+debian/jsobfu usr/share/metasploit-framework/
 debian/msfupdate usr/share/metasploit-framework/
 debian/extra/ruby usr/share/metasploit-framework/
 debian/extra/msfdb usr/share/metasploit-framework/
