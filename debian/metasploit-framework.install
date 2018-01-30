@@ -9,6 +9,7 @@ debian/exe2vba usr/share/metasploit-framework/
 debian/exe2vbs usr/share/metasploit-framework/
 debian/pdf2xdp usr/share/metasploit-framework/
 debian/msf_irb_shell usr/share/metasploit-framework/
+debian/find_badchars usr/share/metasploit-framework/
 debian/msfupdate usr/share/metasploit-framework/
 debian/extra/ruby usr/share/metasploit-framework/
 debian/extra/msfdb usr/share/metasploit-framework/
