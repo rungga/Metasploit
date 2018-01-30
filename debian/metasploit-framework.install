@@ -17,6 +17,7 @@ debian/msf-virustotal usr/share/metasploit-framework/
 debian/hmac_sha1_crack usr/share/metasploit-framework/
 debian/lm2ntcrack usr/share/metasploit-framework/
 debian/halflm_second usr/share/metasploit-framework/
+debian/md5_lookup usr/share/metasploit-framework/
 debian/msfupdate usr/share/metasploit-framework/
 debian/extra/ruby usr/share/metasploit-framework/
 debian/extra/msfdb usr/share/metasploit-framework/
