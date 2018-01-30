@@ -14,6 +14,7 @@ debian/java_deserializer usr/share/metasploit-framework/
 debian/jsobfu usr/share/metasploit-framework/
 debian/msf-egghunter usr/share/metasploit-framework/
 debian/msf-virustotal usr/share/metasploit-framework/
+debian/halflm_second usr/share/metasploit-framework/
 debian/msfupdate usr/share/metasploit-framework/
 debian/extra/ruby usr/share/metasploit-framework/
 debian/extra/msfdb usr/share/metasploit-framework/
