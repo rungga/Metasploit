@@ -1,3 +1,9 @@
+metasploit-framework (4.16.34-0kali3) kali-dev; urgency=medium
+
+  * Drop use of update-alternatives and use symlink to add tools to $PATH
+
+ -- Sophie Brun <sophie@freexian.com>  Thu, 01 Feb 2018 10:01:14 +0100
+
 metasploit-framework (4.16.34-0kali2) kali-dev; urgency=medium
 
   * Add pattern_create, pattern_offset + Others to $PATH (Closes:
