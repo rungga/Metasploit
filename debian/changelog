@@ -1,3 +1,9 @@
+metasploit-framework (4.16.35-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Fri, 02 Feb 2018 10:23:04 +0100
+
 metasploit-framework (4.16.34-0kali3) kali-dev; urgency=medium
 
   * Drop use of update-alternatives and use symlink to add tools to $PATH
