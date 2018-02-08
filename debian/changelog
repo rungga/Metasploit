@@ -1,8 +1,10 @@
 metasploit-framework (4.16.36-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
+  * debian/rules: change temporarily the maximal version of Ruby for the
+    transition to Ruby 2.5
 
- -- Sophie Brun <sophie@freexian.com>  Mon, 05 Feb 2018 14:59:26 +0100
+ -- Sophie Brun <sophie@freexian.com>  Thu, 08 Feb 2018 14:38:21 +0100
 
 metasploit-framework (4.16.35-0kali1) kali-dev; urgency=medium
 
