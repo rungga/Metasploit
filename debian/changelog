@@ -1,3 +1,9 @@
+metasploit-framework (4.16.43-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Mon, 05 Mar 2018 13:49:02 +0100
+
 metasploit-framework (4.16.41-0kali2) kali-dev; urgency=medium
 
   * Switch to systemctl & more verbose output
