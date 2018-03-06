@@ -1,3 +1,9 @@
+metasploit-framework (4.16.43-0kali2) kali-dev; urgency=medium
+
+  * Hide output of setting password for db user
+
+ -- Ben Wilson <g0tmi1k@offensive-security.com>  Tue, 06 Mar 2018 14:17:11 +0000
+
 metasploit-framework (4.16.43-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
