@@ -68,7 +68,10 @@ init_db() {
     printf "ALTER ROLE ${DB_USER} WITH PASSWORD '$DB_PASS';\n" | pg_cmd psql postgres >/dev/null
   else
     echo -e "${GREEN}[+]${RESET} Creating database user '${DB_USER}'"
-    printf "%s\n%s\n" "${DB_PASS}" "${DB_PASS}" | pg_cmd createuser -S -D -R -P ${DB_USER} >/dev/null
+    TMPFILE=$(mktemp) || (echo -e "${RED}[-]${RESET} Error: Couldn't create temp file" && exit 1)
+    printf "%s\n%s\n" "${DB_PASS}" "${DB_PASS}" | pg_cmd createuser -S -D -R -P ${DB_USER} >/dev/null 2>"${TMPFILE}"
+    grep -v "^Enter password for new role: $\|^Enter it again: $" "${TMPFILE}"
+    rm -f "${TMPFILE}"
   fi
 
   if ! db_exists ${DB_NAME}; then
@@ -165,7 +168,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 if [ $(id -u) -ne 0 ]; then
-  echo -e "${RED}[-]${RESET} Error: $0 must be run as root"
+  echo -e "${RED}[-]${RESET} Error: $0 must be ${RED}run as root${RESET}" 1>&2
   exit 1
 fi
 
@@ -175,6 +178,6 @@ case $1 in
   delete) delete_db ;;
   start) start_db ;;
   stop) stop_db ;;
-  *) echo -e "${RED}[-]${RESET} Error: unrecognized action '${1}'"; usage ;;
+  *) echo -e "${RED}[-]${RESET} Error: unrecognized action '${RED}${1}${RESET}'" 1>&2; usage ;;
 esac
 
