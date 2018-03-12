@@ -20,8 +20,7 @@ override_dh_auto_build:
 	bundle config --local frozen true
 
 override_dh_gencontrol:
-#	dh_gencontrol -- -Vruby:Depends="ruby (>= 1:$(major-rubyversion).$(minor-rubyversion)), ruby (<< 1:$(major-rubyversion).$(minormax-rubyversion))"
-	dh_gencontrol -- -Vruby:Depends="ruby (>= 1:$(major-rubyversion).$(minor-rubyversion)), ruby (<= 1:2.5~1)"
+	dh_gencontrol -- -Vruby:Depends="ruby (>= 1:$(major-rubyversion).$(minor-rubyversion)), ruby (<< 1:$(major-rubyversion).$(minormax-rubyversion))"
 
 override_dh_install:
 	dh_install --exclude=data/gui --exclude=LICENSE --exclude=LICENCE --exclude=LICENSE.txt

@@ -1,3 +1,10 @@
+metasploit-framework (4.16.44-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release 
+  * debian/rules: drop the temporary change on maximal version of Ruby
+
+ -- Sophie Brun <sophie@freexian.com>  Mon, 12 Mar 2018 11:56:05 +0100
+
 metasploit-framework (4.16.43-0kali2) kali-dev; urgency=medium
 
   * Hide output of setting password for db user
