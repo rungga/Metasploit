@@ -1,3 +1,9 @@
+metasploit-framework (4.16.44-0kali3) kali-dev; urgency=medium
+
+  * Made msfdb more verbose
+
+ -- Ben Wilson <g0tmi1k@offensive-security.com>  Tue, 13 Mar 2018 14:32:42 +0000
+
 metasploit-framework (4.16.44-0kali2) kali-dev; urgency=medium
 
   * Add msfdb status/run
