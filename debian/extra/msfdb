@@ -142,6 +142,8 @@ delete_db() {
 
   echo -e "${GREEN}[+]${RESET} Deleting configuration file ${DB_CONF}"
   rm -f ${DB_CONF}
+
+  stop_db
 }
 
 reinit_db() {
@@ -150,13 +152,15 @@ reinit_db() {
 }
 
 status_db() {
-   systemctl --no-pager -l status ${PG_SERVICE}
+  systemctl --no-pager -l status ${PG_SERVICE}
 
   ## Check if the port is free
   if lsof -Pi :${DB_PORT} -sTCP:LISTEN -t >/dev/null ; then
     echo ""
+    ## Show network servies
     lsof -Pi :${DB_PORT} -sTCP:LISTEN
     echo ""
+    ## Show running processes
     ps -f $( lsof -Pi :${DB_PORT} -sTCP:LISTEN -t )
     echo ""
   fi
