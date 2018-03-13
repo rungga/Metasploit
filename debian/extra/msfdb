@@ -149,6 +149,19 @@ reinit_db() {
   init_db
 }
 
+status_db() {
+   systemctl --no-pager -l status ${PG_SERVICE}
+
+  ## Check if the port is free
+  if lsof -Pi :${DB_PORT} -sTCP:LISTEN -t >/dev/null ; then
+    echo ""
+    lsof -Pi :${DB_PORT} -sTCP:LISTEN
+    echo ""
+    ps -f $( lsof -Pi :${DB_PORT} -sTCP:LISTEN -t )
+    echo ""
+  fi
+}
+
 usage() {
   PROG="$(basename $0)"
   echo
@@ -159,6 +172,7 @@ usage() {
   echo "  ${PROG} delete   # delete database and stop using it"
   echo "  ${PROG} start    # start the database"
   echo "  ${PROG} stop     # stop the database"
+  echo "  ${PROG} status   # check service status"
   echo
   exit 0
 }
@@ -178,6 +192,7 @@ case $1 in
   delete) delete_db ;;
   start) start_db ;;
   stop) stop_db ;;
+  status) status_db ;;
   *) echo -e "${RED}[-]${RESET} Error: unrecognized action '${RED}${1}${RESET}'" 1>&2; usage ;;
 esac
 
