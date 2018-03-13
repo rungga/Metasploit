@@ -84,7 +84,7 @@ init_db() {
     pg_cmd createdb ${DB_NAME}_test -O ${DB_USER} -T template0 -E UTF-8
   fi
 
-  echo -e "${GREEN}[+]${RESET} Creating configuration file in ${DB_CONF}"
+  echo -e "${GREEN}[+]${RESET} Creating configuration file '${DB_CONF}'"
   cat > ${DB_CONF} <<-EOF
 development:
   adapter: postgresql
@@ -163,6 +163,14 @@ status_db() {
     ## Show running processes
     ps -f $( lsof -Pi :${DB_PORT} -sTCP:LISTEN -t )
     echo ""
+  else
+    echo -e "${YELLOW}[i]${RESET} No network service running"
+  fi
+
+  if [ -e ${DB_CONF} ]; then
+    echo -e "${GREEN}[+]${RESET} Detected configuration file (${DB_CONF})"
+  else
+    echo -e "${YELLOW}[i]${RESET} No configuration file found"
   fi
 }
 
