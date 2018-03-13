@@ -162,6 +162,20 @@ status_db() {
   fi
 }
 
+run_db() {
+  ## Is there a config file?
+  if [ ! -e ${DB_CONF} ]; then
+    ## No, so lets create one (first time run!)
+    init_db
+  else
+   ## There is, so just start up
+    start_db
+  fi
+
+  ## Run metasploit-framework's main console
+  msfconsole
+}
+
 usage() {
   PROG="$(basename $0)"
   echo
@@ -173,6 +187,7 @@ usage() {
   echo "  ${PROG} start    # start the database"
   echo "  ${PROG} stop     # stop the database"
   echo "  ${PROG} status   # check service status"
+  echo "  ${PROG} run      # start the database and run msfconsole"
   echo
   exit 0
 }
@@ -193,6 +208,7 @@ case $1 in
   start) start_db ;;
   stop) stop_db ;;
   status) status_db ;;
+  run) run_db ;;
   *) echo -e "${RED}[-]${RESET} Error: unrecognized action '${RED}${1}${RESET}'" 1>&2; usage ;;
 esac
 
