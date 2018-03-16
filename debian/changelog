@@ -1,3 +1,9 @@
+metasploit-framework (4.16.45-0kali1) kali-dev; urgency=medium
+
+  * Import new upstream release
+
+ -- Sophie Brun <sophie@freexian.com>  Fri, 16 Mar 2018 14:11:12 +0100
+
 metasploit-framework (4.16.44-0kali3) kali-dev; urgency=medium
 
   * Made msfdb more verbose
