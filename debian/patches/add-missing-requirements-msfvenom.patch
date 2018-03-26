@@ -1,0 +1,20 @@
+Description: add missing requirements in parse_args
+ msfvenom -b xxx fails with
+ /usr/bin/msfvenom:138:in `block in parse_args': uninitialized constant Rex (NameError)
+ It requires rex to run correctly. Call the function require_deps before
+ parsing the arguments.
+Author: Sophie Brun <sophie@freexian.com>
+Last-Update: 2018-03-26
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/msfvenom
++++ b/msfvenom
+@@ -60,6 +60,8 @@ end
+ def parse_args(args)
+   opts = {}
+   datastore = {}
++  # load dependencies (require rex)
++  require_deps unless @framework_loaded
+   opt = OptionParser.new
+   banner = "MsfVenom - a Metasploit standalone payload generator.\n"
+   banner << "Also a replacement for msfpayload and msfencode.\n"
