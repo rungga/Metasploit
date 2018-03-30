@@ -1,6 +1,7 @@
 metasploit-framework (4.16.47-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
+  * Drop the patch on msfvenom (fixed upstream)
 
  -- Sophie Brun <sophie@freexian.com>  Fri, 30 Mar 2018 09:06:33 +0200
 
