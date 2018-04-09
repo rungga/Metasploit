@@ -5,7 +5,7 @@ Last-Update: 2018-01-30
 This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
 --- a/tools/exploit/pattern_create.rb
 +++ b/tools/exploit/pattern_create.rb
-@@ -17,7 +17,7 @@ module PatternCreate
+@@ -22,7 +22,7 @@ module PatternCreate
      def self.parse(args)
        options = {}
        parser = OptionParser.new do |opt|
@@ -16,7 +16,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
          opt.on('-l', '--length <length>', Integer, "The length of the pattern") do |len|
 --- a/tools/exploit/pattern_offset.rb
 +++ b/tools/exploit/pattern_offset.rb
-@@ -17,7 +17,7 @@ module PatternOffset
+@@ -22,7 +22,7 @@ module PatternOffset
      def self.parse(args)
        options = {}
        parser = OptionParser.new do |opt|
@@ -27,7 +27,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
 --- a/tools/exploit/egghunter.rb
 +++ b/tools/exploit/egghunter.rb
-@@ -16,7 +16,7 @@ module Egghunter
+@@ -21,7 +21,7 @@ module Egghunter
      def self.parse(args)
        options = {}
        parser = OptionParser.new do |opt|
@@ -38,7 +38,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
 --- a/tools/exploit/exe2vba.rb
 +++ b/tools/exploit/exe2vba.rb
-@@ -22,7 +22,7 @@ require 'rex'
+@@ -24,7 +24,7 @@ require 'rex'
  require 'msf/base'
  
  def usage
@@ -49,7 +49,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
 --- a/tools/exploit/exe2vbs.rb
 +++ b/tools/exploit/exe2vbs.rb
-@@ -21,7 +21,7 @@ require 'rex'
+@@ -23,7 +23,7 @@ require 'rex'
  require 'msf/base'
  
  def usage
@@ -60,7 +60,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
 --- a/tools/exploit/find_badchars.rb
 +++ b/tools/exploit/find_badchars.rb
-@@ -31,7 +31,7 @@ $args = Rex::Parser::Arguments.new(
+@@ -33,7 +33,7 @@ $args = Rex::Parser::Arguments.new(
    "-t" => [ true, "The format that the memory contents are in (empty to list)"         ])
  
  def usage
@@ -82,7 +82,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
        options[:array] = id
 --- a/tools/exploit/jsobfu.rb
 +++ b/tools/exploit/jsobfu.rb
-@@ -16,7 +16,7 @@ module Jsobfu
+@@ -21,7 +21,7 @@ module Jsobfu
      def self.parse(args)
        options = {}
        parser = OptionParser.new do |opt|
@@ -93,7 +93,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
 --- a/tools/exploit/metasm_shell.rb
 +++ b/tools/exploit/metasm_shell.rb
-@@ -39,7 +39,7 @@ require 'metasm'
+@@ -42,7 +42,7 @@ require 'metasm'
  @endianess = ""
  
  def usage
@@ -104,7 +104,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
 --- a/tools/exploit/pdf2xdp.rb
 +++ b/tools/exploit/pdf2xdp.rb
-@@ -13,7 +13,7 @@ pdf = ARGV.shift
+@@ -15,7 +15,7 @@ pdf = ARGV.shift
  xdp = ARGV.shift
  
  if ! xdp then
@@ -115,7 +115,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
 --- a/tools/exploit/virustotal.rb
 +++ b/tools/exploit/virustotal.rb
-@@ -290,7 +290,7 @@ class OptsConsole
+@@ -289,7 +289,7 @@ class OptsConsole
      options = {}
  
      opts = OptionParser.new do |opts|
@@ -126,7 +126,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
        opts.separator "Specific options:"
 --- a/tools/password/halflm_second.rb
 +++ b/tools/password/halflm_second.rb
-@@ -22,7 +22,7 @@ $:.unshift(ENV['MSF_LOCAL_LIB']) if ENV[
+@@ -24,7 +24,7 @@ $:.unshift(ENV['MSF_LOCAL_LIB']) if ENV[
  require 'rex'
  
  def usage
@@ -137,7 +137,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
 --- a/tools/password/hmac_sha1_crack.rb
 +++ b/tools/password/hmac_sha1_crack.rb
-@@ -24,7 +24,7 @@ require 'rex'
+@@ -28,7 +28,7 @@ require 'rex'
  require 'openssl'
  
  def usage
@@ -148,7 +148,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  end
 --- a/tools/password/md5_lookup.rb
 +++ b/tools/password/md5_lookup.rb
-@@ -274,7 +274,7 @@ module Md5LookupUtility
+@@ -272,7 +272,7 @@ module Md5LookupUtility
      def self.get_parsed_options
        options = {}
        parser = OptionParser.new do |opt|
@@ -159,12 +159,12 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
 --- a/tools/recon/makeiplist.rb
 +++ b/tools/recon/makeiplist.rb
-@@ -29,7 +29,7 @@ class OptsConsole
+@@ -34,7 +34,7 @@ class OptsConsole
  
      opts = OptionParser.new do |opts|
-       opts.banner = %Q|This script takes a list of ranges and converts it to a per line ip list.
+       opts.banner = %Q|This script takes a list of ranges and converts it to a per line IP list.
 -Usage: #{__FILE__} [options]|
-+Usage: mdf-makeiplist [options]|
++Usage: msf-makeiplist [options]|
  
        opts.separator ""
        opts.separator "Specific options:"
