@@ -70,7 +70,7 @@ Gem::Specification.new do |spec|
   # are needed when there's no database
   spec.add_runtime_dependency 'metasploit-model'
   # Needed for Meterpreter
-  spec.add_runtime_dependency 'metasploit-payloads', '1.3.32'
+  spec.add_runtime_dependency 'metasploit-payloads', '1.3.33'
   # Needed for the next-generation POSIX Meterpreter
   spec.add_runtime_dependency 'metasploit_payloads-mettle', '0.3.7'
   # Needed by msfgui and other rpc components
@@ -135,7 +135,7 @@ Gem::Specification.new do |spec|
   # Core of the Ruby Exploitation Library
   spec.add_runtime_dependency 'rex-core'
   # Text manipulation library for things like generating random string
-  spec.add_runtime_dependency 'rex-text'
+  spec.add_runtime_dependency 'rex-text', ["< 0.2.18"]
   # Library for Generating Randomized strings valid as Identifiers such as variable names
   spec.add_runtime_dependency 'rex-random_identifier'
   # library for creating Powershell scripts for exploitation purposes
