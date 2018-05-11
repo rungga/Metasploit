@@ -1,23 +1,8 @@
 {
-    "COMMAND_LIST": [
-        "sessions -C sysinfo",
-        "sessions -C ifconfig",
-        "sessions -C sessions -l",
-        "sessions -C getuid",
-        "sessions -C exit"
-    ],
+    "COMMAND_LIST": [],
     "CREDS_FILE": "../JSON/creds.json",
     "FRAMEWORK_BRANCH": "upstream/master",
     "HTTP_PORT": 5309,
-    "MODULES": [
-        {
-            "NAME": "exploit/windows/smb/ms17_010_eternalblue",
-            "SETTINGS": [
-                "SMBUser=vagrant",
-                "SMBPass=vagrant"
-            ]
-        }
-    ],
     "MSF_HOSTS": [
         {
             "CPE": "cpe:/a:rapid7:metasploit:::",
@@ -28,20 +13,38 @@
             "TYPE": "VIRTUAL"
         }
     ],
-    "PAYLOADS": [
-        {
-            "NAME": "windows/x64/meterpreter/reverse_tcp",
-            "SETTINGS": []
-        }
-    ],
+    "REPORT_PREFIX": "SmbEnumSharesTest",
     "STARTING_LISTENER": 30000,
     "SUCCESS_LIST": [
-        "Session 1 created in the background"
+        "IPC$"
     ],
     "TARGETS": [
         {
-            "CPE": "cpe:/o:microsoft:windows_7:::x64",
+            "CPE": "cpe:/o:microsoft:windows_server_2008:r2:sp1:x64",
             "METHOD": "EXPLOIT",
+            "MODULES": [
+                {
+                    "NAME": "auxiliary/scanner/smb/smb_enumshares",
+                    "SETTINGS": [
+                        "smbuser=vagrant",
+                        "smbpass=vagrant"
+                    ]
+                }
+            ],
+            "TYPE": "VIRTUAL"
+        },
+        {
+            "CPE": "cpe:/o:microsoft:windows_server_2016:::x64",
+            "METHOD": "EXPLOIT",
+            "MODULES": [
+                {
+                    "NAME": "auxiliary/scanner/smb/smb_enumshares",
+                    "SETTINGS": [
+                        "smbuser=vagrant",
+                        "smbpass=vagrant"
+                    ]
+                }
+            ],
             "TYPE": "VIRTUAL"
         }
     ],
@@ -54,5 +57,6 @@
         "PYTHON": "C:\\software\\x86\\python27\\python.exe",
         "TESTING_SNAPSHOT": "TESTING_BASE",
         "TYPE": "VIRTUAL"
-    }
+    },
+    "TEST_NAME": "smb_enumshares test"
 }
