@@ -10,7 +10,7 @@ Last-Update: 2017-05-29
 This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
 --- a/msfupdate
 +++ /dev/null
-@@ -1,318 +0,0 @@
+@@ -1,317 +0,0 @@
 -#!/usr/bin/env ruby
 -# -*- coding: binary -*-
 -#
@@ -163,7 +163,6 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
 -  # We could also do this by running `git config --global user.name` and `git config --global user.email`
 -  # and check the output of those. (it's a bit quieter)
 -  def git_globals_okay?
--    require 'os'
 -    output = ''
 -    begin
 -      output = `git config --list`
