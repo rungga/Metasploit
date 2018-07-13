@@ -85,6 +85,7 @@ Copyright: 2016-2017 Andrew Svetlov
 License: Apache-2.0
 
 Files: modules/auxiliary/scanner/smb/impacket/dcomexec.py
+ modules/auxiliary/scanner/smb/impacket/secretsdump.py
 Copyright: 2003-2018 CORE Security Technologies
 License: Apache-2.0
 
