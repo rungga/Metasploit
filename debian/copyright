@@ -65,7 +65,8 @@ License: GPL-2+
 
 Files: external/source/exploits/cve-2015-0016/*
  external/source/exploits/CVE-2016-0040/Metasploit/Metasploit.*
-Copyright: 2011-2012 Stephen Fewer of Harmony Security (www.harmonysecurity.com)
+ external/source/exploits/cve-2018-8897/dll/*
+Copyright: 2011-2013 Stephen Fewer of Harmony Security (www.harmonysecurity.com)
 License: BSD-3-clause
 
 Files: external/source/flash_detector/bin/js/swfobject.js
