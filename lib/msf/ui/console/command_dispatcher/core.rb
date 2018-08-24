@@ -500,7 +500,7 @@ class Core
 
         # Portable file truncation?
         if File.writable?(Msf::Config.history_file)
-          File.open(Msf::Config.history_file, 'w') {}
+          File.write(Msf::Config.history_file, '')
         end
 
         print_good('Command history and history file cleared')
@@ -1575,7 +1575,7 @@ class Core
     # If the driver indicates that the value is not valid, bust out.
     if (driver.on_variable_set(global, name, value) == false)
       print_error("The value specified for #{name} is not valid.")
-      return true
+      return false
     end
 
     begin
@@ -1587,6 +1587,11 @@ class Core
     rescue OptionValidateError => e
       print_error(e.message)
       elog(e.message)
+    end
+
+    # Set PAYLOAD from TARGET
+    if name.upcase == 'TARGET' && active_module && active_module.exploit?
+      active_module.import_target_datastore
     end
 
     print_line("#{name} => #{datastore[name]}")
