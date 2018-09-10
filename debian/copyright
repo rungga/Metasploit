@@ -73,7 +73,7 @@ Files: external/source/flash_detector/bin/js/swfobject.js
 Copyright: 2007-2008 Adobe Systems Incorporated and its licensors
 License: MIT
 
-Files: external/source/exploits/cve-2018-8897-exe/*
+Files: external/source/exploits/cve-2018-8897/exe/*
 Copyright: 2018, Can Bölük
 License: BSD-3-clause
 
