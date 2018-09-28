@@ -77,6 +77,10 @@ Files: external/source/exploits/cve-2018-8897/exe/*
 Copyright: 2018, Can Bölük
 License: BSD-3-clause
 
+Files: external/source/exploits/CVE-2018-8440/dll/ALPC-TaskSched-LPE*
+Copyright: 2015 Google Inc. All Rights Reserved.
+License: Apache-2.0
+
 Files: lib/anemone.rb lib/anemone/*
 Copyright: 2009 Vertive, Inc.
 License: MIT
