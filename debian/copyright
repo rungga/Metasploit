@@ -66,6 +66,7 @@ License: GPL-2+
 Files: external/source/exploits/cve-2015-0016/*
  external/source/exploits/CVE-2016-0040/Metasploit/Metasploit.*
  external/source/exploits/cve-2018-8897/dll/*
+ external/source/exploits/rottenpotato/MSFRottenPotato/*
 Copyright: 2011-2013 Stephen Fewer of Harmony Security (www.harmonysecurity.com)
 License: BSD-3-clause
 
