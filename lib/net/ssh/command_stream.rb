@@ -16,8 +16,12 @@ class CommandStream
   end
 
   def shell_requested(channel, success)
-    raise "could not request ssh shell" unless success
+    unless success
+      raise Net::SSH::ChannelRequestFailed, 'shell/exec channel request failed'
+    end
+
     channel[:data] = ''
+    channel[:extended_data] = ''
 
     channel.on_eof do
       cleanup
@@ -27,12 +31,14 @@ class CommandStream
       cleanup
     end
 
-    channel.on_data do |ch,data|
+    channel.on_data do |ch, data|
       self.rsock.write(data)
+      channel[:data] << data
     end
 
     channel.on_extended_data do |ch, ctype, data|
       self.rsock.write(data)
+      channel[:extended_data] << data
     end
 
     self.channel = channel
@@ -57,7 +63,7 @@ class CommandStream
           # A PTY will write us to {u,w}tmp and lastlog
           rch.request_pty if rpty
           if rcmd.nil?
-            rch.send_channel_request("shell", &method(:shell_requested))
+            rch.send_channel_request('shell', &method(:shell_requested))
           else
             rch.exec(rcmd, &method(:shell_requested))
           end
@@ -78,6 +84,7 @@ class CommandStream
         end
 
       rescue ::Exception => e
+        # XXX: This won't be set UNTIL there's a failure from a thread
         self.error = e
         #::Kernel.warn "BOO: #{e.inspect}"
         #::Kernel.warn e.backtrace.join("\n")
