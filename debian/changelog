@@ -1,3 +1,10 @@
+metasploit-framework (4.17.25-0kali2) kali-dev; urgency=medium
+
+  * d/rules: don't use dh_makeshlibs on data/* directory. It contains compiled
+    *.so not for the build arch.
+
+ -- Sophie Brun <sophie@freexian.com>  Fri, 16 Nov 2018 15:19:46 +0100
+
 metasploit-framework (4.17.25-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
