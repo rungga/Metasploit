@@ -1,7 +1,8 @@
 Source: metasploit-framework
 Section: net
 Priority: optional
-Maintainer: Raphaël Hertzog <buxy@kali.org>
+Maintainer: Kali Developers <devel@kali.org>
+Uploaders: Raphaël Hertzog <buxy@kali.org>
 Build-Depends:
   debhelper (>= 9),
 # Dependencies needed to fetch and build the gems in a bundle
@@ -18,8 +19,10 @@ Build-Depends:
   libffi-dev,
   ruby-json (>= 1.8.3),
   zlib1g-dev,
-Standards-Version: 4.1.1
-Homepage: http://www.metasploit.com/
+Standards-Version: 4.2.1
+Homepage: https://www.metasploit.com/
+Vcs-Git: git://git.kali.org/packages/metasploit-framework.git
+Vcs-Browser: http://git.kali.org/gitweb/?p=packages/metasploit-framework.git;a=summary
 
 Package: metasploit-framework
 Architecture: any
