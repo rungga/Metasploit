@@ -86,8 +86,8 @@ Files: lib/anemone.rb lib/anemone/*
 Copyright: 2009 Vertive, Inc.
 License: MIT
 
-Files: lib/metasm/* data/cpuinfo/*
-Copyright: 2006-2010 Yoann GUILLOT
+Files: tools/exploit/metasm_shell.rb
+Copyright: 2007 Yoann GUILLOT
 License: LGPL-2.1
 
 Files: lib/msf/core/modules/external/python/async_timeout/*
