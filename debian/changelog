@@ -1,3 +1,11 @@
+metasploit-framework (4.17.34-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 4.17.34
+  * Update debian/copyright
+  * Bump Standards-Version to 4.3.0
+
+ -- Sophie Brun <sophie@offensive-security.com>  Mon, 07 Jan 2019 14:05:00 +0100
+
 metasploit-framework (4.17.33-0kali1) kali-dev; urgency=medium
 
   * Import new upstream release
