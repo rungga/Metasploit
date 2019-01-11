@@ -94,6 +94,10 @@ Files: lib/msf/core/modules/external/python/async_timeout/*
 Copyright: 2016-2017 Andrew Svetlov
 License: Apache-2.0
 
+Files: lib/msf/core/web_services/public/* lib/msf/core/web_services/views/api_docs.erb
+Copyright: Copyright 2018 SmartBear Software
+License: Apache-2.0
+
 Files: modules/auxiliary/gather/office365userenum.py
 Copyright: 2015  Oliver Morton (Sec-1 Ltd)
 License: GPL-2+
