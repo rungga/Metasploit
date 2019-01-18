@@ -87,7 +87,7 @@ module Msf::DBManager::Import
   # import_file_detect will raise an error if the filetype
   # is unknown.
   def import(args={}, &block)
-    wspace = Msf::Util::DBManager.process_opts_workspace(args, framework)
+    wspace = args[:wspace] || args['wspace'] || workspace
     preserve_hosts = args[:task].options["DS_PRESERVE_HOSTS"] if args[:task].present? && args[:task].options.present?
     wspace.update_attribute(:import_fingerprint, true)
     existing_host_ids = wspace.hosts.map(&:id)
@@ -173,7 +173,7 @@ module Msf::DBManager::Import
   #
   def import_file(args={}, &block)
     filename = args[:filename] || args['filename']
-    wspace = Msf::Util::DBManager.process_opts_workspace(args, framework)
+    wspace = args[:wspace] || args['wspace'] || workspace
     @import_filedata            = {}
     @import_filedata[:filename] = filename
 
@@ -210,9 +210,9 @@ module Msf::DBManager::Import
     REXML::Security.entity_expansion_text_limit = 51200
 
     if block
-      import(args.merge(data: data, workspace: wspace.name)) { |type,data| yield type,data }
+      import(args.merge(:data => data)) { |type,data| yield type,data }
     else
-      import(args.merge(data: data, workspace: wspace.name))
+      import(args.merge(:data => data))
     end
   end
 

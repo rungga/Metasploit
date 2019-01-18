@@ -5,11 +5,6 @@ require 'msf/ui'
 require 'msf/ui/console/command_dispatcher/creds'
 
 RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
-
-  if ENV['REMOTE_DB']
-    before {skip("Awaiting credentials port")}
-  end
-
   include_context 'Msf::DBManager'
   include_context 'Msf::UIDriver'
 
@@ -35,30 +30,30 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
         let(:nonblank_username)   { 'nonblank_user' }
         let(:nonblank_password)   { 'nonblank_pass' }
 
-        let!(:origin) { FactoryBot.create(:metasploit_credential_origin_import) }
+        let!(:origin) { FactoryGirl.create(:metasploit_credential_origin_import) }
         
-        let!(:priv) { FactoryBot.create(:metasploit_credential_password, data: password) }
-        let!(:pub) { FactoryBot.create(:metasploit_credential_username, username: username) }
-        let!(:blank_pub) { blank_pub = FactoryBot.create(:metasploit_credential_blank_username) }
-        let!(:nonblank_priv) { FactoryBot.create(:metasploit_credential_password, data: nonblank_password) }
-        let!(:nonblank_pub) { FactoryBot.create(:metasploit_credential_username, username: nonblank_username) }
-        let!(:blank_priv) { FactoryBot.create(:metasploit_credential_password, data: blank_password) }
+        let!(:priv) { FactoryGirl.create(:metasploit_credential_password, data: password) }
+        let!(:pub) { FactoryGirl.create(:metasploit_credential_username, username: username) }
+        let!(:blank_pub) { blank_pub = FactoryGirl.create(:metasploit_credential_blank_username) }
+        let!(:nonblank_priv) { FactoryGirl.create(:metasploit_credential_password, data: nonblank_password) }
+        let!(:nonblank_pub) { FactoryGirl.create(:metasploit_credential_username, username: nonblank_username) }
+        let!(:blank_priv) { FactoryGirl.create(:metasploit_credential_password, data: blank_password) }
         before(:example) do
-          FactoryBot.create(:metasploit_credential_core,
+          FactoryGirl.create(:metasploit_credential_core,
             origin: origin,
             private: priv,
             public: pub,
             realm: nil,
             workspace: framework.db.workspace)
           
-          FactoryBot.create(:metasploit_credential_core,
+          FactoryGirl.create(:metasploit_credential_core,
             origin: origin,
             private: nonblank_priv,
             public: blank_pub,
             realm: nil,
             workspace: framework.db.workspace)
             
-          FactoryBot.create(:metasploit_credential_core,
+          FactoryGirl.create(:metasploit_credential_core,
             origin: origin,
             private: blank_priv,
             public: nonblank_pub,
@@ -172,12 +167,12 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
           let(:ntlm_hash) { '1443d06412d8c0e6e72c57ef50f76a05:27c433245e4763d074d30a05aae0af2c' }
 
           let!(:pub) do
-            FactoryBot.create(:metasploit_credential_username, username: username)
+            FactoryGirl.create(:metasploit_credential_username, username: username)
           end
           let!(:password_core) do
-            priv = FactoryBot.create(:metasploit_credential_password, data: password)
-            FactoryBot.create(:metasploit_credential_core,
-                               origin: FactoryBot.create(:metasploit_credential_origin_import),
+            priv = FactoryGirl.create(:metasploit_credential_password, data: password)
+            FactoryGirl.create(:metasploit_credential_core,
+                               origin: FactoryGirl.create(:metasploit_credential_origin_import),
                                private: priv,
                                public: pub,
                                realm: nil,
@@ -187,18 +182,18 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
           #         # Somehow this is hitting a unique constraint on Cores with the same
           #         # Public, even though it has a different Private. Skip for now
           #         let!(:ntlm_core) do
-          #           priv = FactoryBot.create(:metasploit_credential_ntlm_hash, data: ntlm_hash)
-          #           FactoryBot.create(:metasploit_credential_core,
-          #                              origin: FactoryBot.create(:metasploit_credential_origin_import),
+          #           priv = FactoryGirl.create(:metasploit_credential_ntlm_hash, data: ntlm_hash)
+          #           FactoryGirl.create(:metasploit_credential_core,
+          #                              origin: FactoryGirl.create(:metasploit_credential_origin_import),
           #                              private: priv,
           #                              public: pub,
           #                              realm: nil,
           #                              workspace: framework.db.workspace)
           #         end
           #         let!(:nonreplayable_core) do
-          #           priv = FactoryBot.create(:metasploit_credential_nonreplayable_hash, data: 'asdf')
-          #           FactoryBot.create(:metasploit_credential_core,
-          #                              origin: FactoryBot.create(:metasploit_credential_origin_import),
+          #           priv = FactoryGirl.create(:metasploit_credential_nonreplayable_hash, data: 'asdf')
+          #           FactoryGirl.create(:metasploit_credential_core,
+          #                              origin: FactoryGirl.create(:metasploit_credential_origin_import),
           #                              private: priv,
           #                              public: pub,
           #                              realm: nil,
@@ -246,9 +241,9 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
       end
     end
     describe 'Adding' do
-      let(:pub) { FactoryBot.create(:metasploit_credential_username, username: username) }
-      let(:priv) { FactoryBot.create(:metasploit_credential_password, data: password) }
-      let(:r) { FactoryBot.create(:metasploit_credential_realm, key: realm_type, value: realm) }
+      let(:pub) { FactoryGirl.create(:metasploit_credential_username, username: username) }
+      let(:priv) { FactoryGirl.create(:metasploit_credential_password, data: password) }
+      let(:r) { FactoryGirl.create(:metasploit_credential_realm, key: realm_type, value: realm) }
       context 'Cores with public privates and realms' do
         context 'username password and realm' do
           it 'creates a core if one does not exist' do
@@ -257,8 +252,8 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
             }.to change { Metasploit::Credential::Core.count }.by 1
           end
           it 'does not create a core if it already exists' do
-            FactoryBot.create(:metasploit_credential_core,
-              origin: FactoryBot.create(:metasploit_credential_origin_import),
+            FactoryGirl.create(:metasploit_credential_core,
+              origin: FactoryGirl.create(:metasploit_credential_origin_import),
               private: priv,
               public: pub,
               realm: r,
@@ -275,8 +270,8 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
               }.to change { Metasploit::Credential::Core.count }.by 1
             end
             it 'does not create a core if it already exists' do
-              FactoryBot.create(:metasploit_credential_core,
-                origin: FactoryBot.create(:metasploit_credential_origin_import),
+              FactoryGirl.create(:metasploit_credential_core,
+                origin: FactoryGirl.create(:metasploit_credential_origin_import),
                 private: nil,
                 public: pub,
                 realm: r,
@@ -294,8 +289,8 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
               }.to change { Metasploit::Credential::Core.count }.by 1
             end
             it 'does not create a core if it already exists' do
-              FactoryBot.create(:metasploit_credential_core,
-                origin: FactoryBot.create(:metasploit_credential_origin_import),
+              FactoryGirl.create(:metasploit_credential_core,
+                origin: FactoryGirl.create(:metasploit_credential_origin_import),
                 private: priv,
                 public: pub,
                 realm: nil,
@@ -313,8 +308,8 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
               }.to change { Metasploit::Credential::Core.count }.by 1
             end
             it 'does not create a core if it already exists' do
-              FactoryBot.create(:metasploit_credential_core,
-                origin: FactoryBot.create(:metasploit_credential_origin_import),
+              FactoryGirl.create(:metasploit_credential_core,
+                origin: FactoryGirl.create(:metasploit_credential_origin_import),
                 private: priv,
                 public: nil,
                 realm: r,
@@ -332,8 +327,8 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
               }.to change { Metasploit::Credential::Core.count }.by 1
             end
             it 'does not create a core if it already exists' do
-              FactoryBot.create(:metasploit_credential_core,
-                origin: FactoryBot.create(:metasploit_credential_origin_import),
+              FactoryGirl.create(:metasploit_credential_core,
+                origin: FactoryGirl.create(:metasploit_credential_origin_import),
                 private: nil,
                 public: pub,
                 realm: nil,
@@ -351,8 +346,8 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
               }.to change { Metasploit::Credential::Core.count }.by 1
             end
             it 'does not create a core if it already exists' do
-              FactoryBot.create(:metasploit_credential_core,
-                origin: FactoryBot.create(:metasploit_credential_origin_import),
+              FactoryGirl.create(:metasploit_credential_core,
+                origin: FactoryGirl.create(:metasploit_credential_origin_import),
                 private: priv,
                 public: nil,
                 realm: nil,
@@ -363,15 +358,15 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
             end
           end
           context 'ntlm' do
-            let(:priv) { FactoryBot.create(:metasploit_credential_ntlm_hash) }
+            let(:priv) { FactoryGirl.create(:metasploit_credential_ntlm_hash) }
             it 'creates a core if one does not exist' do
               expect {
                 creds.cmd_creds('add', "ntlm:#{priv.data}")
               }.to change { Metasploit::Credential::Core.count }.by 1
             end
             it 'does not create a core if it already exists' do
-              FactoryBot.create(:metasploit_credential_core,
-                origin: FactoryBot.create(:metasploit_credential_origin_import),
+              FactoryGirl.create(:metasploit_credential_core,
+                origin: FactoryGirl.create(:metasploit_credential_origin_import),
                 private: priv,
                 public: nil,
                 realm: nil,
@@ -382,15 +377,15 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
             end
           end
           context 'hash' do
-            let(:priv) { FactoryBot.create(:metasploit_credential_nonreplayable_hash) }
+            let(:priv) { FactoryGirl.create(:metasploit_credential_nonreplayable_hash) }
             it 'creates a core if one does not exist' do
               expect {
                 creds.cmd_creds('add', "hash:#{priv.data}")
               }.to change { Metasploit::Credential::Core.count }.by 1
             end
             it 'does not create a core if it already exists' do
-              FactoryBot.create(:metasploit_credential_core,
-                origin: FactoryBot.create(:metasploit_credential_origin_import),
+              FactoryGirl.create(:metasploit_credential_core,
+                origin: FactoryGirl.create(:metasploit_credential_origin_import),
                 private: priv,
                 public: nil,
                 realm: nil,
@@ -401,7 +396,7 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
             end
           end
           context 'ssh-key' do
-            let(:priv) { FactoryBot.create(:metasploit_credential_ssh_key) }
+            let(:priv) { FactoryGirl.create(:metasploit_credential_ssh_key) }
             before(:each) do
               @file = Tempfile.new('id_rsa')
               @file.write(priv.data)
@@ -413,8 +408,8 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
               }.to change { Metasploit::Credential::Core.count }.by 1
             end
             it 'does not create a core if it already exists' do
-              FactoryBot.create(:metasploit_credential_core,
-                origin: FactoryBot.create(:metasploit_credential_origin_import),
+              FactoryGirl.create(:metasploit_credential_core,
+                origin: FactoryGirl.create(:metasploit_credential_origin_import),
                 private: priv,
                 public: pub,
                 realm: nil,
@@ -428,15 +423,15 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Creds do
         context 'realm-types' do
           Metasploit::Model::Realm::Key::SHORT_NAMES.each do |short_name, long_name|
             context "#{short_name}" do
-              let(:r) { FactoryBot.create(:metasploit_credential_realm, key: long_name) }
+              let(:r) { FactoryGirl.create(:metasploit_credential_realm, key: long_name) }
               it 'creates a core if one does not exist' do
                 expect {
                   creds.cmd_creds('add', "realm:#{r.value}", "realm-type:#{short_name}")
                 }.to change { Metasploit::Credential::Core.count }.by 1
               end
               it 'does not create a core if it already exists' do
-                FactoryBot.create(:metasploit_credential_core,
-                  origin: FactoryBot.create(:metasploit_credential_origin_import),
+                FactoryGirl.create(:metasploit_credential_core,
+                  origin: FactoryGirl.create(:metasploit_credential_origin_import),
                   private: nil,
                   public: nil,
                   realm: r,

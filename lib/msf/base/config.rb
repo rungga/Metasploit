@@ -33,24 +33,20 @@ class Config < Hash
       return val
     end
 
-    # XXX Update this when there is a need to break compatibility
-    config_dir_major = 4
-    config_dir = ".msf#{config_dir_major}"
-
     # Windows-specific environment variables
     ['HOME', 'LOCALAPPDATA', 'APPDATA', 'USERPROFILE'].each do |dir|
       val = Rex::Compat.getenv(dir)
       if (val and File.directory?(val))
-        return File.join(val, config_dir)
+        return File.join(val, ".msf#{Metasploit::Framework::Version::MAJOR}")
       end
     end
 
     begin
       # First we try $HOME/.msfx
-      File.expand_path("~#{FileSep}#{config_dir}")
+      File.expand_path("~#{FileSep}.msf#{Metasploit::Framework::Version::MAJOR}")
     rescue ::ArgumentError
       # Give up and install root + ".msfx"
-      InstallRoot + config_dir
+      InstallRoot + ".msf#{Metasploit::Framework::Version::MAJOR}"
     end
   end
 
@@ -243,14 +239,6 @@ class Config < Hash
     self.new.save(opts)
   end
 
-  # Deletes the specified config group from the ini file
-  #
-  # @param group [String] The name of the group to remove
-  # @return [void]
-  def self.delete_group(group)
-    self.new.delete_group(group)
-  end
-
   # Updates the config class' self with the default hash.
   #
   # @return [Hash] the updated Hash.
@@ -432,17 +420,6 @@ class Config < Hash
     ini.to_file
   end
 
-  # Deletes the specified config group from the ini file
-  #
-  # @param group [String] The name of the group to remove
-  # @return [void]
-  def delete_group(group)
-    ini = Rex::Parser::Ini.new(config_file)
-
-    ini.delete(group)
-
-    ini.to_file
-  end
 end
 
 end

@@ -311,7 +311,7 @@ RSpec.shared_examples_for 'Msf::ModuleManager::Cache' do
       #
 
       let!(:mdm_module_detail) do
-        FactoryBot.create(:mdm_module_detail,
+        FactoryGirl.create(:mdm_module_detail,
                            :file => path,
                            :mtype => type,
                            :mtime => pathname.mtime,

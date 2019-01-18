@@ -51,6 +51,7 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Db do
   it { is_expected.to respond_to :db_parse_db_uri_postgresql }
   it { is_expected.to respond_to :deprecated_commands }
   it { is_expected.to respond_to :each_host_range_chunk }
+  it { is_expected.to respond_to :make_sortable }
   it { is_expected.to respond_to :name }
   it { is_expected.to respond_to :set_rhosts_from_addrs }
 
@@ -147,7 +148,7 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Db do
       it "should show a help message" do
         db.cmd_loot "-h"
         expect(@output).to match_array [
-          "Usage: loot [options]",
+          "Usage: loot <options>",
           " Info: loot [-h] [addr1 addr2 ...] [-t <type1,type2>]",
           "  Add: loot -f [fname] -i [info] -a [addr1 addr2 ...] -t [type]",
           "  Del: loot -d [addr1 addr2 ...]",
@@ -173,16 +174,16 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Db do
           "  -a,--add                  Add a note to the list of addresses, instead of listing",
           "  -d,--delete               Delete the hosts instead of searching",
           "  -n,--note <data>          Set the data for a new note (only with -a)",
-          "  -t,--type <type1,type2>   Search for a list of types, or set single type for add",
+          "  -t <type1,type2>          Search for a list of types",
           "  -h,--help                 Show this help information",
           "  -R,--rhosts               Set RHOSTS from the results of the search",
-          "  -S,--search               Search string to filter by",
+          "  -S,--search               Regular expression to match for search",
           "  -o,--output               Save the notes to a csv file",
-          "  -O <column>               Order rows by specified column number",
+          "  --sort <field1,field2>    Fields to sort by (case sensitive)",
           "Examples:",
           "  notes --add -t apps -n 'winzip' 10.1.1.34 10.1.20.41",
           "  notes -t smb.fingerprint 10.1.1.34 10.1.20.41",
-          "  notes -S 'nmap.nse.(http|rtsp)'"
+          "  notes -S 'nmap.nse.(http|rtsp)' --sort type,output"
         ]
 
       end
@@ -200,67 +201,45 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Db do
           "  -d,--delete       Delete the services instead of searching",
           "  -c <col1,col2>    Only show the given columns",
           "  -h,--help         Show this help information",
-          "  -s <name>         Name of the service to add",
-          "  -p <port>         Search for a list of ports",
-          "  -r <protocol>     Protocol type of the service being added [tcp|udp]",
+          "  -s <name1,name2>  Search for a list of service names",
+          "  -p <port1,port2>  Search for a list of ports",
+          "  -r <protocol>     Only show [tcp|udp] services",
           "  -u,--up           Only show services which are up",
           "  -o <file>         Send output to a file in csv format",
           "  -O <column>       Order rows by specified column number",
           "  -R,--rhosts       Set RHOSTS from the results of the search",
           "  -S,--search       Search string to filter by",
-          "  -U,--update       Update data for existing service",
           "Available columns: created_at, info, name, port, proto, state, updated_at"
         ]
       end
     end
     describe "-p" do
       before(:example) do
-        @services = []
-        @services << framework.db.report_service({host: '192.168.0.1', port: 1024, name: 'service1', proto: 'udp'})
-        @services << framework.db.report_service({host: '192.168.0.1', port: 1025, name: 'service2', proto: 'tcp'})
-        @services << framework.db.report_service({host: '192.168.0.1', port: 1026, name: 'service3', proto: 'udp'})
+        host = FactoryGirl.create(:mdm_host, :workspace => framework.db.workspace, :address => "192.168.0.1")
+        FactoryGirl.create(:mdm_service, :host => host, :port => 1024, name: 'Service1', proto: 'udp')
+        FactoryGirl.create(:mdm_service, :host => host, :port => 1025, name: 'Service2', proto: 'tcp')
+        FactoryGirl.create(:mdm_service, :host => host, :port => 1026, name: 'Service3', proto: 'udp')
       end
-
-      after(:example) do
-        ids = []
-        @services.each{|service|
-          ids << service.id
-        }
-
-        framework.db.delete_service({ids: ids})
-      end
-
       it "should list services that are on a given port" do
-        db.cmd_services "-p", "1024, 1025"
+        db.cmd_services "-p", "1024,1025"
         expect(@output).to match_array [
           "Services",
           "========",
           "",
           "host         port  proto  name      state  info",
           "----         ----  -----  ----      -----  ----",
-          "192.168.0.1  1024  udp    service1  open   ",
-          "192.168.0.1  1025  tcp    service2  open   "
+          "192.168.0.1  1024  udp    Service1  open   ",
+          "192.168.0.1  1025  tcp    Service2  open   "
         ]
       end
     end
-
     describe "-np" do
       before(:example) do
-        @services = []
-        @services << framework.db.report_service({host: '192.168.0.2', port: 1024})
-        @services << framework.db.report_service({host: '192.168.0.2', port: 1025})
-        @services << framework.db.report_service({host: '192.168.0.2', port: 1026})
+        host = FactoryGirl.create(:mdm_host, :workspace => framework.db.workspace, :address => "192.168.0.1")
+        FactoryGirl.create(:mdm_service, :host => host, :port => 1024)
+        FactoryGirl.create(:mdm_service, :host => host, :port => 1025)
+        FactoryGirl.create(:mdm_service, :host => host, :port => 1026)
       end
-
-      after(:example) do
-        ids = []
-        @services.each{|service|
-          ids << service.id
-        }
-
-        framework.db.delete_service({ids: ids})
-      end
-
       it "should list services that are not on a given port" do
         skip {
           db.cmd_services "-np", "1024"
@@ -271,8 +250,8 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Db do
             "",
             "host         port  proto  name  state  info",
             "----         ----  -----  ----  -----  ----",
-            "192.168.0.2  1025  snmp         open   ",
-            "192.168.0.2  1026  snmp         open   "
+            "192.168.0.1  1025  snmp         open   ",
+            "192.168.0.1  1026  snmp         open   "
           ]
         }
       end
@@ -292,7 +271,7 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Db do
           "  -s <svc names>        List vulns matching these service names",
           "  -R,--rhosts           Set RHOSTS from the results of the search",
           "  -S,--search           Search string to filter by",
-          "  -i,--info             Display vuln information",
+          "  -i,--info             Display Vuln Info",
           "Examples:",
           "  vulns -p 1-65536          # only vulns with associated services",
           "  vulns -p 1-65536 -s http  # identified as http on any port"
@@ -362,8 +341,7 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Db do
         expect(@output).to match_array [
           "Added workspace: foo",
           "Added workspace: bar",
-          "Added workspace: baf",
-          "Workspace: baf"
+          "Added workspace: baf"
         ]
       end
     end
@@ -371,18 +349,25 @@ RSpec.describe Msf::Ui::Console::CommandDispatcher::Db do
     describe "-d" do
       it "should delete a workspace" do
         db.cmd_workspace("-a", "foo")
-        expect(framework.db.find_workspace("foo")).not_to be_nil
+        @output = []
         db.cmd_workspace("-d", "foo")
-        expect(framework.db.find_workspace("foo")).to be_nil
+        expect(@output).to match_array [
+          "Deleted workspace: foo",
+          "Switched workspace: default"
+        ]
       end
     end
 
     describe "-D" do
       it "should delete all workspaces" do
         db.cmd_workspace("-a", "foo")
-        expect(framework.db.workspaces.size).to be > 1
+        @output = []
         db.cmd_workspace("-D")
-        expect(framework.db.workspaces.size).to eq 1
+        expect(@output).to match_array [
+          "Deleted and recreated the default workspace",
+          "Deleted workspace: foo",
+          "Switched workspace: default"
+        ]
       end
     end
 

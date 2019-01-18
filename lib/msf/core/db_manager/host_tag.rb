@@ -6,9 +6,13 @@ module Msf::DBManager::HostTag
     raise Msf::DBImportError.new("Missing required option :name") unless name
     addr = opts.delete(:addr)
     raise Msf::DBImportError.new("Missing required option :addr") unless addr
-  ::ActiveRecord::Base.connection_pool.with_connection {
-    wspace = Msf::Util::DBManager.process_opts_workspace(opts, framework)
+    wspace = opts.delete(:wspace)
     raise Msf::DBImportError.new("Missing required option :wspace") unless wspace
+  ::ActiveRecord::Base.connection_pool.with_connection {
+    if wspace.kind_of? String
+      wspace = find_workspace(wspace)
+    end
+
     host = nil
     report_host(:workspace => wspace, :address => addr)
 

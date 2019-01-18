@@ -25,7 +25,7 @@ end
 
 group :development, :test do
   # automatically include factories from spec/factories
-  gem 'factory_bot_rails'
+  gem 'factory_girl_rails'
   # Make rspec output shorter and more useful
   gem 'fivemat'
   # running documentation generation tasks and rspec tasks
@@ -34,7 +34,6 @@ group :development, :test do
   # environment is development
   gem 'rspec-rails'
   gem 'rspec-rerun'
-  gem 'swagger-blocks'
 end
 
 group :test do

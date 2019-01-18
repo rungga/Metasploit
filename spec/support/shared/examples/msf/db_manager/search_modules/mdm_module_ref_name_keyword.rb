@@ -5,7 +5,7 @@ RSpec.shared_examples_for 'Msf::DBManager#search_modules Mdm::Module::Ref#name k
     end
 
     let(:name) do
-      FactoryBot.generate :mdm_module_ref_name
+      FactoryGirl.generate :mdm_module_ref_name
     end
 
     let(:search_string) do
@@ -13,7 +13,7 @@ RSpec.shared_examples_for 'Msf::DBManager#search_modules Mdm::Module::Ref#name k
     end
 
     before(:example) do
-      FactoryBot.create(:mdm_module_ref, :name => name)
+      FactoryGirl.create(:mdm_module_ref, :name => name)
     end
 
     name_prefix = "#{keyword.to_s.upcase}-"

@@ -63,9 +63,9 @@ Gem::Specification.new do |spec|
   # Metasploit::Concern hooks
   spec.add_runtime_dependency 'metasploit-concern'
   # Metasploit::Credential database models
-  spec.add_runtime_dependency 'metasploit-credential'
+  spec.add_runtime_dependency 'metasploit-credential', ['< 3.0.0']
   # Database models shared between framework and Pro.
-  spec.add_runtime_dependency 'metasploit_data_models'
+  spec.add_runtime_dependency 'metasploit_data_models', ['< 3.0.0']
   # Things that would normally be part of the database model, but which
   # are needed when there's no database
   spec.add_runtime_dependency 'metasploit-model'
@@ -100,12 +100,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'redcarpet'
   # Needed for Microsoft patch finding tool (msu_finder)
   spec.add_runtime_dependency 'patch_finder'
-  # Required for Metasploit Web Services
-  spec.add_runtime_dependency 'thin'
-  spec.add_runtime_dependency 'sinatra'
-  spec.add_runtime_dependency 'warden'
-  # Required for JSON-RPC client
-  spec.add_runtime_dependency 'em-http-request'
   # TimeZone info
   spec.add_runtime_dependency 'tzinfo-data'
   # Gem for dealing with SSHKeys

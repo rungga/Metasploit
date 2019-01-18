@@ -17,9 +17,12 @@ def initialize(info = {})
   super
 
   register_options([
-      Opt::RHOSTS,
+      OptAddressRange.new('RHOSTS', [ true, "The target address range or CIDR identifier"]),
       OptInt.new('THREADS', [ true, "The number of concurrent threads", 1 ] )
     ], Auxiliary::Scanner)
+
+  # RHOST should not be used in scanner modules, only RHOSTS
+  deregister_options('RHOST')
 
   register_advanced_options([
     OptBool.new('ShowProgress', [true, 'Display progress messages during a scan', true]),
@@ -27,6 +30,20 @@ def initialize(info = {})
   ], Auxiliary::Scanner)
 
 end
+
+# If a module is using the scanner mixin, technically the RHOST datastore option should be
+# disabled. Only the mixin should be setting this. See #6989
+
+def setup
+  @original_rhost = datastore['RHOST']
+  datastore['RHOST'] = nil
+end
+
+def cleanup
+  datastore['RHOST'] = @original_rhost
+  super
+end
+
 
 def check
   nmod = replicant
@@ -48,6 +65,7 @@ end
 # The command handler when launched from the console
 #
 def run
+
   @show_progress = datastore['ShowProgress']
   @show_percent  = datastore['ShowProgressPercent'].to_i
 
@@ -88,7 +106,13 @@ def run
 
   begin
 
+  if (self.respond_to?('run_range'))
+    # No automated progress reporting or error handling for run_range
+    return run_range(datastore['RHOSTS'])
+  end
+
   if (self.respond_to?('run_host'))
+
     loop do
       # Stop scanning if we hit a fatal error
       break if has_fatal_errors?
@@ -240,7 +264,7 @@ def run
     return
   end
 
-  print_error("This module defined no run_host or run_batch methods")
+  print_error("This module defined no run_host, run_range or run_batch methods")
 
   rescue ::Interrupt
     print_status("Caught interrupt from the console...")

@@ -257,7 +257,7 @@ class Msftidy
   # This check also enforces namespace module name reversibility
   def check_snake_case_filename
     if @name !~ /^[a-z0-9]+(?:_[a-z0-9]+)*\.rb$/
-      warn('Filenames must be lowercase alphanumeric snake case.')
+      warn('Filenames should be lowercase alphanumeric snake case.')
     end
   end
 
@@ -488,7 +488,6 @@ class Msftidy
     end
 
     prefix_super_map = {
-      'evasion' => /^Msf::Evasion$/,
       'auxiliary' => /^Msf::Auxiliary$/,
       'exploits' => /^Msf::Exploit(?:::Local|::Remote)?$/,
       'encoders' => /^(?:Msf|Rex)::Encoder/,

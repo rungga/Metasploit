@@ -9,7 +9,7 @@ module Msf::DBManager::Task
   def report_task(opts)
     return if not active
   ::ActiveRecord::Base.connection_pool.with_connection {
-    wspace = Msf::Util::DBManager.process_opts_workspace(opts, framework)
+    wspace = opts.delete(:workspace) || workspace
     path = opts.delete(:path) || (raise RuntimeError, "A task :path is required")
 
     ret = {}
@@ -49,7 +49,7 @@ module Msf::DBManager::Task
   #
   # This methods returns a list of all tasks in the database
   #
-  def tasks(wspace=framework.db.workspace)
+  def tasks(wspace=workspace)
   ::ActiveRecord::Base.connection_pool.with_connection {
     wspace.tasks
   }

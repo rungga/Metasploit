@@ -71,33 +71,26 @@ class Auxiliary
   # Executes an auxiliary module
   #
   def cmd_run(*args)
-    opts    = []
+    opt_str = nil
     action  = mod.datastore['ACTION']
     jobify  = false
     quiet   = false
 
-    @@auxiliary_opts.parse(args) do |opt, idx, val|
+    @@auxiliary_opts.parse(args) { |opt, idx, val|
       case opt
-      when '-j'
-        jobify = true
-      when '-o'
-        opts.push(val)
-      when '-a'
-        action = val
-      when '-q'
-        quiet  = true
-      when '-h'
-        cmd_run_help
-        return false
-      else
-        if val[0] != '-' && val.match?('=')
-          opts.push(val)
-        else
+        when '-j'
+          jobify = true
+        when '-o'
+          opt_str = val
+        when '-a'
+          action = val
+        when '-q'
+          quiet  = true
+        when '-h'
           cmd_run_help
           return false
-        end
       end
-    end
+    }
 
     # Always run passive modules in the background
     if mod.is_a?(Msf::Module::HasActions) &&
@@ -108,7 +101,7 @@ class Auxiliary
     begin
       mod.run_simple(
         'Action'         => action,
-        'OptionStr'      => opts.join(','),
+        'OptionStr'      => opt_str,
         'LocalInput'     => driver.input,
         'LocalOutput'    => driver.output,
         'RunAsJob'       => jobify,

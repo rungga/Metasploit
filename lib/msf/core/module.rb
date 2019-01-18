@@ -156,7 +156,7 @@ class Module
   # Creates a fresh copy of an instantiated module
   #
   def replicant
-    obj = self.clone
+    obj = self.class.new
     self.instance_variables.each { |k|
       v = instance_variable_get(k)
       v = v.dup rescue v

@@ -5,7 +5,7 @@ module Metasploit
   module Framework
     module LoginScanner
 
-      class BavisionCamerasException < StandardError; end
+      class BavisionCamerasException < Exception; end
 
       class BavisionCameras < HTTP
 
