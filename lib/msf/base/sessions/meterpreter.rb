@@ -507,20 +507,22 @@ class Meterpreter < Rex::Post::Meterpreter::Client
             end
           end
 
+          sysinfo = sys.config.sysinfo
+          host = Msf::Util::Host.normalize_host(self)
+
           framework.db.report_note({
             :type => "host.os.session_fingerprint",
-            :host => self,
+            :host => host,
             :workspace => wspace,
             :data => {
-              :name => sys.config.sysinfo["Computer"],
-              :os => sys.config.sysinfo["OS"],
-              :arch => sys.config.sysinfo["Architecture"],
+              :name => sysinfo["Computer"],
+              :os => sysinfo["OS"],
+              :arch => sysinfo["Architecture"],
             }
           })
 
           if self.db_record
-            self.db_record.desc = safe_info
-            self.db_record.save!
+            framework.db.update_session(self)
           end
 
           # XXX: This is obsolete given the Mdm::Host.normalize_os() support for host.os.session_fingerprint
