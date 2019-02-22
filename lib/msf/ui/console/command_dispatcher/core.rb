@@ -1987,7 +1987,7 @@ class Core
         output_mods[:skip] = num
       end
       opts.on '-h', '--help', 'Help banner.' do
-        return print(opts.help)
+        return print(remove_lines(opts.help, '--generate-completions'))
       end
 
       # Internal use
@@ -2102,7 +2102,7 @@ class Core
       end
 
       opts.on '-h', '--help', 'Help banner.' do
-        return print(opts.help)
+        return print(remove_lines(opts.help, '--generate-completions'))
       end
 
       # Internal use
@@ -2362,11 +2362,11 @@ class Core
 
     # List only those hosts with matching open ports?
     mport = self.active_module.datastore['RPORT']
-    if (mport)
+    if mport
       mport = mport.to_i
       hosts = {}
-      framework.db.each_service(framework.db.workspace) do |service|
-        if (service.port == mport)
+      framework.db.services.each do |service|
+        if service.port == mport
           hosts[ service.host.address ] = true
         end
       end
@@ -2377,7 +2377,7 @@ class Core
 
     # List all hosts in the database
     else
-      framework.db.each_host(framework.db.workspace) do |host|
+      framework.db.hosts.each do |host|
         res << host.address
       end
     end
@@ -2395,8 +2395,8 @@ class Core
     host = framework.db.has_host?(framework.db.workspace, self.active_module.datastore['RHOST'])
     return res if not host
 
-    framework.db.each_service(framework.db.workspace) do |service|
-      if (service.host_id == host.id)
+    framework.db.services.each do |service|
+      if service.host_id == host.id
         res << service.port.to_s
       end
     end
