@@ -1,3 +1,11 @@
+metasploit-framework (5.0.18-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 5.0.18
+  * Update Vcs-Git and Vcs-Browser
+  * Use debhelper-compat 12
+
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 19 Apr 2019 09:55:33 +0200
+
 metasploit-framework (5.0.17-0kali1) kali-dev; urgency=medium
 
   * New upstream version 5.0.17
