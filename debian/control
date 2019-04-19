@@ -21,8 +21,8 @@ Build-Depends:
   zlib1g-dev,
 Standards-Version: 4.3.0
 Homepage: https://www.metasploit.com/
-Vcs-Git: git://git.kali.org/packages/metasploit-framework.git
-Vcs-Browser: http://git.kali.org/gitweb/?p=packages/metasploit-framework.git;a=summary
+Vcs-Git: https://gitlab.com/kalilinux/packages/metasploit-framework.git
+Vcs-Browser: https://gitlab.com/kalilinux/packages/metasploit-framework
 
 Package: metasploit-framework
 Architecture: any
