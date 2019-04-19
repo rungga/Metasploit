@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Kali Developers <devel@kali.org>
 Uploaders: Raphaël Hertzog <buxy@kali.org>
 Build-Depends:
-  debhelper (>= 11),
+  debhelper-compat (= 12),
 # Dependencies needed to fetch and build the gems in a bundle
   ruby-dev,
   bundler,
