@@ -1,3 +1,9 @@
+metasploit-framework (5.0.28-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 5.0.28
+
+ -- Sophie Brun <sophie@offensive-security.com>  Tue, 11 Jun 2019 10:41:07 +0200
+
 metasploit-framework (5.0.27-0kali2) kali-dev; urgency=medium
 
   * Add a patch to force use of bcrypt 3.1.12 (fixes build on armel and armhf)
@@ -2361,7 +2367,7 @@ metasploit-framework (4.5.0-1kali1) unstable; urgency=low
 
  -- Brandon Turner <bturner@localhost.localdomain>  Wed, 09 Jan 2013 17:22:39 -0600
 
-metasploit-framework (4.5.0-1) unstable; urgency=low
+metasploit-framework (4.5.0-0kali1) unstable; urgency=low
 
   * Initial packaging
 
