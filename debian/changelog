@@ -1,3 +1,13 @@
+metasploit-framework (5.0.38-0kali1) kali-dev; urgency=medium
+
+  [ Raphaël Hertzog ]
+  * Add GitLab's CI configuration file
+
+  [ Sophie Brun ]
+  * New upstream version 5.0.38
+
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 26 Jul 2019 09:23:45 +0200
+
 metasploit-framework (5.0.37-0kali1) kali-dev; urgency=medium
 
   * New upstream version 5.0.37
