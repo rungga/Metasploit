@@ -1,4 +1,3 @@
 drop-installation-msfupdate.patch
 fix-usage-example.patch
 add-missing-dependencies.patch
-fix-bcrypt-version.patch
