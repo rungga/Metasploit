@@ -19,7 +19,7 @@ Build-Depends:
   libffi-dev,
   ruby-json (>= 1.8.3),
   zlib1g-dev,
-Standards-Version: 4.3.0
+Standards-Version: 4.4.0
 Homepage: https://www.metasploit.com/
 Vcs-Git: https://gitlab.com/kalilinux/packages/metasploit-framework.git
 Vcs-Browser: https://gitlab.com/kalilinux/packages/metasploit-framework
