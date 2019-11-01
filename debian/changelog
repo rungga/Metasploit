@@ -1,3 +1,13 @@
+metasploit-framework (5.0.58-0kali1) kali-dev; urgency=medium
+
+  [ Vangelis Mouhtsis ]
+  * Bump Standards-Version to 4.4.0. No changes needed.
+
+  [ Sophie Brun ]
+  * New upstream version 5.0.58
+
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 01 Nov 2019 11:21:39 +0100
+
 metasploit-framework (5.0.57-0kali1) kali-dev; urgency=medium
 
   * New upstream version 5.0.57
