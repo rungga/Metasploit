@@ -1,0 +1,17 @@
+Description: remove-bundler-version
+ Remove bundler version in Gemfile.lock to be compatible with Kali bundler
+ version.
+Author: Sophie Brun <sophie@offensive-security.com>
+Bug-Kali: https://bugs.kali.org/view.php?id=6110
+Last-Update: 2020-02-18
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -414,6 +414,3 @@ DEPENDENCIES
+   swagger-blocks
+   timecop
+   yard
+-
+-BUNDLED WITH
+-   1.17.3
