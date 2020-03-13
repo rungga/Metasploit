@@ -1,0 +1,22 @@
+From: Sophie Brun <sophie@offensive-security.com>
+Date: Fri, 13 Mar 2020 12:04:53 +0100
+Subject: Fix shell issue
+
+Description: upstream patch https://github.com/rapid7/metasploit-framework/pull/13064
+---
+ lib/rex/post/meterpreter/extensions/stdapi/sys/process.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/rex/post/meterpreter/extensions/stdapi/sys/process.rb b/lib/rex/post/meterpreter/extensions/stdapi/sys/process.rb
+index ce8e04b..86fb15a 100644
+--- a/lib/rex/post/meterpreter/extensions/stdapi/sys/process.rb
++++ b/lib/rex/post/meterpreter/extensions/stdapi/sys/process.rb
+@@ -179,7 +179,7 @@ class Process < Rex::Post::Process
+     # If we were creating a channel out of this
+     if (channel_id != nil)
+       channel = Rex::Post::Meterpreter::Channels::Pools::StreamPool.new(client,
+-          channel_id, "stdapi_process", CHANNEL_FLAG_SYNCHRONOUS)
++          channel_id, "stdapi_process", CHANNEL_FLAG_SYNCHRONOUS, nil)
+     end
+ 
+     # Return a process instance
