@@ -2,4 +2,3 @@ drop-installation-msfupdate.patch
 fix-usage-example.patch
 add-missing-dependencies.patch
 change-bundler-version.patch
-fix-shell-issue.patch

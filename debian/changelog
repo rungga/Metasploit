@@ -1,6 +1,7 @@
 metasploit-framework (5.0.81-0kali1) kali-dev; urgency=medium
 
   * New upstream version 5.0.81
+  * Refresh patches (remove upstream merged patch about the issue on shell)
 
  -- Sophie Brun <sophie@offensive-security.com>  Fri, 20 Mar 2020 09:22:55 +0100
 
