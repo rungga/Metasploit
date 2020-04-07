@@ -115,7 +115,7 @@ index 784717c..8083091 100755
  end
  
 diff --git a/tools/exploit/pattern_create.rb b/tools/exploit/pattern_create.rb
-index ce6b51e..ecee8ce 100755
+index e63306f..a239438 100755
 --- a/tools/exploit/pattern_create.rb
 +++ b/tools/exploit/pattern_create.rb
 @@ -22,7 +22,7 @@ module PatternCreate
@@ -128,7 +128,7 @@ index ce6b51e..ecee8ce 100755
          opt.separator 'Options:'
          opt.on('-l', '--length <length>', Integer, "The length of the pattern") do |len|
 diff --git a/tools/exploit/pattern_offset.rb b/tools/exploit/pattern_offset.rb
-index c6c910b..580cb1f 100755
+index 3ff8c30..58f9c7c 100755
 --- a/tools/exploit/pattern_offset.rb
 +++ b/tools/exploit/pattern_offset.rb
 @@ -22,7 +22,7 @@ module PatternOffset
@@ -206,10 +206,10 @@ index 95a71da..412fc0d 100755
          opt.separator 'Specific options:'
  
 diff --git a/tools/recon/makeiplist.rb b/tools/recon/makeiplist.rb
-index 37a8a36..44625d7 100755
+index 4d38f6f..85765fa 100755
 --- a/tools/recon/makeiplist.rb
 +++ b/tools/recon/makeiplist.rb
-@@ -34,7 +34,7 @@ class OptsConsole
+@@ -33,7 +33,7 @@ class OptsConsole
  
      opts = OptionParser.new do |opts|
        opts.banner = %Q|This script takes a list of ranges and converts it to a per line IP list.

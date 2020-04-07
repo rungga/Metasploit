@@ -13,7 +13,7 @@ Last-Update: 2020-02-18
  1 file changed, 3 deletions(-)
 
 diff --git a/Gemfile.lock b/Gemfile.lock
-index e90988d..49375e1 100644
+index a58adb4..f83788b 100644
 --- a/Gemfile.lock
 +++ b/Gemfile.lock
 @@ -444,6 +444,3 @@ DEPENDENCIES
