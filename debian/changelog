@@ -1,3 +1,9 @@
+metasploit-framework (5.0.85-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 5.0.85
+
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 17 Apr 2020 09:13:16 +0200
+
 metasploit-framework (5.0.84-0kali1) kali-dev; urgency=medium
 
   * Add a patch to fix small Python 3 syntax errors
