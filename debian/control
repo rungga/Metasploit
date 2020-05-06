@@ -17,6 +17,9 @@ Build-Depends:
   libxml2-dev,
   libxslt-dev,
   libffi-dev,
+  oracle-instantclient-basic [amd64 i386],
+  oracle-instantclient-devel (>= 19.3.0.0.0-0kali2) [amd64 i386],
+  oracle-instantclient-sqlplus [amd64 i386],
   ruby-json (>= 1.8.3),
   zlib1g-dev,
 Standards-Version: 4.4.0

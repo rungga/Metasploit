@@ -1,3 +1,9 @@
+metasploit-framework (5.0.87-0kali2) kali-dev; urgency=medium
+
+  * Add a missing gem oci8 for i386 and amd64 (see issue 6360)
+
+ -- Sophie Brun <sophie@offensive-security.com>  Wed, 06 May 2020 16:21:43 +0200
+
 metasploit-framework (5.0.87-0kali1) kali-dev; urgency=medium
 
   * New upstream version 5.0.87
