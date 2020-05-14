@@ -1,0 +1,21 @@
+From: Sophie Brun <sophie@offensive-security.com>
+Date: Thu, 14 May 2020 15:45:35 +0200
+Subject: Fix ppython3 syntax error
+
+---
+ modules/auxiliary/scanner/smb/impacket/wmiexec.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/modules/auxiliary/scanner/smb/impacket/wmiexec.py b/modules/auxiliary/scanner/smb/impacket/wmiexec.py
+index d106d23..30ca71e 100755
+--- a/modules/auxiliary/scanner/smb/impacket/wmiexec.py
++++ b/modules/auxiliary/scanner/smb/impacket/wmiexec.py
+@@ -102,7 +102,7 @@ class WMIEXEC:
+                 self.shell.onecmd(self.__command)
+             else:
+                 self.shell.cmdloop()
+-        except (Exception, KeyboardInterrupt), e:
++        except (Exception, KeyboardInterrupt) as e:
+             logging.error(str(e))
+ 
+         if smbConnection is not None:

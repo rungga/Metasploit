@@ -3,3 +3,5 @@ fix-usage-example.patch
 add-missing-dependencies.patch
 change-bundler-version.patch
 Fix-small-Python-3-syntax-error.patch
+Update-shebang-to-use-python3.patch
+Fix-ppython3-syntax-error.patch
