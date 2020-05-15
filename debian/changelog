@@ -1,3 +1,9 @@
+metasploit-framework (5.0.89-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 5.0.89
+
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 15 May 2020 09:16:07 +0200
+
 metasploit-framework (5.0.88-0kali2) kali-dev; urgency=medium
 
   * Add a patch to change shebang python to python3 (see 6376)
