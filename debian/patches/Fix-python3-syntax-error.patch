@@ -1,6 +1,6 @@
 From: Sophie Brun <sophie@offensive-security.com>
 Date: Thu, 14 May 2020 15:45:35 +0200
-Subject: Fix ppython3 syntax error
+Subject: Fix python3 syntax error
 
 ---
  modules/auxiliary/scanner/smb/impacket/wmiexec.py | 2 +-
