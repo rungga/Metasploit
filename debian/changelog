@@ -1,3 +1,9 @@
+metasploit-framework (5.0.94-0kali2) kali-dev; urgency=medium
+
+  * Add a patch to force reline version to 0.1.3 (shipped by libruby2.7)
+
+ -- Sophie Brun <sophie@offensive-security.com>  Wed, 24 Jun 2020 09:24:13 +0200
+
 metasploit-framework (5.0.94-0kali1) kali-dev; urgency=medium
 
   * New upstream version 5.0.94

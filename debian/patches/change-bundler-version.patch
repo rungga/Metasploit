@@ -13,10 +13,10 @@ Last-Update: 2020-02-18
  1 file changed, 3 deletions(-)
 
 diff --git a/Gemfile.lock b/Gemfile.lock
-index 0edbbc9..8e06cf4 100644
+index 0ceca75..74d75b5 100644
 --- a/Gemfile.lock
 +++ b/Gemfile.lock
-@@ -446,6 +446,3 @@ DEPENDENCIES
+@@ -457,6 +457,3 @@ DEPENDENCIES
    swagger-blocks
    timecop
    yard
