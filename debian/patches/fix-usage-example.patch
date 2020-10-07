@@ -24,7 +24,7 @@ Last-Update: 2018-01-30
  15 files changed, 15 insertions(+), 15 deletions(-)
 
 diff --git a/tools/exploit/egghunter.rb b/tools/exploit/egghunter.rb
-index eb8c2ad..fbf3f17 100755
+index f5199d3..26b6993 100755
 --- a/tools/exploit/egghunter.rb
 +++ b/tools/exploit/egghunter.rb
 @@ -21,7 +21,7 @@ module Egghunter
