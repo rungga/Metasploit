@@ -1,6 +1,8 @@
 metasploit-framework (6.0.14-0kali1) kali-experimental; urgency=medium
 
   * New upstream version 6.0.14
+  * Refresh patches
+  * Update force-reline-version.patch for ruby 2.7.2
 
  -- Sophie Brun <sophie@offensive-security.com>  Fri, 30 Oct 2020 08:30:34 +0100
 
