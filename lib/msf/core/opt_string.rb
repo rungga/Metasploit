@@ -8,12 +8,23 @@ module Msf
 #
 ###
 class OptString < OptBase
+
+  # This adds a length parameter to check for the maximum length of strings.
+  def initialize(in_name, attrs = [],
+               required: false, desc: nil, default: nil, enums: [], regex: nil, aliases: [], max_length: nil)
+    super
+  end
+
   def type
     return 'string'
   end
 
+  def validate_on_assignment?
+    true
+  end
+
   def normalize(value)
-    if (value =~ /^file:(.*)/)
+    if (value.to_s =~ /^file:(.*)/)
       path = $1
       begin
         value = File.read(path)
@@ -24,10 +35,11 @@ class OptString < OptBase
     value
   end
 
-  def valid?(value=self.value)
+  def valid?(value=self.value, check_empty: true)
     value = normalize(value)
-    return false if empty_required_value?(value)
-    return super
+    return false if check_empty && empty_required_value?(value)
+    return false if invalid_value_length?(value)
+    return super(value, check_empty: false)
   end
 end
 

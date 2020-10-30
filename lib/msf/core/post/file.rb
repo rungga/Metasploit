@@ -27,12 +27,17 @@ module Msf::Post::File
     if session.type == "meterpreter"
       return session.fs.dir.getwd
     else
-      if session.platform =~ /win/
+      if session.platform == 'windows'
         # XXX: %CD% only exists on XP and newer, figure something out for NT4
         # and 2k
         return session.shell_command_token("echo %CD%")
       else
-        return session.shell_command_token("pwd")
+        if command_exists?("pwd")
+          return session.shell_command_token("pwd").to_s.strip
+        else
+          # Result on systems without pwd command
+          return session.shell_command_token("echo $PWD").to_s.strip
+        end
       end
     end
   end
@@ -43,36 +48,69 @@ module Msf::Post::File
   def dir(directory)
     if session.type == 'meterpreter'
       return session.fs.dir.entries(directory)
-    else
-      if session.platform =~ /win/
-        return session.shell_command_token("dir #{directory}").split(/[\r\n]+/)
-      else
-        return session.shell_command_token("ls #{directory}").split(/[\r\n]+/)
-      end
     end
+
+    if session.platform == 'windows'
+      return session.shell_command_token("dir #{directory}").split(/[\r\n]+/)
+    end
+
+    if command_exists?('ls')
+      return session.shell_command_token("ls #{directory}").split(/[\r\n]+/)
+    end
+
+    # Result on systems without ls command
+    if directory[-1] != '/'
+      directory = directory + "/"
+    end
+    result = []
+    data = session.shell_command_token("for fn in #{directory}*; do echo $fn; done")
+    parts = data.split("\n")
+    parts.each do |line|
+      line = line.split("/")[-1]
+      result.insert(-1, line)
+    end
+
+    result
   end
 
   alias ls dir
+
+  # create and mark directory for cleanup
+  def mkdir(path)
+    vprint_status("Creating directory #{path}")
+    if session.type == 'meterpreter'
+      vprint_status("Meterpreter Session")
+      result = session.fs.dir.mkdir(path)
+    else
+      if session.platform == 'windows'
+        result = cmd_exec("mkdir \"#{path}\"")
+      else
+        result = cmd_exec("mkdir -p '#{path}'")
+      end
+    end
+    vprint_status("#{path} created")
+    register_dir_for_cleanup(path)
+    result
+  end
 
   #
   # See if +path+ exists on the remote system and is a directory
   #
   # @param path [String] Remote filename to check
   def directory?(path)
-    if session.type == "meterpreter"
+    if session.type == 'meterpreter'
       stat = session.fs.file.stat(path) rescue nil
       return false unless stat
       return stat.directory?
     else
-      if session.platform =~ /win/
+      if session.platform == 'windows'
         f = cmd_exec("cmd.exe /C IF exist \"#{path}\\*\" ( echo true )")
       else
         f = session.shell_command_token("test -d \"#{path}\" && echo true")
       end
-
-      return false if f.nil? or f.empty?
+      return false if f.nil? || f.empty?
       return false unless f =~ /true/
-      return true
+      true
     end
   end
 
@@ -93,12 +131,12 @@ module Msf::Post::File
   #
   # @param path [String] Remote filename to check
   def file?(path)
-    if session.type == "meterpreter"
+    if session.type == 'meterpreter'
       stat = session.fs.file.stat(path) rescue nil
       return false unless stat
       return stat.file?
     else
-      if session.platform =~ /win/
+      if session.platform == 'windows'
         f = cmd_exec("cmd.exe /C IF exist \"#{path}\" ( echo true )")
         if f =~ /true/
           f = cmd_exec("cmd.exe /C IF exist \"#{path}\\\\\" ( echo false ) ELSE ( echo true )")
@@ -106,34 +144,115 @@ module Msf::Post::File
       else
         f = session.shell_command_token("test -f \"#{path}\" && echo true")
       end
-
-      return false if f.nil? or f.empty?
+      return false if f.nil? || f.empty?
       return false unless f =~ /true/
-      return true
+      true
     end
   end
 
   alias file_exist? file?
 
   #
+  # See if +path+ on the remote system is a setuid file
+  #
+  # @param path [String] Remote filename to check
+  def setuid?(path)
+    if session.type == 'meterpreter'
+      stat = session.fs.file.stat(path) rescue nil
+      return false unless stat
+      return stat.setuid?
+    else
+      if session.platform != 'windows'
+        f = session.shell_command_token("test -u \"#{path}\" && echo true")
+      end
+      return false if f.nil? || f.empty?
+      return false unless f =~ /true/
+      true
+    end
+  end
+
+  #
+  # See if +path+ on the remote system exists and is executable
+  #
+  # @param path [String] Remote path to check
+  #
+  # @return [Boolean] true if +path+ exists and is executable
+  #
+  def executable?(path)
+    raise "`executable?' method does not support Windows systems" if session.platform == 'windows'
+
+    cmd_exec("test -x '#{path}' && echo true").to_s.include? 'true'
+  end
+
+  #
+  # See if +path+ on the remote system exists and is writable
+  #
+  # @param path [String] Remote path to check
+  #
+  # @return [Boolean] true if +path+ exists and is writable
+  #
+  def writable?(path)
+    raise "`writable?' method does not support Windows systems" if session.platform == 'windows'
+
+    cmd_exec("test -w '#{path}' && echo true").to_s.include? 'true'
+  end
+
+  #
+  # See if +path+ on the remote system exists and is immutable
+  #
+  # @param path [String] Remote path to check
+  #
+  # @return [Boolean] true if +path+ exists and is immutable
+  #
+  def immutable?(path)
+    raise "`immutable?' method does not support Windows systems" if session.platform == 'windows'
+
+    attributes(path).include?('Immutable')
+  end
+
+  #
+  # See if +path+ on the remote system exists and is readable
+  #
+  # @param path [String] Remote path to check
+  #
+  # @return [Boolean] true if +path+ exists and is readable
+  #
+  def readable?(path)
+    raise "`readable?' method does not support Windows systems" if session.platform == 'windows'
+
+    cmd_exec("test -r '#{path}' && echo true").to_s.include? 'true'
+  end
+
+  #
   # Check for existence of +path+ on the remote file system
   #
   # @param path [String] Remote filename to check
   def exist?(path)
-    if session.type == "meterpreter"
+    if session.type == 'meterpreter'
       stat = session.fs.file.stat(path) rescue nil
       return !!(stat)
     else
-      if session.platform =~ /win/
+      if session.platform == 'windows'
         f = cmd_exec("cmd.exe /C IF exist \"#{path}\" ( echo true )")
       else
         f = cmd_exec("test -e \"#{path}\" && echo true")
       end
-
-      return false if f.nil? or f.empty?
+      return false if f.nil? || f.empty?
       return false unless f =~ /true/
-      return true
+      true
     end
+  end
+
+  alias :exists? :exist?
+
+  #
+  # Retrieve file attributes for +path+ on the remote system
+  #
+  # @param path [String] Remote filename to check
+  def attributes(path)
+    raise "`attributes' method does not support Windows systems" if session.platform == 'windows'
+
+    cmd_exec("lsattr -l '#{path}'").to_s.scan(/^#{path}\s+(.+)$/).flatten.first.to_s.split(', ')
   end
 
   #
@@ -143,31 +262,14 @@ module Msf::Post::File
   # @param data [String]
   # @return [void]
   def file_local_write(local_file_name, data)
-    unless ::File.exists?(local_file_name)
+    unless ::File.exist?(local_file_name)
       ::FileUtils.touch(local_file_name)
     end
-
     output = ::File.open(local_file_name, "a")
     data.each_line do |d|
       output.puts(d)
     end
     output.close
-  end
-
-  #
-  # Returns a MD5 checksum of a given local file
-  #
-  # @param local_file_name [String] Local file name
-  # @return [String] Hex digest of file contents
-  def file_local_digestmd5(local_file_name)
-    if ::File.exists?(local_file_name)
-      require 'digest/md5'
-      chksum = nil
-      chksum = Digest::MD5.hexdigest(::File.open(local_file_name, "rb") { |f| f.read})
-      return chksum
-    else
-      raise "File #{local_file_name} does not exists!"
-    end
   end
 
   #
@@ -186,22 +288,6 @@ module Msf::Post::File
   end
 
   #
-  # Returns a SHA1 checksum of a given local file
-  #
-  # @param local_file_name [String] Local file name
-  # @return [String] Hex digest of file contents
-  def file_local_digestsha1(local_file_name)
-    if ::File.exists?(local_file_name)
-      require 'digest/sha1'
-      chksum = nil
-      chksum = Digest::SHA1.hexdigest(::File.open(local_file_name, "rb") { |f| f.read})
-      return chksum
-    else
-      raise "File #{local_file_name} does not exists!"
-    end
-  end
-
-  #
   # Returns a SHA1 checksum of a given remote file
   #
   # @note THIS DOWNLOADS THE FILE
@@ -214,22 +300,6 @@ module Msf::Post::File
       chksum = Digest::SHA1.hexdigest(data)
     end
     return chksum
-  end
-
-  #
-  # Returns a SHA256 checksum of a given local file
-  #
-  # @param local_file_name [String] Local file name
-  # @return [String] Hex digest of file contents
-  def file_local_digestsha2(local_file_name)
-    if ::File.exists?(local_file_name)
-      require 'digest/sha2'
-      chksum = nil
-      chksum = Digest::SHA256.hexdigest(::File.open(local_file_name, "rb") { |f| f.read})
-      return chksum
-    else
-      raise "File #{local_file_name} does not exists!"
-    end
   end
 
   #
@@ -253,19 +323,28 @@ module Msf::Post::File
   #
   # @param file_name [String] Remote file name to read
   # @return [String] Contents of the file
+  #
+  # @return [Array] of strings(lines)
+  #
   def read_file(file_name)
-    data = nil
-    if session.type == "meterpreter"
-      data = _read_file_meterpreter(file_name)
-    elsif session.type == "shell"
-      if session.platform =~ /win/
-        data = session.shell_command_token("type \"#{file_name}\"")
-      else
-        data = session.shell_command_token("cat \"#{file_name}\"")
-      end
-
+    if session.type == 'meterpreter'
+      return _read_file_meterpreter(file_name)
     end
-    data
+
+    return nil unless session.type == 'shell'
+
+    if session.platform == 'windows'
+      return session.shell_command_token("type \"#{file_name}\"")
+    end
+
+    return nil unless readable?(file_name)
+
+    if command_exists?('cat')
+      return session.shell_command_token("cat \"#{file_name}\"")
+    end
+
+    # Result on systems without cat command
+    session.shell_command_token("while read line; do echo $line; done <#{file_name}")
   end
 
   # Platform-agnostic file write. Writes given object content to a remote file.
@@ -281,14 +360,13 @@ module Msf::Post::File
       fd.write(data)
       fd.close
     elsif session.respond_to? :shell_command_token
-      if session.platform =~ /win/
+      if session.platform == 'windows'
         session.shell_command_token("echo #{data} > \"#{file_name}\"")
       else
         _write_file_unix_shell(file_name, data)
       end
-
     end
-    return true
+    true
   end
 
   #
@@ -306,13 +384,13 @@ module Msf::Post::File
       fd.write(data)
       fd.close
     elsif session.respond_to? :shell_command_token
-      if session.platform =~ /win/
+      if session.platform == 'windows'
         session.shell_command_token("<nul set /p=\"#{data}\" >> \"#{file_name}\"")
       else
         _write_file_unix_shell(file_name, data, true)
       end
     end
-    return true
+    true
   end
 
   #
@@ -327,6 +405,45 @@ module Msf::Post::File
   end
 
   #
+  # Upload a binary and write it as an executable file +remote+ on the
+  # remote filesystem.
+  #
+  # @param remote [String] Destination file name on the remote filesystem
+  # @param data [String] Data to be uploaded
+  def upload_and_chmodx(path, data)
+    print_status "Writing '#{path}' (#{data.size} bytes) ..."
+    write_file path, data
+    chmod(path)
+  end
+
+  #
+  # Sets the permissions on a remote file
+  #
+  # @param path [String] Path on the remote filesystem
+  # @param mode [Fixnum] Mode as an octal number
+  def chmod(path, mode = 0700)
+    if session.platform == 'windows'
+      raise "`chmod' method does not support Windows systems"
+    end
+
+    if session.type == 'meterpreter' && session.commands.include?('stdapi_fs_chmod')
+      session.fs.file.chmod(path, mode)
+    else
+      cmd_exec("chmod #{mode.to_s(8)} '#{path}'")
+    end
+  end
+
+  #
+  # Read a local exploit file binary from the data directory
+  #
+  # @param path [String] Directory in the exploits folder
+  # @param path [String] Filename in the data folder
+  def exploit_data(data_directory, file)
+    file_path = ::File.join(::Msf::Config.data_directory, "exploits", data_directory, file)
+    ::File.binread(file_path)
+  end
+
+  #
   # Delete remote files
   #
   # @param remote_files [Array<String>] List of remote filenames to
@@ -337,7 +454,7 @@ module Msf::Post::File
       if session.type == "meterpreter"
         session.fs.file.delete(remote) if exist?(remote)
       else
-        if session.platform =~ /win/
+        if session.platform == 'windows'
           cmd_exec("del /q /f \"#{remote}\"")
         else
           cmd_exec("rm -f \"#{remote}\"")
@@ -346,7 +463,27 @@ module Msf::Post::File
     end
   end
 
+  #
+  # Delete remote directories
+  #
+  # @param remote_dirs [Array<String>] List of remote directories to
+  #   delete
+  # @return [void]
+  def rm_rf(*remote_dirs)
+    remote_dirs.each do |remote|
+      if session.type == "meterpreter"
+        session.fs.dir.rmdir(remote) if exist?(remote)
+      else
+        if session.platform == 'windows'
+          cmd_exec("rd /s /q \"#{remote}\"")
+        else
+          cmd_exec("rm -rf \"#{remote}\"")
+        end
+      end
+    end
+  end
   alias :file_rm :rm_f
+  alias :dir_rm :rm_rf
 
   #
   # Rename a remote file.
@@ -357,7 +494,7 @@ module Msf::Post::File
     if session.type == "meterpreter"
       return (session.fs.file.mv(old_file, new_file).result == 0)
     else
-      if session.platform =~ /win/
+      if session.platform == 'windows'
         cmd_exec(%Q|move /y "#{old_file}" "#{new_file}"|) =~ /moved/
       else
         cmd_exec(%Q|mv -f "#{old_file}" "#{new_file}"|).empty?
@@ -378,22 +515,22 @@ protected
   #
   # @return [String]
   def _read_file_meterpreter(file_name)
-    begin
-      fd = session.fs.file.new(file_name, "rb")
-    rescue ::Rex::Post::Meterpreter::RequestError => e
-      print_error("Failed to open file: #{file_name}: #{e}")
-      return nil
-    end
+    fd = session.fs.file.new(file_name, "rb")
 
     data = fd.read
-    begin
-      until fd.eof?
-        data << fd.read
-      end
-    ensure
-      fd.close
+    until fd.eof?
+      data << fd.read
     end
+
     data
+  rescue EOFError
+    # Sometimes fd isn't marked EOF in time?
+    ''
+  rescue ::Rex::Post::Meterpreter::RequestError => e
+    print_error("Failed to open file: #{file_name}: #{e}")
+    return nil
+  ensure
+    fd.close if fd
   end
 
   #
@@ -465,7 +602,7 @@ protected
       { :cmd => %q^echo -ne 'CONTENTS'^ , :enc => :hex },
     ].each { |foo|
       # Some versions of printf mangle %.
-      test_str = "\0\xff\xfeABCD\x7f%%\r\n"
+      test_str = "\0\xff\xfe#{Rex::Text.rand_text_alpha_upper(4)}\x7f%%\r\n"
       #test_str = "\0\xff\xfe"
       case foo[:enc]
       when :hex
@@ -531,7 +668,7 @@ protected
   #
   # Calculate the maximum line length for a unix shell.
   #
-  # @return [Fixnum]
+  # @return [Integer]
   def _unix_max_line_length
     # Based on autoconf's arg_max calculator, see
     # http://www.in-ulm.de/~mascheck/various/argmax/autoconf_check.html

@@ -56,6 +56,12 @@ class ThreadManager < Array
   def initialize(framework)
     self.framework = framework
     self.monitor   = spawn_monitor
+
+    # XXX: Preserve Ruby < 2.5 thread exception reporting behavior
+    # https://ruby-doc.org/core-2.5.0/Thread.html#method-c-report_on_exception
+    if Thread.method_defined?(:report_on_exception=)
+      Thread.report_on_exception = false
+    end
   end
 
   #
@@ -78,7 +84,7 @@ class ThreadManager < Array
       end
 
       rescue ::Exception => e
-        elog("thread monitor: #{e} #{e.backtrace} source:#{self[:tm_call].inspect}")
+        elog("Thread Monitor Exception | Source: #{self[:tm_call].inspect}", error: e)
       end
     end
   end
@@ -100,15 +106,14 @@ class ThreadManager < Array
           argv.shift.call(*argv)
         rescue ::Exception => e
           elog(
-              "thread exception: #{::Thread.current[:tm_name]}  critical=#{::Thread.current[:tm_crit]}  " \
-              "error: #{e.class} #{e}\n" \
+              "Thread Exception: #{::Thread.current[:tm_name]}  critical=#{::Thread.current[:tm_crit]}  " \
               "  source:\n" \
-              "    #{::Thread.current[:tm_call].join "\n    "}"
+              "    #{::Thread.current[:tm_call].join "\n    "}",
+              error: e
           )
-          elog("Call Stack\n#{e.backtrace.join("\n")}")
           raise e
         ensure
-          if framework.db and framework.db.active
+          if framework.db && framework.db.active && framework.db.is_local?
             # NOTE: despite the Deprecation Warning's advice, this should *NOT*
             # be ActiveRecord::Base.connection.close which causes unrelated
             # threads to raise ActiveRecord::StatementInvalid exceptions at

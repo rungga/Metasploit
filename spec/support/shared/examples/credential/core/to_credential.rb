@@ -1,11 +1,11 @@
 require 'metasploit/framework/credential'
 
-shared_examples_for 'Metasploit::Credential::Core::ToCredential' do
+RSpec.shared_examples_for 'Metasploit::Credential::Core::ToCredential' do
   context "methods" do
     context ".to_credential" do
 
       subject(:crednetial_core) do
-        FactoryGirl.create(:metasploit_credential_core)
+        FactoryBot.create(:metasploit_credential_core)
       end
 
       it { is_expected.to respond_to :to_credential }

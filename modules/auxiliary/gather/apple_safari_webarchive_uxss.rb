@@ -1,14 +1,12 @@
 ##
-# This module requires Metasploit: http://metasploit.com/download
+# This module requires Metasploit: https://metasploit.com/download
 # Current source: https://github.com/rapid7/metasploit-framework
 ##
 
-require 'msf/core'
 require 'msf/core/exploit/format/webarchive'
 require 'uri'
 
-class Metasploit3 < Msf::Auxiliary
-
+class MetasploitModule < Msf::Auxiliary
   include Msf::Exploit::FILEFORMAT
   include Msf::Exploit::Remote::HttpServer::HTML
   include Msf::Exploit::Format::Webarchive
@@ -31,10 +29,10 @@ class Metasploit3 < Msf::Auxiliary
       'Author'         => 'joev',
       'References'     =>
         [
-          ['URL', 'https://community.rapid7.com/community/metasploit/blog/2013/04/25/abusing-safaris-webarchive-file-format']
+          ['URL', 'https://blog.rapid7.com/2013/04/25/abusing-safaris-webarchive-file-format']
         ],
       'DisclosureDate' => 'Feb 22 2013',
-      'Actions'        => [ [ 'WebServer' ] ],
+      'Actions'        => [[ 'WebServer', 'Description' => 'Serve exploit via web server' ]],
       'PassiveActions' => [ 'WebServer' ],
       'DefaultAction'  => 'WebServer'))
   end

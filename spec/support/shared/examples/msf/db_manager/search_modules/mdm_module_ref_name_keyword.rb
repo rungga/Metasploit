@@ -1,19 +1,19 @@
-shared_examples_for 'Msf::DBManager#search_modules Mdm::Module::Ref#name keyword' do |keyword|
+RSpec.shared_examples_for 'Msf::DBManager#search_modules Mdm::Module::Ref#name keyword' do |keyword|
   context "with #{keyword} keyword" do
     let(keyword) do
       1
     end
 
     let(:name) do
-      FactoryGirl.generate :mdm_module_ref_name
+      FactoryBot.generate :mdm_module_ref_name
     end
 
     let(:search_string) do
       "#{keyword}:#{send(keyword)}"
     end
 
-    before(:each) do
-      FactoryGirl.create(:mdm_module_ref, :name => name)
+    before(:example) do
+      FactoryBot.create(:mdm_module_ref, :name => name)
     end
 
     name_prefix = "#{keyword.to_s.upcase}-"

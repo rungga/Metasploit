@@ -22,7 +22,7 @@ module Parser
       thost = {
         :host      => attrs["IPAddress"],
         :name      => attrs["HostName"],
-        :workspace => @args[:wspace]
+        :workspace => @args[:workspace]
       }
       thost[:host] = attrs["IPAddress"]
       thost[:name] = attrs["HostName"]
@@ -59,12 +59,12 @@ module Parser
     unless in_tag("JobOrder")
       case name
       when "OS"
-        unless @host.nil? or @text.blank?
+        unless @host.nil? or @text.to_s.strip.empty?
           tnote = {
             :type       => "host.os.fusionvm_fingerprint",
             :data       => { :os => @text.strip },
             :host       => @host,
-            :workspace  => @args[:wspace]
+            :workspace  => @args[:workspace]
           }
           db_report(:note, tnote)
           @host.normalize_os
@@ -86,7 +86,7 @@ module Parser
       when "CVE"
         @vuln[:refs] << "CVE-#{@text.strip}"
       when "References"
-        unless @text.blank?
+        unless @text.to_s.strip.empty?
           @text.split(' ').each do |ref|
             next unless ref.start_with? "http"
             if ref =~ /MS\d{2}-\d{3}/

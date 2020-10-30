@@ -1,13 +1,11 @@
 ##
-# This module requires Metasploit: http://metasploit.com/download
+# This module requires Metasploit: https://metasploit.com/download
 # Current source: https://github.com/rapid7/metasploit-framework
 ##
 
-require 'msf/core'
 require 'uri'
 
-class Metasploit3 < Msf::Auxiliary
-
+class MetasploitModule < Msf::Auxiliary
   include Msf::Exploit::Remote::HttpServer::HTML
   include Msf::Auxiliary::Report
 
@@ -36,7 +34,7 @@ class Metasploit3 < Msf::Auxiliary
           ['URL', 'http://quaxio.com/jsonp_handcrafted_flash_files/']
         ],
       'DisclosureDate' => 'Jul 8 2014',
-      'Actions'        => [ [ 'WebServer' ] ],
+      'Actions'        => [[ 'WebServer', 'Description' => 'Serve exploit via web server' ]],
       'PassiveActions' => [ 'WebServer' ],
       'DefaultAction'  => 'WebServer'))
 
@@ -197,5 +195,4 @@ class Metasploit3 < Msf::Auxiliary
   def rhost
     URI.parse(datastore["JSONP_URL"]).host
   end
-
 end

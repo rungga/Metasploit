@@ -1,8 +1,8 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Source: http://www.metasploit.com/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source: https://www.metasploit.com/
 
 Files: *
-Copyright: 2006-2015, Rapid7, Inc.
+Copyright: 2006-2018, Rapid7, Inc.
 License: BSD-3-clause
 
 # The Metasploit Framework is provided under the 3-clause BSD license provided
@@ -15,12 +15,25 @@ License: BSD-3-clause
 # Last updated: 2013-Nov-04
 #
 
-Files: data/john/*
-Copyright: 1996-2011 Solar Designer.
+Files: data/jtr/*
+Copyright: 1996-2013 Solar Designer.
 License: GPL-2+
+
+Files: data/jtr/dumb*.conf
+Copyright: 2012-2018 magnum
+License: Public-License
+ This  software is Copyright (c) 2012-2018 magnum, and it is hereby
+ released to the general public under the following terms:
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted.
 
 Files: external/source/exploits/IE11SandboxEscapes/*
 Copyright: James Forshaw, 2014
+License: GPL-3+
+
+Files: data/exploits/roothelper/roothelper.c
+Copyright: 2015 Qualys, Inc.
+           1997-2003, 2007, 2008 Red Hat, Inc.
 License: GPL-3+
 
 Files: external/source/byakugan/*
@@ -59,34 +72,54 @@ Copyright: 1999 AT&T Laboratories Cambridge.
 License: GPL-2+
 
 Files: external/source/exploits/cve-2015-0016/*
-Copyright: 2011-2012 Stephen Fewer of Harmony Security (www.harmonysecurity.com)
+ external/source/exploits/CVE-2016-0040/Metasploit/Metasploit.*
+ external/source/exploits/cve-2018-8897/dll/*
+ external/source/exploits/rottenpotato/MSFRottenPotato/*
+Copyright: 2011-2013 Stephen Fewer of Harmony Security (www.harmonysecurity.com)
 License: BSD-3-clause
 
 Files: external/source/flash_detector/bin/js/swfobject.js
 Copyright: 2007-2008 Adobe Systems Incorporated and its licensors
 License: MIT
 
+Files: external/source/exploits/cve-2018-8897/exe/*
+Copyright: 2018, Can Bölük
+License: BSD-3-clause
+
+Files: external/source/exploits/CVE-2018-8440/dll/ALPC-TaskSched-LPE*
+Copyright: 2015 Google Inc. All Rights Reserved.
+License: Apache-2.0
+
 Files: lib/anemone.rb lib/anemone/*
 Copyright: 2009 Vertive, Inc.
 License: MIT
 
-Files: lib/bit-struct.rb lib/bit-struct/*
-Copyright: 2005-2009, Joel VanderWerf
-License: Ruby
-
-Files: lib/metasm.rb lib/metasm/* data/cpuinfo/*
-Copyright: 2006-2010 Yoann GUILLOT
+Files: tools/exploit/metasm_shell.rb
+Copyright: 2007 Yoann GUILLOT
 License: LGPL-2.1
 
-Files: lib/nessus/*
-Copyright: Vlatoko Kosturjak
-License: BSD-3-clause
+Files: lib/msf/core/modules/external/python/async_timeout/*
+Copyright: 2016-2017 Andrew Svetlov
+License: Apache-2.0
+
+Files: lib/msf/core/web_services/public/* lib/msf/core/web_services/views/api_docs.erb
+Copyright: Copyright 2018 SmartBear Software
+License: Apache-2.0
+
+Files: modules/auxiliary/gather/office365userenum.py
+Copyright: 2015  Oliver Morton (Sec-1 Ltd)
+License: GPL-2+
+
+Files: modules/auxiliary/scanner/smb/impacket/dcomexec.py
+ modules/auxiliary/scanner/smb/impacket/secretsdump.py
+Copyright: 2003-2018 CORE Security Technologies
+License: Apache-2.0
 
 Files: lib/net/dns.rb lib/net/dns/*
 Copyright: 2006 Marco Ceresa
 License: Ruby
 
-Files: lib/net/ssh.rb lib/net/ssh/*
+Files: lib/net/ssh/*
 Copyright: 2008 Jamis Buck <jamis@37signals.com>
 License: MIT
 
@@ -94,7 +127,7 @@ Files: lib/postgres_msf.rb lib/postgres/postgres-pr/message.rb lib/postgres/post
 Copyright: 2005 Michael Neumann
 License: BSD-3-clause or Ruby
 
-Files: lib/openvas/*
+Files: plugins/openvas.rb
 Copyright: No copyright statement provided
 License: MIT
 
@@ -109,10 +142,6 @@ License: Ruby
 Files: lib/snmp.rb lib/snmp/*
 Copyright: 2004, David R. Halliday
 License: Ruby
-
-Files: lib/sshkey.rb lib/sshkey/*
-Copyright: 2011 James Miller
-License: MIT
 
 Files: lib/windows_console_color_support.rb
 Copyright: 2011 Michael 'mihi' Schierl
@@ -515,3 +544,19 @@ License: Artistic
  BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
  DAMAGES ARISING IN ANY WAY OUT OF THE USE OF THE PACKAGE, EVEN IF
  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: Apache-2.0
+  Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+     http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ .
+ On Debian-based systems the full text of the Apache version 2.0 license
+ can be found in `/usr/share/common-licenses/Apache-2.0'.

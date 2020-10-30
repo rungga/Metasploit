@@ -1,4 +1,9 @@
-shared_examples_for 'Msf::DBManager::ModuleCache' do
+RSpec.shared_examples_for 'Msf::DBManager::ModuleCache' do
+
+  if ENV['REMOTE_DB']
+    before {skip("Module Cache methods will not be ported, instead the newer module metadata cache should be used")}
+  end
+
   it { is_expected.to respond_to :match_values }
   it { is_expected.to respond_to :module_to_details_hash }
   it { is_expected.to respond_to :modules_cached }
@@ -20,13 +25,13 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
     end
 
     let!(:module_details) do
-      FactoryGirl.create_list(
+      FactoryBot.create_list(
           :mdm_module_detail,
           module_detail_count
       )
     end
 
-    before(:each) do
+    before(:example) do
       allow(db_manager).to receive(:migrated).and_return(migrated)
     end
 
@@ -39,7 +44,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
         false
       end
 
-      before(:each) do
+      before(:example) do
         allow(db_manager).to receive(:modules_caching).and_return(modules_caching)
       end
 
@@ -83,20 +88,20 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
     end
 
     let(:mtype) do
-      FactoryGirl.generate :mdm_module_detail_mtype
+      FactoryBot.generate :mdm_module_detail_mtype
     end
 
     let(:refname) do
-      FactoryGirl.generate :mdm_module_detail_refname
+      FactoryBot.generate :mdm_module_detail_refname
     end
 
     let!(:module_detail) do
-      FactoryGirl.create(
+      FactoryBot.create(
           :mdm_module_detail
       )
     end
 
-    before(:each) do
+    before(:example) do
       allow(db_manager).to receive(:migrated).and_return(migrated)
     end
 
@@ -106,7 +111,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
       end
 
       let!(:module_detail) do
-        FactoryGirl.create(:mdm_module_detail)
+        FactoryBot.create(:mdm_module_detail)
       end
 
       context 'with matching Mdm::Module::Detail' do
@@ -152,50 +157,6 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
       search_modules.to_a
     end
 
-    context 'with app keyword' do
-      let(:search_string) do
-        "app:#{app}"
-      end
-
-      before(:each) do
-        Mdm::Module::Detail::STANCES.each do |stance|
-          FactoryGirl.create(:mdm_module_detail, :stance => stance)
-        end
-      end
-
-      context 'with client' do
-        let(:app) do
-          'client'
-        end
-
-        it "should match Mdm::Module::Detail#stance 'passive'" do
-          expect(module_details.count).to be > 0
-
-          expect(
-            module_details.all? { |module_detail|
-              module_detail.stance == 'passive'
-            }
-          ).to eq true
-        end
-      end
-
-      context 'with server' do
-        let(:app) do
-          'server'
-        end
-
-        it "should match Mdm::Module::Detail#stance 'aggressive'" do
-          expect(module_details.count).to be > 0
-
-          expect(
-            module_details.all? { |module_detail|
-              module_detail.stance == 'aggressive'
-            }
-          ).to eq true
-        end
-      end
-    end
-
     context 'with author keyword' do
       let(:search_string) do
         # us inspect so strings with spaces are quoted correctly
@@ -203,7 +164,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
       end
 
       let!(:module_authors) do
-        FactoryGirl.create_list(:mdm_module_author, 2)
+        FactoryBot.create_list(:mdm_module_author, 2)
       end
 
       let(:target_module_author) do
@@ -258,7 +219,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
       end
 
       let!(:existing_module_details) do
-        FactoryGirl.create_list(:mdm_module_detail, 2)
+        FactoryBot.create_list(:mdm_module_detail, 2)
       end
 
       let(:target_module_detail) do
@@ -301,13 +262,11 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
 
     it_should_behave_like 'Msf::DBManager#search_modules Mdm::Module::Platform#name or Mdm::Module::Target#name keyword', :os
 
-    it_should_behave_like 'Msf::DBManager#search_modules Mdm::Module::Ref#name keyword', :osvdb
-
     it_should_behave_like 'Msf::DBManager#search_modules Mdm::Module::Platform#name or Mdm::Module::Target#name keyword', :platform
 
     context 'with ref keyword' do
       let(:ref) do
-        FactoryGirl.generate :mdm_module_ref_name
+        FactoryBot.generate :mdm_module_ref_name
       end
 
       let(:search_string) do
@@ -316,7 +275,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
       end
 
       let!(:module_ref) do
-        FactoryGirl.create(:mdm_module_ref)
+        FactoryBot.create(:mdm_module_ref)
       end
 
       context 'with Mdm::Module::Ref#name' do
@@ -346,7 +305,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
 
     context 'with type keyword' do
       let(:type) do
-        FactoryGirl.generate :mdm_module_detail_mtype
+        FactoryBot.generate :mdm_module_detail_mtype
       end
 
       let(:search_string) do
@@ -358,7 +317,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
       end
 
       let!(:all_module_details) do
-        FactoryGirl.create_list(:mdm_module_detail, 2)
+        FactoryBot.create_list(:mdm_module_detail, 2)
       end
 
       context 'with Mdm::Module::Ref#name' do
@@ -391,7 +350,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
         end
 
         let!(:module_action) do
-          FactoryGirl.create(:mdm_module_action)
+          FactoryBot.create(:mdm_module_action)
         end
 
         it 'should match Mdm::Module::Action#name' do
@@ -413,7 +372,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
         end
 
         let!(:module_arch) do
-          FactoryGirl.create(:mdm_module_arch)
+          FactoryBot.create(:mdm_module_arch)
         end
 
         it 'should match Mdm::Module::Arch#name' do
@@ -435,7 +394,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
         end
 
         let!(:module_author) do
-          FactoryGirl.create(:mdm_module_author)
+          FactoryBot.create(:mdm_module_author)
         end
 
         it 'should match Mdm::Module::Author#name' do
@@ -457,7 +416,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
         end
 
         let!(:all_module_details) do
-          FactoryGirl.create_list(:mdm_module_detail, 3)
+          FactoryBot.create_list(:mdm_module_detail, 3)
         end
 
         context 'with #description' do
@@ -517,7 +476,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
         end
 
         let!(:module_platform) do
-          FactoryGirl.create(:mdm_module_platform)
+          FactoryBot.create(:mdm_module_platform)
         end
 
         it 'should match Mdm::Module::Platform#name' do
@@ -539,7 +498,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
         end
 
         let!(:module_ref) do
-          FactoryGirl.create(:mdm_module_ref)
+          FactoryBot.create(:mdm_module_ref)
         end
 
         it 'should match Mdm::Module::Ref#name' do
@@ -561,7 +520,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
         end
 
         let!(:module_target) do
-          FactoryGirl.create(:mdm_module_target)
+          FactoryBot.create(:mdm_module_target)
         end
 
         it 'should match Mdm::Module::Target#name' do
@@ -588,7 +547,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
       false
     end
 
-    before(:each) do
+    before(:example) do
       allow(db_manager).to receive(:migrated).and_return(migrated)
     end
 
@@ -601,7 +560,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
         true
       end
 
-      before(:each) do
+      before(:example) do
         allow(db_manager).to receive(:modules_caching).and_return(modules_caching)
       end
 
@@ -665,7 +624,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
 
           let!(:module_detail) do
             # needs to reference a real module so that it can be loaded
-            FactoryGirl.create(
+            FactoryBot.create(
                 :mdm_module_detail,
                 :file => module_pathname.to_path,
                 :mtime => modification_time,
@@ -702,7 +661,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
                   let(:modification_time) do
                     # +1 as rand can return 0 and the time must be different for
                     # this context.
-                    super() - (rand(1.day) + 1)
+                    1.days.ago
                   end
 
                   it_should_behave_like 'Msf::DBManager#update_all_module_details refresh'
@@ -804,7 +763,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
       'exploits'
     end
 
-    before(:each) do
+    before(:example) do
       allow(db_manager).to receive(:migrated).and_return(migrated)
     end
 
@@ -838,18 +797,18 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
         end
 
         let(:privileged) do
-          FactoryGirl.generate :mdm_module_detail_privileged
+          FactoryBot.generate :mdm_module_detail_privileged
         end
 
         let(:rank) do
-          FactoryGirl.generate :mdm_module_detail_rank
+          FactoryBot.generate :mdm_module_detail_rank
         end
 
         let(:stance) do
-          FactoryGirl.generate :mdm_module_detail_stance
+          FactoryBot.generate :mdm_module_detail_stance
         end
 
-        before(:each) do
+        before(:example) do
           allow(db_manager).to receive(
               :module_to_details_hash
           ).with(
@@ -864,7 +823,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
             Mdm::Module::Detail.last
           end
 
-          before(:each) do
+          before(:example) do
             update_module_details
           end
 
@@ -881,13 +840,13 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
             []
           end
 
-          before(:each) do
+          before(:example) do
             module_to_details_hash[:bits] = bits
           end
 
           context 'with :action' do
             let(:name) do
-              FactoryGirl.generate :mdm_module_action_name
+              FactoryBot.generate :mdm_module_action_name
             end
 
             let(:bits) do
@@ -914,7 +873,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
                 Mdm::Module::Detail.last
               end
 
-              before(:each) do
+              before(:example) do
                 update_module_details
               end
 
@@ -924,7 +883,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
 
           context 'with :arch' do
             let(:name) do
-              FactoryGirl.generate :mdm_module_arch_name
+              FactoryBot.generate :mdm_module_arch_name
             end
 
             let(:bits) do
@@ -951,7 +910,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
                 Mdm::Module::Detail.last
               end
 
-              before(:each) do
+              before(:example) do
                 update_module_details
               end
 
@@ -961,11 +920,11 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
 
           context 'with :author' do
             let(:email) do
-              FactoryGirl.generate :mdm_module_author_email
+              FactoryBot.generate :mdm_module_author_email
             end
 
             let(:name) do
-              FactoryGirl.generate :mdm_module_author_name
+              FactoryBot.generate :mdm_module_author_name
             end
 
             let(:bits) do
@@ -993,7 +952,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
                 Mdm::Module::Detail.last
               end
 
-              before(:each) do
+              before(:example) do
                 update_module_details
               end
 
@@ -1013,7 +972,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
             end
 
             let(:name) do
-              FactoryGirl.generate :mdm_module_platform_name
+              FactoryBot.generate :mdm_module_platform_name
             end
 
             it 'should create an Mdm::Module::Platform' do
@@ -1031,7 +990,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
                 Mdm::Module::Detail.last
               end
 
-              before(:each) do
+              before(:example) do
                 update_module_details
               end
 
@@ -1050,7 +1009,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
             end
 
             let(:name) do
-              FactoryGirl.generate :mdm_module_ref_name
+              FactoryBot.generate :mdm_module_ref_name
             end
 
             it 'should create an Mdm::Module::Ref' do
@@ -1068,7 +1027,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
                 Mdm::Module::Detail.last
               end
 
-              before(:each) do
+              before(:example) do
                 update_module_details
               end
 
@@ -1088,11 +1047,11 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
             end
 
             let(:index) do
-              FactoryGirl.generate :mdm_module_target_index
+              FactoryBot.generate :mdm_module_target_index
             end
 
             let(:name) do
-              FactoryGirl.generate :mdm_module_target_name
+              FactoryBot.generate :mdm_module_target_name
             end
 
             it 'should create an Mdm::Module::Target' do
@@ -1110,7 +1069,7 @@ shared_examples_for 'Msf::DBManager::ModuleCache' do
                 Mdm::Module::Detail.last
               end
 
-              before(:each) do
+              before(:example) do
                 update_module_details
               end
 

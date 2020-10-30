@@ -1,6 +1,7 @@
 # -*- coding: binary -*-
 require 'msf/base/simple'
 require 'msf/base/simple/framework/module_paths'
+require 'msf/base/simple/noop_job_listener'
 
 module Msf
 module Simple
@@ -30,7 +31,7 @@ module Framework
     def load(path, opts = {})
       def_path = Msf::Config.plugin_directory + File::SEPARATOR + path
 
-      if (File.exists?(def_path) or File.exists?(def_path + ".rb"))
+      if (File.exist?(def_path) or File.exist?(def_path + ".rb"))
         super(def_path, opts)
       else
         super
@@ -60,6 +61,7 @@ module Framework
       Msf::MODULE_PAYLOAD => Msf::Simple::Payload,
       Msf::MODULE_AUX     => Msf::Simple::Auxiliary,
       Msf::MODULE_POST    => Msf::Simple::Post,
+      Msf::MODULE_EVASION => Msf::Simple::Evasion
     }
 
   # Create a simplified instance of the framework.  This routine takes a hash
@@ -169,6 +171,7 @@ module Framework
   # Statistics.
   #
   attr_reader :stats
+
 
   #
   # Boolean indicating whether the cache is initialized yet

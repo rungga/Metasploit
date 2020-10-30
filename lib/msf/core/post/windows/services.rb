@@ -55,11 +55,11 @@ module Services
   # @param opts [Hash]
   # @option opts [String] :host (nil) The host on which to open the
   #   service manager. May be a hostname or IP address.
-  # @option opts [Fixnum] :access (0xF003F) Bitwise-or of the
+  # @option opts [Integer] :access (0xF003F) Bitwise-or of the
   #   SC_MANAGER_* constants (see
   #   {http://msdn.microsoft.com/en-us/library/windows/desktop/ms685981(v=vs.85).aspx})
   #
-  # @return [Fixnum] Opaque Windows handle SC_HANDLE as returned by
+  # @return [Integer] Opaque Windows handle SC_HANDLE as returned by
   #   OpenSCManagerA()
   # @yield [manager] Gives the block a manager handle as returned by
   #   advapi32.dll!OpenSCManagerA. When the block returns, the handle
@@ -78,7 +78,7 @@ module Services
     # );
     manag = advapi32.OpenSCManagerA(machine_str,nil,access)
     if (manag["return"] == 0)
-      raise RuntimeError.new("Unable to open service manager: #{manag["ErrorMessage"]}")
+      raise "Unable to open service manager: #{manag["ErrorMessage"]}"
     end
 
     if (block_given?)
@@ -105,7 +105,7 @@ module Services
   # Open the service with advapi32.dll!OpenServiceA on the
   # target manager
   #
-  # @return [Fixnum] Opaque Windows handle SC_HANDLE as returned by
+  # @return [Integer] Opaque Windows handle SC_HANDLE as returned by
   #   OpenServiceA()
   # @yield [manager] Gives the block a service handle as returned by
   #   advapi32.dll!OpenServiceA. When the block returns, the handle
@@ -115,7 +115,7 @@ module Services
   def open_service_handle(manager, name, access)
     handle = advapi32.OpenServiceA(manager, name, access)
     if (handle["return"] == 0)
-      raise RuntimeError.new("Could not open service. OpenServiceA error: #{handle["ErrorMessage"]}")
+      raise "Could not open service. OpenServiceA error: #{handle["ErrorMessage"]}"
     end
 
     if (block_given?)
@@ -250,6 +250,29 @@ module Services
   end
 
   #
+  # Check if the specified Windows service exists.
+  #
+  # @param name [String] The target service's name (not to be confused
+  #   with Display Name). Case sensitive.
+  #
+  # @return [Boolean]
+  #
+  def service_exists?(service)
+    srv_info = service_info(service)
+
+    if srv_info.nil?
+      vprint_error('Unable to enumerate Windows services')
+      return false
+    end
+
+    if srv_info && srv_info[:display].empty?
+      return false
+    end
+
+    true
+  end
+
+  #
   # Changes a given service startup mode, name must be provided and the mode.
   #
   # Mode is a string with either auto, manual or disable for the
@@ -267,7 +290,7 @@ module Services
         when "manual" then startup_number   = START_TYPE_MANUAL
         when "disable" then startup_number  = START_TYPE_DISABLED
         else
-          raise RuntimeError, "Invalid Startup Mode: #{mode}"
+          raise "Invalid Startup Mode: #{mode}"
       end
     end
 
@@ -376,7 +399,7 @@ module Services
   # @param server [String,nil] A hostname or IP address. Default is the
   #   remote localhost
   #
-  # @return [Fixnum] 0 if service started successfully, 1 if it failed
+  # @return [Integer] 0 if service started successfully, 1 if it failed
   #   because the service is already running, 2 if it is disabled
   #
   # @raise [RuntimeError] if OpenServiceA failed
@@ -395,7 +418,7 @@ module Services
   # Stop a service.
   #
   # @param (see #service_start)
-  # @return [Fixnum] 0 if service stopped successfully, 1 if it failed
+  # @return [Integer] 0 if service stopped successfully, 1 if it failed
   #   because the service is already stopped or disabled, 2 if it
   #   cannot be stopped for some other reason.
   #
@@ -453,7 +476,7 @@ module Services
         status = advapi32.QueryServiceStatus(service_handle,28)
 
         if (status["return"] == 0)
-          raise RuntimeError.new("Could not query service. QueryServiceStatus error: #{status["ErrorMessage"]}")
+          raise "Could not query service. QueryServiceStatus error: #{status["ErrorMessage"]}"
         else
           ret = parse_service_status_struct(status['lpServiceStatus'])
         end
@@ -485,7 +508,7 @@ module Services
         vprint_good("[#{name}] Service started")
         return true
       else
-        raise RuntimeError, status
+        raise status
       end
     rescue RuntimeError => s
       if tried

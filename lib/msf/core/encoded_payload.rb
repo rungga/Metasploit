@@ -127,7 +127,7 @@ class EncodedPayload
   def encode
     # If the exploit has bad characters, we need to run the list of encoders
     # in ranked precedence and try to encode without them.
-    if reqs['BadChars'].to_s.length > 0 or reqs['Encoder'] or reqs['ForceEncode']
+    if reqs['Encoder'] || reqs['ForceEncode'] || has_chars?(reqs['BadChars'])
       encoders = pinst.compatible_encoders
 
       # Make sure the encoder name from the user has the same String#encoding
@@ -235,9 +235,8 @@ class EncodedPayload
             next_encoder = true
             break
 
-          rescue ::Exception
-            elog("#{err_start}: Broken encoder #{encoder.refname}: #{$!}", 'core', LEV_0)
-            dlog("#{err_start}: Call stack\n#{$@.join("\n")}", 'core', LEV_1)
+          rescue ::Exception => e
+            elog("Broken encoder #{encoder.refname}", error: e)
             next_encoder = true
             break
           end
@@ -276,6 +275,10 @@ class EncodedPayload
     # If there are no bad characters, then the raw is the same as the
     # encoded
     else
+      unless reqs['BadChars'].blank?
+        ilog("#{pinst.refname}: payload contains no badchars, skipping automatic encoding", 'core', LEV_0)
+      end
+
       self.encoded = raw
     end
 
@@ -290,6 +293,7 @@ class EncodedPayload
   def generate_sled
     min   = reqs['MinNops'] || 0
     space = reqs['Space']
+    pad_nops = reqs['PadNops']
 
     self.nop_sled_size = min
 
@@ -309,6 +313,9 @@ class EncodedPayload
 
     # Check for the DisableNops setting
     self.nop_sled_size = 0 if reqs['DisableNops']
+
+    # Check for the PadNops setting
+    self.nop_sled_size = (pad_nops - self.encoded.length) if reqs['PadNops']
 
     # Now construct the actual sled
     if (self.nop_sled_size > 0)
@@ -338,7 +345,6 @@ class EncodedPayload
 
         begin
           nop.copy_ui(pinst)
-
           self.nop_sled = nop.generate_sled(self.nop_sled_size,
             'BadChars'      => reqs['BadChars'],
             'SaveRegisters' => save_regs)
@@ -509,6 +515,15 @@ protected
   #
   attr_accessor :reqs
 
+  def has_chars?(chars)
+    return false if chars.blank? || self.raw.blank?
+
+    chars.each_byte do |bad|
+      return true if self.raw.index(bad.chr(Encoding::ASCII_8BIT))
+    end
+
+    false
+  end
 end
 
 end

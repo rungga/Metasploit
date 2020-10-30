@@ -24,6 +24,7 @@ class ClientRequest
     'headers'                => nil,
     'raw_headers'            => '',
     'method'                 => 'GET',
+    'partial'                => false,
     'path_info'              => '',
     'port'                   => 80,
     'proto'                  => 'HTTP',
@@ -89,8 +90,7 @@ class ClientRequest
     @opts['headers'] ||= {}
   end
 
-  def to_s
-
+  def to_s(headers_only: false)
     # Start GET query string
     qstr = opts['query'] ? opts['query'].dup : ""
 
@@ -108,21 +108,21 @@ class ClientRequest
           qstr << set_encode_uri(Rex::Text.rand_text_alphanumeric(rand(32)+1))
         end
       end
+      if opts.key?("vars_get") && opts['vars_get']
+        opts['vars_get'].each_pair do |var,val|
+          var = var.to_s
 
-      opts['vars_get'].each_pair do |var,val|
-        var = var.to_s
-
-        qstr << '&' if qstr.length > 0
-        qstr << (opts['encode_params'] ? set_encode_uri(var) : var)
-        # support get parameter without value
-        # Example: uri?parameter
-        if val
-          val = val.to_s
-          qstr << '='
-          qstr << (opts['encode_params'] ? set_encode_uri(val) : val)
+          qstr << '&' if qstr.length > 0
+          qstr << (opts['encode_params'] ? set_encode_uri(var) : var)
+          # support get parameter without value
+          # Example: uri?parameter
+          if val
+            val = val.to_s
+            qstr << '='
+            qstr << (opts['encode_params'] ? set_encode_uri(val) : val)
+          end
         end
       end
-
       if (opts['pad_post_params'])
         1.upto(opts['pad_post_params_count'].to_i) do |i|
           rand_var = Rex::Text.rand_text_alphanumeric(rand(32)+1)
@@ -136,12 +136,16 @@ class ClientRequest
 
       opts['vars_post'].each_pair do |var,val|
         var = var.to_s
-        val = val.to_s
-
-        pstr << '&' if pstr.length > 0
-        pstr << (opts['encode_params'] ? set_encode_uri(var) : var)
-        pstr << '='
-        pstr << (opts['encode_params'] ? set_encode_uri(val) : val)
+        unless val.is_a?(Array)
+          val = [val]
+        end
+        val.each do |v|
+          v = v.to_s
+          pstr << '&' if pstr.length > 0
+          pstr << (opts['encode_params'] ? set_encode_uri(var) : var)
+          pstr << '='
+          pstr << (opts['encode_params'] ? set_encode_uri(v) : v)
+        end
       end
     else
       if opts['encode']
@@ -171,17 +175,21 @@ class ClientRequest
     req << set_uri_append()
     req << set_uri_version_spacer()
     req << set_version
-    req << set_host_header
+
+    # Set a default Host header if one wasn't passed in
+    unless opts['headers'] && opts['headers'].keys.map(&:downcase).include?('host')
+      req << set_host_header
+    end
 
     # If an explicit User-Agent header is set, then use that instead of
     # the default
-    unless opts['headers'] and opts['headers'].keys.map{|x| x.downcase }.include?('user-agent')
+    unless opts['headers'] && opts['headers'].keys.map(&:downcase).include?('user-agent')
       req << set_agent_header
     end
 
     # Similar to user-agent, only add an automatic auth header if a
     # manual one hasn't been provided
-    unless opts['headers'] and opts['headers'].keys.map{|x| x.downcase }.include?('authorization')
+    unless opts['headers'] && opts['headers'].keys.map(&:downcase).include?('authorization')
       req << set_auth_header
     end
 
@@ -191,9 +199,11 @@ class ClientRequest
 
     req << set_content_type_header
     req << set_content_len_header(pstr.length)
-    req << set_chunked_header()
+    req << set_chunked_header
     req << opts['raw_headers']
-    req << set_body(pstr)
+    req << set_body(pstr) unless headers_only
+
+    req
   end
 
   protected
@@ -391,8 +401,19 @@ class ClientRequest
 
   #
   # Return the content length header
+  #
   def set_content_len_header(clen)
-    return "" if opts['chunked_size'] > 0
+    if opts['method'] == 'GET' && (clen == 0 || opts['chunked_size'] > 0)
+      # This condition only applies to GET because of the specs.
+      # RFC-7230:
+      # A Content-Length header field is normally sent in a POST
+      # request even when the value is 0 (indicating an empty payload body)
+      return ''
+    elsif opts['headers'] && opts['headers']['Content-Length']
+      # If the module has a modified content-length header, respect that by
+      # not setting another one.
+      return ''
+    end
     set_formatted_header("Content-Length", clen)
   end
 

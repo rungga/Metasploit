@@ -133,6 +133,14 @@ RSpec.describe Rex::Proto::Http::Response do
     HEREDOC
   end
 
+  let (:get_cookies_spaces_and_missing_semicolon) do
+    <<-HEREDOC.gsub(/^ {6}/, '')
+      HTTP/1.1 200 OK
+      Set-Cookie: k1=v1; k2=v2;k3=v3
+
+    HEREDOC
+  end
+
   let (:meta_name) do
     'META_NAME'
   end
@@ -176,7 +184,7 @@ RSpec.describe Rex::Proto::Http::Response do
       <genre>Computer</genre>
       <price>44.95</price>
       <publish_date>2000-10-01</publish_date>
-      <description>An in-depth look at creating applications 
+      <description>An in-depth look at creating applications
       with XML.</description>
    </book>
 </catalog>
@@ -211,7 +219,7 @@ RSpec.describe Rex::Proto::Http::Response do
       res
     end
 
-    before(:each) do
+    before(:example) do
       allow_any_instance_of(Rex::Proto::Http::Client).to receive(:request_cgi).with(any_args)
       allow_any_instance_of(Rex::Proto::Http::Client).to receive(:send_recv).with(any_args).and_return(response)
       allow_any_instance_of(Rex::Proto::Http::Client).to receive(:set_config).with(any_args)
@@ -234,7 +242,7 @@ RSpec.describe Rex::Proto::Http::Response do
         res
       end
 
-      before(:each) do
+      before(:example) do
         allow_any_instance_of(Rex::Proto::Http::Client).to receive(:send_recv).with(any_args).and_return(response)
       end
 
@@ -252,7 +260,7 @@ RSpec.describe Rex::Proto::Http::Response do
         res
       end
 
-      before(:each) do
+      before(:example) do
         allow_any_instance_of(Rex::Proto::Http::Client).to receive(:send_recv).with(any_args).and_return(response)
       end
 
@@ -394,6 +402,22 @@ RSpec.describe Rex::Proto::Http::Response do
       }
       expected_cookies.shuffle!
       expect(cookies_array).to include(*expected_cookies)
+    end
+
+    it 'parses cookies with inconsistent spacing and a missing trailing semicolons' do
+      resp = described_class.new()
+      resp.parse(self.send :get_cookies_spaces_and_missing_semicolon)
+      cookies = resp.get_cookies_parsed
+      names = cookies.keys.sort
+      values = []
+      cookies.each do |_, parsed|
+        parsed.value.each do |value|
+          values << value
+        end
+      end
+      values.sort!
+      expect(names).to eq(%w(k1 k2 k3))
+      expect(values).to eq(%w(v1 v2 v3))
     end
 
   end

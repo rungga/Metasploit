@@ -28,9 +28,14 @@ class Payload < Msf::Module
   require 'msf/core/payload/windows'
   require 'msf/core/payload/netware'
   require 'msf/core/payload/java'
-  require 'msf/core/payload/dalvik'
+  require 'msf/core/payload/android'
   require 'msf/core/payload/firefox'
   require 'msf/core/payload/mainframe'
+  require 'msf/core/payload/hardware'
+  require 'metasploit/framework/compiler/mingw'
+
+  # Universal payload includes
+  require 'msf/core/payload/multi'
 
   ##
   #
@@ -64,6 +69,13 @@ class Payload < Msf::Module
   #
   def initialize(info = {})
     super
+    self.can_cleanup = true
+
+    #
+    # Gets the Dependencies if the payload requires external help
+    # to work
+    #
+    self.module_info['Dependencies'] = self.module_info['Dependencies'] || []
 
     # If this is a staged payload but there is no stage information,
     # then this is actually a stager + single combination.  Set up the
@@ -198,7 +210,9 @@ class Payload < Msf::Module
     pl = nil
     begin
       pl = generate()
+    rescue Metasploit::Framework::Compiler::Mingw::UncompilablePayloadError
     rescue NoCompatiblePayloadError
+    rescue PayloadItemSizeError
     end
     pl ||= ''
     pl.length
@@ -232,6 +246,13 @@ class Payload < Msf::Module
   #
   def offsets
     return module_info['Payload'] ? module_info['Payload']['Offsets'] : nil
+  end
+
+  #
+  # Returns the compiler dependencies if the payload has one
+  #
+  def dependencies
+    module_info['Dependencies']
   end
 
   #
@@ -534,6 +555,11 @@ class Payload < Msf::Module
   end
 
   #
+  # This attribute designates if the payload supports onsession()
+  # method calls (typically to clean up artifacts)
+  #
+  attr_accessor :can_cleanup
+  #
   # This attribute holds the string that should be prepended to the buffer
   # when it's generated.
   #
@@ -609,12 +635,11 @@ protected
     end
     cpu = case a
       when ARCH_X86    then Metasm::Ia32.new
-      when ARCH_X86_64 then Metasm::X86_64.new
       when ARCH_X64    then Metasm::X86_64.new
       when ARCH_PPC    then Metasm::PowerPC.new
       when ARCH_ARMLE  then Metasm::ARM.new
-      when ARCH_MIPSLE  then Metasm::MIPS.new(:little)
-      when ARCH_MIPSBE  then Metasm::MIPS.new(:big)
+      when ARCH_MIPSLE then Metasm::MIPS.new(:little)
+      when ARCH_MIPSBE then Metasm::MIPS.new(:big)
       else
         elog("Broken payload #{refname} has arch unsupported with assembly: #{module_info["Arch"].inspect}")
         elog("Call stack:\n#{caller.join("\n")}")

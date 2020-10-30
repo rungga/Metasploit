@@ -1,15 +1,23 @@
 # -*- coding: binary -*-
+require 'stringio'
+require 'factory_bot'
+
 ENV['RAILS_ENV'] = 'test'
 
-unless Bundler.settings.without.include?(:coverage)
-  require 'simplecov'
-end
+require File.expand_path('../../config/rails_bigdecimal_fix', __FILE__)
 
 # @note must be before loading config/environment because railtie needs to be loaded before
 #   `Metasploit::Framework::Application.initialize!` is called.
 #
 # Must be explicit as activerecord is optional dependency
 require 'active_record/railtie'
+require 'rubocop'
+require 'rubocop/rspec/support'
+require 'metasploit/framework/database'
+# check if database.yml is present
+unless Metasploit::Framework::Database.configurations_pathname.try(:to_path)
+  fail 'RSPEC currently needs a configured database'
+end
 
 require File.expand_path('../../config/environment', __FILE__)
 
@@ -37,15 +45,19 @@ end
 
 RSpec.configure do |config|
   config.raise_errors_for_deprecations!
-
+  config.include RuboCop::RSpec::ExpectOffense
   config.expose_dsl_globally = false
 
   # These two settings work together to allow you to limit a spec run
   # to individual examples or groups you care about by tagging them with
   # `:focus` metadata. When nothing is tagged with `:focus`, all examples
   # get run.
-  config.filter_run :focus
-  config.run_all_when_everything_filtered = true
+  if ENV['CI']
+    config.before(:example, :focus) { raise "Should not commit focused specs" }
+  else
+    config.filter_run focus: true
+    config.run_all_when_everything_filtered = true
+  end
 
   # allow more verbose output when running an individual spec file.
   if config.files_to_run.one?
@@ -93,7 +105,57 @@ RSpec.configure do |config|
     # a real object.
     mocks.verify_partial_doubles = true
   end
+
+  # rspec-rails 3 will no longer automatically infer an example group's spec type
+  # from the file location. You can explicitly opt-in to the feature using this
+  # config option.
+  # To explicitly tag specs without using automatic inference, set the `:type`
+  # metadata manually:
+  #
+  #     describe ThingsController, :type => :controller do
+  #       # Equivalent to being in spec/controllers
+  #     end
+  config.infer_spec_type_from_file_location!
+
+  if ENV['REMOTE_DB']
+    require 'metasploit/framework/data_service/remote/managed_remote_data_service'
+    opts = {}
+    opts[:process_name] = File.join('tools', 'dev', 'msfdb_ws')
+    opts[:host] = 'localhost'
+    opts[:port] = '8080'
+
+    config.before(:suite) do
+      Metasploit::Framework::DataService::ManagedRemoteDataService.instance.start(opts)
+    end
+
+    config.after(:suite) do
+      Metasploit::Framework::DataService::ManagedRemoteDataService.instance.stop
+    end
+  end
+
 end
 
 Metasploit::Framework::Spec::Constants::Suite.configure!
 Metasploit::Framework::Spec::Threads::Suite.configure!
+
+def get_stdout(&block)
+  out = $stdout
+  $stdout = tmp = StringIO.new
+  begin
+    yield
+  ensure
+    $stdout = out
+  end
+  tmp.string
+end
+
+def get_stderr(&block)
+  out = $stderr
+  $stderr = tmp = StringIO.new
+  begin
+    yield
+  ensure
+    $stderr = out
+  end
+  tmp.string
+end

@@ -66,7 +66,7 @@ class Webcam
 
     remote_browser_path = webrtc_browser_path
 
-    if remote_browser_path.blank?
+    if remote_browser_path.to_s.strip.empty?
       fail "Unable to find a suitable browser on the target machine"
     end
 
@@ -112,7 +112,7 @@ class Webcam
 
       paths.each do |browser_path|
         if file?(browser_path)
-          found_browser_path = client.fs.file.expand_path(browser_path)
+          found_browser_path = browser_path
           break
         end
       end
@@ -157,7 +157,7 @@ class Webcam
       write_file("#{tmp_dir}\\interface.html", interface)
       write_file("#{tmp_dir}\\api.js", api)
     rescue RuntimeError => e
-      elog("webcam_chat failed. #{e.class} #{e}")
+      elog('webcam_chat failed', error: e)
       raise "Unable to initialize the interface on the target machine"
     end
 
@@ -175,7 +175,7 @@ class Webcam
       begin
         write_file(profile_path, setting)
       rescue RuntimeError => e
-        elog("webcam_chat failed: #{e.class} #{e}")
+        elog('webcam_chat failed', error: e)
         raise "Unable to write the necessary setting for Firefox."
       end
       args = "-p #{profile_name}"
@@ -186,7 +186,7 @@ class Webcam
     begin
       session.sys.process.execute(remote_browser_path, "#{args} #{tmp_dir}\\interface.html", exec_opts)
     rescue RuntimeError => e
-      elog("webcam_chat failed. #{e.class} #{e}")
+      elog('webcam_chat failed', error: e)
       raise "Unable to start the remote browser: #{e.message}"
     end
   end

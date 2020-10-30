@@ -1,4 +1,5 @@
 # -*- coding: binary -*-
+require 'rex/ui/text/bidirectional_pipe'
 module Msf
 module Ui
 module Web
@@ -18,7 +19,7 @@ class WebConsole
   attr_accessor :thread
 
   # Wrapper class in case we need to extend the pipe
-  class WebConsolePipe < Rex::IO::BidirectionalPipe
+  class WebConsolePipe < Rex::Ui::Text::BidirectionalPipe
     def prompting?
       false
     end
@@ -48,8 +49,12 @@ class WebConsole
     self.pipe.create_subscriber('msfweb')
 
     # Skip database initialization if it is already configured
-    if framework.db and framework.db.usable and framework.db.migrated
+    if framework.db && framework.db.active
       opts['SkipDatabaseInit'] = true
+      if opts['workspace']
+        wspace = framework.db.find_workspace(opts['workspace'])
+        framework.db.workspace = wspace
+      end
     end
 
     # Initialize the console with our pipe

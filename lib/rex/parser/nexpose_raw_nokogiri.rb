@@ -86,7 +86,7 @@ module Rex
         report_fingerprint(host_object)
         # Reset the state once we close a host
         @state.delete_if {|k| k.to_s !~ /^(current_tag|in_nodes)$/}
-        @report_data = {:wspace => @args[:wspace]}
+        @report_data = {:workspace => @args[:workspace]}
       when "name"
         collect_hostname
         @state[:has_text] = false
@@ -192,6 +192,13 @@ module Rex
       refs << "NEXPOSE-#{report_data[:vuln]["id"]}"
       vuln_instances = @report_data[:vuln][:matches].size
       db.emit(:vuln, [refs.last,vuln_instances], &block) if block
+
+      # TODO: potential remove the size limit on this field, might require
+      # some additional UX
+      if @report_data[:vuln]['title'].length > 255
+        db.emit :warning, 'Vulnerability name longer than 255 characters, truncating.', &block if block
+        @report_data[:vuln]['title'] = @report_data[:vuln]['title'][0..254]
+      end
 
       vuln_ids = @report_data[:vuln][:matches].map{ |v| v[0] }
       vdet_ids = @report_data[:vuln][:matches].map{ |v| v[1] }
@@ -361,7 +368,7 @@ module Rex
       return unless @state[:test]
 
       vuln_info = {
-        :workspace => @args[:wspace],
+        :workspace => @args[:workspace],
         # This name will be overwritten during the vuln definition
         # parsing via mass-update.
         :name => "NEXPOSE-" + @state[:test][:id].downcase,
@@ -648,7 +655,7 @@ module Rex
         db.emit(:address,@report_data[:host],&block) if block
         device_id   = @report_data[:nx_device_id]
 
-        host_object = db_report(:host, @report_data.merge(:workspace => @args[:wspace] ) )
+        host_object = db_report(:host, @report_data.merge(:workspace => @args[:workspace] ) )
         if host_object
           db.report_import_note(host_object.workspace, host_object)
           if device_id

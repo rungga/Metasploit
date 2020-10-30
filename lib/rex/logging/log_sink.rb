@@ -1,5 +1,4 @@
 # -*- coding: binary -*-
-require 'rex/constants'
 
 module Rex
 module Logging
@@ -21,7 +20,7 @@ module LogSink
   # intended to take the supplied parameters and persist them to an arbitrary
   # medium.
   #
-  def log(sev, src, level, msg, from)
+  def log(sev, src, level, msg)
     raise NotImplementedError
   end
 

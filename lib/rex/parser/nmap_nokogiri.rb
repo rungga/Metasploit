@@ -80,14 +80,14 @@ module Rex
         collect_host_data
         host_object = report_host &block
         if host_object
-          db.report_import_note(@args[:wspace],host_object)
+          db.report_import_note(@args[:workspace],host_object)
           report_services(host_object,&block)
           report_fingerprint(host_object)
           report_uptime(host_object)
           report_traceroute(host_object)
         end
         @state.delete_if {|k| k != :current_tag}
-        @report_data = {:wspace => @args[:wspace]}
+        @report_data = {:workspace => @args[:workspace]}
       end
       @state[:current_tag].delete name
     end
@@ -190,7 +190,11 @@ module Rex
       return unless in_tag("host")
       attrs.each do |k,v|
         next unless k == "state"
-        @state[:host_alive] = (v == "up")
+        if v == 'up'
+          @state[:host_alive] = true
+        else
+          @state[:host_alive] = false
+        end
       end
     end
 
@@ -228,10 +232,13 @@ module Rex
     end
 
     def collect_host_data
-      if @state[:host_alive]
+      if @state[:host_alive] == true
         @report_data[:state] = Msf::HostState::Alive
-      else
+      elsif @state[:host_alive] == false
         @report_data[:state] = Msf::HostState::Dead
+      # Default to alive if no host state available (masscan)
+      else
+        @report_data[:state] = Msf::HostState::Alive
       end
       if @state[:addresses]
         if @state[:addresses].has_key? "ipv4"
@@ -341,7 +348,7 @@ module Rex
     def report_host(&block)
       if host_is_okay
         scripts = @report_data.delete(:scripts) || []
-        host_object = db_report(:host, @report_data.merge( :workspace => @args[:wspace] ) )
+        host_object = db_report(:host, @report_data.merge( :workspace => @args[:workspace] ) )
         db.emit(:address,@report_data[:host],&block) if block
 
         scripts.each do |script|
@@ -369,12 +376,13 @@ module Rex
       reported = []
       @report_data[:ports].each do |svc|
         scripts = svc.delete(:scripts) || []
-        svc_obj = db_report(:service, svc.merge(:host => host_object))
+        wspace = db.workspaces({:id => host_object.workspace.id}).first
+        svc_obj = db_report(:service, svc.merge(:host => host_object, :workspace => wspace.name))
         scripts.each do |script|
           script.each_pair do |k,v|
             ntype =
             nse_note = {
-              :workspace => host_object.workspace,
+              :workspace => wspace,
               :host => host_object,
               :service => svc_obj,
               :type => "nmap.nse.#{k}." + (svc[:proto] || "tcp") +".#{svc[:port]}",

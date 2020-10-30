@@ -8,7 +8,7 @@ require 'module_test'
 #load 'lib/rex/text.rb'
 #load 'lib/msf/core/post/file.rb'
 
-class Metasploit4 < Msf::Post
+class MetasploitModule < Msf::Post
 
   include Msf::ModuleTest::PostTest
   include Msf::Post::Common
@@ -51,7 +51,9 @@ class Metasploit4 < Msf::Post
         "c:\\boot.ini",
         "c:\\pagefile.sys",
         "/etc/passwd",
-        "/etc/master.passwd"
+        "/etc/master.passwd",
+        "%WINDIR%\\system32\\notepad.exe",
+        "%WINDIR%\\system32\\calc.exe"
       ].each { |path|
         ret = true if file?(path)
       }

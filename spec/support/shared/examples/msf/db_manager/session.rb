@@ -1,5 +1,9 @@
-shared_examples_for 'Msf::DBManager::Session' do
+RSpec.shared_examples_for 'Msf::DBManager::Session' do
   it { is_expected.to respond_to :get_session }
+
+  if ENV['REMOTE_DB']
+    before {skip("Awaiting sessions port")}
+  end
 
   context '#report_session' do
     let(:options) do
@@ -16,7 +20,7 @@ shared_examples_for 'Msf::DBManager::Session' do
       end
 
       context 'with :session' do
-        before(:each) do
+        before(:example) do
           options[:session] = session
         end
 
@@ -33,7 +37,7 @@ shared_examples_for 'Msf::DBManager::Session' do
           end
 
           let(:host) do
-            FactoryGirl.create(:mdm_host, :workspace => session_workspace)
+            FactoryBot.create(:mdm_host, :workspace => session_workspace)
           end
 
           let(:module_instance) do
@@ -50,7 +54,7 @@ shared_examples_for 'Msf::DBManager::Session' do
           end
 
           let(:options_workspace) do
-            FactoryGirl.create(:mdm_workspace)
+            FactoryBot.create(:mdm_workspace)
           end
 
           let(:parent_module_fullname) do
@@ -95,10 +99,10 @@ shared_examples_for 'Msf::DBManager::Session' do
           end
 
           let(:session_workspace) do
-            FactoryGirl.create(:mdm_workspace)
+            FactoryBot.create(:mdm_workspace)
           end
 
-          before(:each) do
+          before(:example) do
             reference_name = 'multi/handler'
             path = File.join(parent_path, 'exploits', reference_name)
 
@@ -115,7 +119,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                 }
             )
 
-            FactoryGirl.create(
+            FactoryBot.create(
                 :mdm_module_detail,
                 :fullname => parent_module_fullname,
                 :name => parent_module_name
@@ -123,16 +127,16 @@ shared_examples_for 'Msf::DBManager::Session' do
           end
 
           context 'with a run_id in user_data' do
-            before(:each) do
+            before(:example) do
               allow(db_manager).to receive(:create_match_for_vuln).and_return(nil)
             end
 
             let(:match_set) do
-              FactoryGirl.create(:automatic_exploitation_match_set, user: session_workspace.owner,workspace:session_workspace)
+              FactoryBot.create(:automatic_exploitation_match_set, user: session_workspace.owner,workspace:session_workspace)
             end
 
             let(:run) do
-              FactoryGirl.create(:automatic_exploitation_run, workspace: session_workspace, match_set_id: match_set.id)
+              FactoryBot.create(:automatic_exploitation_run, workspace: session_workspace, match_set_id: match_set.id)
             end
 
             let(:user_data) do
@@ -142,7 +146,7 @@ shared_examples_for 'Msf::DBManager::Session' do
             end
 
             context 'with :workspace' do
-              before(:each) do
+              before(:example) do
                 options[:workspace] = options_workspace
               end
 
@@ -172,27 +176,13 @@ shared_examples_for 'Msf::DBManager::Session' do
             end
 
             context 'with workspace from either :workspace or session' do
-              it 'should pass normalized host from session as :host to #find_or_create_host' do
-                normalized_host = double('Normalized Host')
-                expect(db_manager).to receive(:normalize_host).with(session).and_return(normalized_host)
-                # stub report_vuln so its use of find_or_create_host and normalize_host doesn't interfere.
-                expect(db_manager).to receive(:report_vuln)
-
-                expect(db_manager).to receive(:find_or_create_host).with(
-                  hash_including(
-                    :host => normalized_host
-                  )
-                ).and_return(host)
-
-                report_session
-              end
 
               context 'with session responds to arch' do
                 let(:arch) do
-                  FactoryGirl.generate :mdm_host_arch
+                  FactoryBot.generate :mdm_host_arch
                 end
 
-                before(:each) do
+                before(:example) do
                   allow(session).to receive(:arch).and_return(arch)
                 end
 
@@ -250,7 +240,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                     nil
                   end
 
-                  before(:each) do
+                  before(:example) do
                     Timecop.freeze
 
                     session.exploit_datastore['RPORT'] = rport
@@ -258,7 +248,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                     report_session
                   end
 
-                  after(:each) do
+                  after(:example) do
                     Timecop.return
                   end
 
@@ -282,7 +272,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                       'windows/smb/ms08_067_netapi'
                     end
 
-                    before(:each) do
+                    before(:example) do
                       path = File.join(
                         parent_path,
                         'exploits',
@@ -320,7 +310,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                     end
 
                     let(:service) do
-                      FactoryGirl.create(
+                      FactoryBot.create(
                         :mdm_service,
                         :host => host
                       )
@@ -339,7 +329,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                     nil
                   end
 
-                  before(:each) do
+                  before(:example) do
                     Timecop.freeze
 
                     session.exploit_datastore['RPORT'] = rport
@@ -347,7 +337,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                     report_session
                   end
 
-                  after(:each) do
+                  after(:example) do
                     Timecop.return
                   end
 
@@ -369,7 +359,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                   end
 
                   context "without session.via_exploit 'exploit/multi/handler'" do
-                    before(:each) do
+                    before(:example) do
                       session.via_exploit = parent_module_fullname
                     end
 
@@ -379,11 +369,11 @@ shared_examples_for 'Msf::DBManager::Session' do
               end
 
               context 'returned Mdm::Session' do
-                before(:each) do
+                before(:example) do
                   Timecop.freeze
                 end
 
-                after(:each) do
+                after(:example) do
                   Timecop.return
                 end
 
@@ -426,7 +416,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                 it { expect(subject.last_seen).to be_within(1.second).of(Time.now.utc) }
                 it { expect(subject.local_id).to eq(session.sid) }
                 it { expect(subject.opened_at).to be_within(1.second).of(Time.now.utc) }
-                it { expect(subject.platform).to eq(session.platform) }
+                it { expect(subject.platform).to eq(session.session_type) }
                 it { expect(subject.routes).to eq([]) }
                 it { expect(subject.stype).to eq(session.type) }
                 it { expect(subject.via_payload).to eq(session.via_payload) }
@@ -446,7 +436,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                 end
 
                 context "without session.via_exploit 'exploit/multi/handler'" do
-                  before(:each) do
+                  before(:example) do
                     reference_name = 'windows/smb/ms08_067_netapi'
                     path = File.join(
                       parent_path,
@@ -485,7 +475,7 @@ shared_examples_for 'Msf::DBManager::Session' do
             let(:user_data) { nil }
 
             context 'with :workspace' do
-              before(:each) do
+              before(:example) do
                 options[:workspace] = options_workspace
               end
 
@@ -515,27 +505,13 @@ shared_examples_for 'Msf::DBManager::Session' do
             end
 
             context 'with workspace from either :workspace or session' do
-              it 'should pass normalized host from session as :host to #find_or_create_host' do
-                normalized_host = double('Normalized Host')
-                allow(db_manager).to receive(:normalize_host).with(session).and_return(normalized_host)
-                # stub report_vuln so its use of find_or_create_host and normalize_host doesn't interfere.
-                allow(db_manager).to receive(:report_vuln)
-
-                expect(db_manager).to receive(:find_or_create_host).with(
-                    hash_including(
-                        :host => normalized_host
-                    )
-                ).and_return(host)
-
-                report_session
-              end
 
               context 'with session responds to arch' do
                 let(:arch) do
-                  FactoryGirl.generate :mdm_host_arch
+                  FactoryBot.generate :mdm_host_arch
                 end
 
-                before(:each) do
+                before(:example) do
                   allow(session).to receive(:arch).and_return(arch)
                 end
 
@@ -593,7 +569,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                     nil
                   end
 
-                  before(:each) do
+                  before(:example) do
                     Timecop.freeze
 
                     session.exploit_datastore['RPORT'] = rport
@@ -601,7 +577,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                     report_session
                   end
 
-                  after(:each) do
+                  after(:example) do
                     Timecop.return
                   end
 
@@ -625,7 +601,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                       'windows/smb/ms08_067_netapi'
                     end
 
-                    before(:each) do
+                    before(:example) do
                       path = File.join(
                           parent_path,
                           'exploits',
@@ -663,7 +639,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                     end
 
                     let(:service) do
-                      FactoryGirl.create(
+                      FactoryBot.create(
                           :mdm_service,
                           :host => host
                       )
@@ -682,7 +658,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                     nil
                   end
 
-                  before(:each) do
+                  before(:example) do
                     Timecop.freeze
 
                     session.exploit_datastore['RPORT'] = rport
@@ -690,7 +666,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                     report_session
                   end
 
-                  after(:each) do
+                  after(:example) do
                     Timecop.return
                   end
 
@@ -712,7 +688,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                   end
 
                   context "without session.via_exploit 'exploit/multi/handler'" do
-                    before(:each) do
+                    before(:example) do
                       session.via_exploit = parent_module_fullname
                     end
 
@@ -722,11 +698,11 @@ shared_examples_for 'Msf::DBManager::Session' do
               end
 
               context 'returned Mdm::Session' do
-                before(:each) do
+                before(:example) do
                   Timecop.freeze
                 end
 
-                after(:each) do
+                after(:example) do
                   Timecop.return
                 end
 
@@ -769,7 +745,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                 it { expect(subject.last_seen).to be_within(1.second).of(Time.now.utc) }
                 it { expect(subject.local_id).to eq(session.sid) }
                 it { expect(subject.opened_at).to be_within(1.second).of(Time.now.utc) }
-                it { expect(subject.platform).to eq(session.platform) }
+                it { expect(subject.platform).to eq(session.session_type) }
                 it { expect(subject.routes).to eq([]) }
                 it { expect(subject.stype).to eq(session.type) }
                 it { expect(subject.via_payload).to eq(session.via_payload) }
@@ -789,7 +765,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                 end
 
                 context "without session.via_exploit 'exploit/multi/handler'" do
-                  before(:each) do
+                  before(:example) do
                     reference_name = 'windows/smb/ms08_067_netapi'
                     path = File.join(
                         parent_path,
@@ -840,13 +816,13 @@ shared_examples_for 'Msf::DBManager::Session' do
 
       context 'without :session' do
         context 'with :host' do
-          before(:each) do
+          before(:example) do
             options[:host] = host
           end
 
           context 'with Mdm::Host' do
             let(:host) do
-              FactoryGirl.create(:mdm_host)
+              FactoryBot.create(:mdm_host)
             end
 
             context 'created Mdm::Session' do
@@ -890,7 +866,7 @@ shared_examples_for 'Msf::DBManager::Session' do
                 'Session Type'
               end
 
-              before(:each) do
+              before(:example) do
                 options[:closed_at] = closed_at
                 options[:close_reason] = close_reason
                 options[:desc] = description
@@ -951,7 +927,7 @@ shared_examples_for 'Msf::DBManager::Session' do
 
               context 'with :routes' do
                 let(:routes) do
-                  FactoryGirl.build_list(
+                  FactoryBot.build_list(
                       :mdm_route,
                       1,
                       :session => nil

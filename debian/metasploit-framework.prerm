@@ -2,7 +2,7 @@
 
 set -e
 
-BINS="msfbinscan msfconsole msfd msfdb msfelfscan msfmachscan msfpescan msfrop msfrpc msfrpcd msfupdate msfvenom"
+BINS="msfconsole msfd msfdb msfrpc msfrpcd msfupdate msfvenom"
 
 if [ "$1" = "remove" ]; then
     for BIN in $BINS; do
