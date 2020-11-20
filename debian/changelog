@@ -946,13 +946,13 @@ metasploit-framework (4.16.44-0kali3) kali-dev; urgency=medium
 
   * Made msfdb more verbose
 
- -- Ben Wilson <g0tmi1k@offensive-security.com>  Tue, 13 Mar 2018 14:32:42 +0000
+ -- Ben Wilson <g0tmi1k@kali.org>  Tue, 13 Mar 2018 14:32:42 +0000
 
 metasploit-framework (4.16.44-0kali2) kali-dev; urgency=medium
 
   * Add msfdb status/run
 
- -- Ben Wilson <g0tmi1k@offensive-security.com>  Tue, 13 Mar 2018 08:24:10 +0000
+ -- Ben Wilson <g0tmi1k@kali.org>  Tue, 13 Mar 2018 08:24:10 +0000
 
 metasploit-framework (4.16.44-0kali1) kali-dev; urgency=medium
 
@@ -965,7 +965,7 @@ metasploit-framework (4.16.43-0kali2) kali-dev; urgency=medium
 
   * Hide output of setting password for db user
 
- -- Ben Wilson <g0tmi1k@offensive-security.com>  Tue, 06 Mar 2018 14:17:11 +0000
+ -- Ben Wilson <g0tmi1k@kali.org>  Tue, 06 Mar 2018 14:17:11 +0000
 
 metasploit-framework (4.16.43-0kali1) kali-dev; urgency=medium
 
@@ -977,7 +977,7 @@ metasploit-framework (4.16.41-0kali2) kali-dev; urgency=medium
 
   * Switch to systemctl & more verbose output
 
- -- Ben Wilson <g0tmi1k@offensive-security.com>  Fri, 02 Mar 2018 20:19:37 +0000
+ -- Ben Wilson <g0tmi1k@kali.org>  Fri, 02 Mar 2018 20:19:37 +0000
 
 metasploit-framework (4.16.41-0kali1) kali-dev; urgency=medium
 
@@ -1030,7 +1030,7 @@ metasploit-framework (4.16.34-0kali2) kali-dev; urgency=medium
   * Add pattern_create, pattern_offset + Others to $PATH (Closes:
     0000175)
 
- -- Ben Wilson <g0tmi1k@offensive-security.com>  Tue, 30 Jan 2018 15:42:08 +0000
+ -- Ben Wilson <g0tmi1k@kali.org>  Tue, 30 Jan 2018 15:42:08 +0000
 
 metasploit-framework (4.16.34-0kali1) kali-dev; urgency=medium
 
