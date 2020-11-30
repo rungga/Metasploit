@@ -1,3 +1,13 @@
+metasploit-framework (6.0.18-0kali1) kali-dev; urgency=medium
+
+  [ Ben Wilson ]
+  * Fix email address
+
+  [ Sophie Brun ]
+  * New upstream version 6.0.18
+
+ -- Sophie Brun <sophie@offensive-security.com>  Mon, 30 Nov 2020 10:38:57 +0100
+
 metasploit-framework (6.0.17-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.0.17
