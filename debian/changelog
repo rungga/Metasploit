@@ -1,3 +1,10 @@
+metasploit-framework (6.0.21-0kali2) kali-dev; urgency=medium
+
+  [ Eduard Tolosa ]
+  * Let msfdb use a specific port for the postgresql connection
+
+ -- Sophie Brun <sophie@offensive-security.com>  Tue, 15 Dec 2020 11:30:25 +0100
+
 metasploit-framework (6.0.21-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.0.21
