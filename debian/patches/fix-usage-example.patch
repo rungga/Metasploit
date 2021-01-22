@@ -24,10 +24,10 @@ Last-Update: 2018-01-30
  15 files changed, 15 insertions(+), 15 deletions(-)
 
 diff --git a/tools/exploit/egghunter.rb b/tools/exploit/egghunter.rb
-index 6c626c2..4b528e4 100755
+index 778791d..292113a 100755
 --- a/tools/exploit/egghunter.rb
 +++ b/tools/exploit/egghunter.rb
-@@ -21,7 +21,7 @@ module Egghunter
+@@ -20,7 +20,7 @@ module Egghunter
      def self.parse(args)
        options = {}
        parser = OptionParser.new do |opt|
@@ -37,11 +37,11 @@ index 6c626c2..4b528e4 100755
          opt.separator 'Specific options:'
  
 diff --git a/tools/exploit/exe2vba.rb b/tools/exploit/exe2vba.rb
-index 61cfb96..bc07f14 100755
+index 61d3f3b..d8330e9 100755
 --- a/tools/exploit/exe2vba.rb
 +++ b/tools/exploit/exe2vba.rb
-@@ -24,7 +24,7 @@ require 'rex'
- require 'msf/base'
+@@ -23,7 +23,7 @@ $:.unshift(ENV['MSF_LOCAL_LIB']) if ENV['MSF_LOCAL_LIB']
+ require 'rex'
  
  def usage
 -  $stderr.puts("    Usage: #{$0} [exe] [vba]\n")
@@ -50,11 +50,11 @@ index 61cfb96..bc07f14 100755
  end
  
 diff --git a/tools/exploit/exe2vbs.rb b/tools/exploit/exe2vbs.rb
-index 3b0c360..6abd511 100755
+index 242e4cd..e4aaeb3 100755
 --- a/tools/exploit/exe2vbs.rb
 +++ b/tools/exploit/exe2vbs.rb
-@@ -23,7 +23,7 @@ require 'rex'
- require 'msf/base'
+@@ -22,7 +22,7 @@ $:.unshift(ENV['MSF_LOCAL_LIB']) if ENV['MSF_LOCAL_LIB']
+ require 'rex'
  
  def usage
 -  $stderr.puts("    Usage: #{$0} [exe] [vbs]\n")
@@ -89,10 +89,10 @@ index 2c62a02..1125a1f 100755
      opts.on("-aID", "--array=ID", "Print detailed information about content array") do |id|
        options[:array] = id
 diff --git a/tools/exploit/jsobfu.rb b/tools/exploit/jsobfu.rb
-index 3bdbf8a..276a547 100755
+index 293a807..8f91e27 100755
 --- a/tools/exploit/jsobfu.rb
 +++ b/tools/exploit/jsobfu.rb
-@@ -21,7 +21,7 @@ module Jsobfu
+@@ -20,7 +20,7 @@ module Jsobfu
      def self.parse(args)
        options = {}
        parser = OptionParser.new do |opt|

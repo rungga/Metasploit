@@ -13,7 +13,7 @@ latest available version of reline gem and it will breaks msfdb init
  1 file changed, 5 insertions(+)
 
 diff --git a/metasploit-framework.gemspec b/metasploit-framework.gemspec
-index 514b7c6..8583d01 100644
+index 3396fde..f200815 100644
 --- a/metasploit-framework.gemspec
 +++ b/metasploit-framework.gemspec
 @@ -212,6 +212,11 @@ Gem::Specification.new do |spec|
