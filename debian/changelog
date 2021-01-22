@@ -1,8 +1,11 @@
-metasploit-framework (6.0.27-0kali1) kali-dev; urgency=medium
+metasploit-framework (6.0.27+772f98a-0kali1) kali-dev; urgency=medium
 
-  * New upstream version 6.0.27
+  * New upstream version 6.0.27+772f98a (see
+    https://github.com/rapid7/metasploit-framework/issues/14646)
+  * Refresh patches
+  * Update packaging
 
- -- Sophie Brun <sophie@offensive-security.com>  Fri, 22 Jan 2021 08:54:03 +0100
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 22 Jan 2021 15:48:46 +0100
 
 metasploit-framework (6.0.26-0kali1) kali-dev; urgency=medium
 
