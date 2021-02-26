@@ -1,7 +1,5 @@
 # -*- coding: binary -*-
 
-require 'rex/ui/text/output/buffer/stdout'
-require 'rex/parser/arguments'
 
 module Msf
   module Ui
@@ -1303,6 +1301,9 @@ module Msf
                 'Prefix'     => "\n",
                 'Postfix'    => "\n",
                 'SearchTerm' => row_filter,
+                # For now, don't perform any word wrapping on the search table as it breaks the workflow of
+                # copying module names in conjunction with the `use <paste-buffer>` command
+                'WordWrap' => false,
                 'Columns' => [
                   '#',
                   'Name',
