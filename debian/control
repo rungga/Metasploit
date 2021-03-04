@@ -39,6 +39,8 @@ Depends:
   curl,
   git,
   wget,
+  python3,
+  rake,
 # For our own msfdb
   openssl,
 # Generic dependencies 
