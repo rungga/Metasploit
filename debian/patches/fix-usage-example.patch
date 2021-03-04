@@ -102,10 +102,10 @@ index 293a807..8f91e27 100755
          opt.separator 'Specific options:'
  
 diff --git a/tools/exploit/metasm_shell.rb b/tools/exploit/metasm_shell.rb
-index 784717c..8083091 100755
+index b4281b8..e50d5d4 100755
 --- a/tools/exploit/metasm_shell.rb
 +++ b/tools/exploit/metasm_shell.rb
-@@ -42,7 +42,7 @@ require 'metasm'
+@@ -41,7 +41,7 @@ require 'metasm'
  @endianess = ""
  
  def usage

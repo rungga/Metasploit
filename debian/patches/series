@@ -4,3 +4,4 @@ add-missing-dependencies.patch
 Update-shebang-to-use-python3.patch
 force-reline-version.patch
 restrict-maximal-version-thor.patch
+Remove-the-last-remaining-Python-2-script-killerbee_msfre.patch
