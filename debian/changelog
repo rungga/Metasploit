@@ -1,3 +1,15 @@
+metasploit-framework (6.0.33-0kali1) kali-dev; urgency=medium
+
+  [ Arnaud Rebillout ]
+  * Make the test windows_meterpreter skippable
+
+  [ Sophie Brun ]
+  * Fix or ignore various lintian errors
+  * Remove the last remaining Python 2 script
+  * New upstream version 6.0.33
+
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 05 Mar 2021 08:44:44 +0100
+
 metasploit-framework (6.0.32-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.0.32
