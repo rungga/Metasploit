@@ -1,3 +1,10 @@
+metasploit-framework (6.0.37-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 6.0.37
+  * Add missing build-dep shared-mime-info
+
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 26 Mar 2021 09:00:45 +0100
+
 metasploit-framework (6.0.36-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.0.36
