@@ -21,6 +21,7 @@ Build-Depends:
   oracle-instantclient-devel (>= 19.3.0.0.0-0kali2) [amd64 i386],
   oracle-instantclient-sqlplus [amd64 i386],
   ruby-json (>= 1.8.3),
+  shared-mime-info,
   zlib1g-dev,
 Standards-Version: 4.5.1
 Homepage: https://www.metasploit.com/
