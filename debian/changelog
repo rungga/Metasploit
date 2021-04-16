@@ -1,3 +1,9 @@
+metasploit-framework (6.0.40-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 6.0.40
+
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 16 Apr 2021 08:46:26 +0200
+
 metasploit-framework (6.0.39-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.0.39
