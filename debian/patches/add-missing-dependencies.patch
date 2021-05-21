@@ -11,10 +11,10 @@ Last-Update: 2021-05-07
  1 file changed, 5 insertions(+)
 
 diff --git a/metasploit-framework.gemspec b/metasploit-framework.gemspec
-index 38d7254..157ec0f 100644
+index 74610ba..b9dc1f6 100644
 --- a/metasploit-framework.gemspec
 +++ b/metasploit-framework.gemspec
-@@ -119,6 +119,11 @@ Gem::Specification.new do |spec|
+@@ -120,6 +120,11 @@ Gem::Specification.new do |spec|
    end
    # Gem for handling Cookies
    spec.add_runtime_dependency 'http-cookie'
