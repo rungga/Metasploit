@@ -1,3 +1,11 @@
+metasploit-framework (6.1.0-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 6.1.0
+  * Refresh patches
+  * Remove obsolete patch restrict-maximal-version-thor.patch
+
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 13 Aug 2021 14:28:22 +0200
+
 metasploit-framework (6.0.56-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.0.56
