@@ -19,7 +19,7 @@ be >= 1.0.0
  1 file changed, 2 insertions(+)
 
 diff --git a/metasploit-framework.gemspec b/metasploit-framework.gemspec
-index 2af8bcb..f497b5b 100644
+index 6b85d3b..65e16f8 100644
 --- a/metasploit-framework.gemspec
 +++ b/metasploit-framework.gemspec
 @@ -91,6 +91,8 @@ Gem::Specification.new do |spec|
