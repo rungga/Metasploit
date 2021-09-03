@@ -140,6 +140,8 @@ class DataStore < Hash
     }
   end
 
+  # TODO: Doesn't normalize data in the same vein as:
+  # https://github.com/rapid7/metasploit-framework/pull/6644
   def import_option(key, val, imported = true, imported_by = nil, option = nil)
     self.store(key, val)
 
@@ -169,29 +171,29 @@ class DataStore < Hash
   def to_h
     datastore_hash = {}
     self.keys.each do |k|
-      datastore_hash[k.to_s] = self[k].to_s
+      datastore_hash[k.to_s] = self[k]
     end
     datastore_hash
   end
 
   # Hack on a hack for the external modules
-  def to_nested_values
+  def to_external_message_h
     datastore_hash = {}
 
     array_nester = ->(arr) do
       if arr.first.is_a? Array
         arr.map &array_nester
       else
-        arr.map &:to_s
+        arr.map { |item| item.to_s.dup.force_encoding('UTF-8') }
       end
     end
 
     self.keys.each do |k|
       # TODO arbitrary depth
       if self[k].is_a? Array
-        datastore_hash[k.to_s] = array_nester.call(self[k])
+        datastore_hash[k.to_s.dup.force_encoding('UTF-8')] = array_nester.call(self[k])
       else
-        datastore_hash[k.to_s] = self[k].to_s
+        datastore_hash[k.to_s.dup.force_encoding('UTF-8')] = self[k].to_s.dup.force_encoding('UTF-8')
       end
     end
     datastore_hash
@@ -331,4 +333,3 @@ class DataStore < Hash
 end
 
 end
-
