@@ -13,10 +13,10 @@ latest available version of reline gem and it will breaks msfdb init
  1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/metasploit-framework.gemspec b/metasploit-framework.gemspec
-index b7d5780..6b85d3b 100644
+index 0c7244d..d846bcc 100644
 --- a/metasploit-framework.gemspec
 +++ b/metasploit-framework.gemspec
-@@ -214,8 +214,11 @@ Gem::Specification.new do |spec|
+@@ -215,8 +215,11 @@ Gem::Specification.new do |spec|
    spec.add_runtime_dependency 'hrr_rb_ssh-ed25519'
    # Needed for irb internal command
    spec.add_runtime_dependency 'irb'
