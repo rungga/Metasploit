@@ -1,3 +1,10 @@
+metasploit-framework (6.1.12-0kali1) kali-dev; urgency=medium
+
+  * Change debian/watch
+  * New upstream version 6.1.12
+
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 29 Oct 2021 10:00:24 +0200
+
 metasploit-framework (6.1.11-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.1.11
