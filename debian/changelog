@@ -1,6 +1,8 @@
 metasploit-framework (6.1.24-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.1.24
+  * Refresh patches
+  * Refresh specific patch for amd64 and i386
 
  -- Sophie Brun <sophie@offensive-security.com>  Tue, 11 Jan 2022 10:22:57 +0100
 
