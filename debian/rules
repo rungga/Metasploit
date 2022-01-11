@@ -21,7 +21,7 @@ override_dh_auto_configure:
 
 override_dh_auto_build:
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),amd64 i386))
-	patch -p0 <debian/oci8-gemspec.patch
+	patch -p1 <debian/oci8-gemspec.patch
 endif
 
 	# Build binary gems
