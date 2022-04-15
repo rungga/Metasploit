@@ -1,3 +1,9 @@
+metasploit-framework (6.1.38-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 6.1.38
+
+ -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Fri, 15 Apr 2022 11:02:35 +0200
+
 metasploit-framework (6.1.37-0kali2) kali-dev; urgency=medium
 
   * Improve msfdb Kali script to fix ctrl+z (see 7646)
