@@ -1,3 +1,10 @@
+metasploit-framework (6.1.39-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 6.1.39
+  * Remove patch fixed in upstream
+
+ -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Fri, 22 Apr 2022 09:43:15 +0200
+
 metasploit-framework (6.1.38-0kali2) kali-dev; urgency=medium
 
   * Fix update for ruby-smb 3.1.0
