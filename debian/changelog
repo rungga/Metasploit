@@ -1,3 +1,10 @@
+metasploit-framework (6.1.42-0kali1) kali-dev; urgency=medium
+
+  * Add zsh and bash autocompletion
+  * New upstream version 6.1.42
+
+ -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Fri, 13 May 2022 07:41:24 +0200
+
 metasploit-framework (6.1.41-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.1.41
