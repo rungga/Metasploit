@@ -42,6 +42,7 @@ Depends:
   wget,
   python3,
   rake,
+  gcc-mingw-w64,
 # For our own msfdb
   openssl,
 # Generic dependencies 
