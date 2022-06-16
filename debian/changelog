@@ -1,8 +1,9 @@
 metasploit-framework (6.2.3-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.2.3
+  * Add gcc-mingw-w64 dependency
 
- -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Thu, 16 Jun 2022 20:22:40 +0200
+ -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Thu, 16 Jun 2022 21:15:44 +0200
 
 metasploit-framework (6.2.2-0kali1) kali-dev; urgency=medium
 
