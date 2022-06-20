@@ -42,13 +42,15 @@ Depends:
   wget,
   python3,
   rake,
-  gcc-mingw-w64,
 # For our own msfdb
   openssl,
 # Generic dependencies 
   ${misc:Depends},
   ${shlibs:Depends},
   ruby-json (>= 1.8.3),
+Suggests:
+  gcc-mingw-w64-i686-win32,
+  gcc-mingw-w64-x86-64-win32,
 # Conflict and break old packaging in moto...
 Conflicts: metasploit-common
 Breaks: metasploit (<= 4.11.4-2015071402-1kali0)
