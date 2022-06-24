@@ -42,6 +42,8 @@ Depends:
   wget,
   python3,
   rake,
+  gcc-mingw-w64-i686-win32,
+  gcc-mingw-w64-x86-64-win32,
 # For our own msfdb
   openssl,
 # Generic dependencies 
@@ -55,8 +57,6 @@ Suggests:
  java7-runtime-headless,
  clamav,
  clamav-daemon,
- gcc-mingw-w64-i686-win32,
- gcc-mingw-w64-x86-64-win32,
 Description: Framework for exploit development and vulnerability research
  The Metasploit Framework is an open source platform that supports
  vulnerability research, exploit development, and the creation of custom
