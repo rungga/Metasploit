@@ -2,27 +2,27 @@ Source: metasploit-framework
 Section: net
 Priority: optional
 Maintainer: Kali Developers <devel@kali.org>
-Uploaders: Raphaël Hertzog <buxy@kali.org>
+Uploaders:
+ Raphaël Hertzog <buxy@kali.org>,
 Build-Depends:
-  debhelper-compat (= 13),
-# Dependencies needed to fetch and build the gems in a bundle
-  ruby-dev,
-  bundler,
-  ca-certificates,
-  git,
-  libgmp-dev,
-  libpcap-dev,
-  libpq-dev,
-  libsqlite3-dev,
-  libxml2-dev,
-  libxslt-dev,
-  libffi-dev,
-  oracle-instantclient-basic [amd64 i386],
-  oracle-instantclient-devel (>= 19.3.0.0.0-0kali2) [amd64 i386],
-  oracle-instantclient-sqlplus [amd64 i386],
-  ruby-json (>= 1.8.3),
-  shared-mime-info,
-  zlib1g-dev,
+ bundler,
+ ca-certificates,
+ debhelper-compat (= 13),
+ git,
+ libffi-dev,
+ libgmp-dev,
+ libpcap-dev,
+ libpq-dev,
+ libsqlite3-dev,
+ libxml2-dev,
+ libxslt-dev,
+ oracle-instantclient-basic [amd64 i386],
+ oracle-instantclient-devel (>= 19.3.0.0.0-0kali2) [amd64 i386],
+ oracle-instantclient-sqlplus [amd64 i386],
+ ruby-dev,
+ ruby-json (>= 1.8.3),
+ shared-mime-info,
+ zlib1g-dev,
 Standards-Version: 4.6.0
 Homepage: https://www.metasploit.com/
 Vcs-Git: https://gitlab.com/kalilinux/packages/metasploit-framework.git
@@ -31,32 +31,32 @@ Vcs-Browser: https://gitlab.com/kalilinux/packages/metasploit-framework
 Package: metasploit-framework
 Architecture: any
 Depends:
-  ${ruby:Depends},
-  postgresql,
-  bundler,
-  john,
-  nasm,
-  nmap,
-  curl,
-  git,
-  wget,
-  python3,
-  rake,
-  gcc-mingw-w64-i686-win32,
-  gcc-mingw-w64-x86-64-win32,
+ bundler,
+ curl,
+ gcc-mingw-w64-i686-win32,
+ gcc-mingw-w64-x86-64-win32,
+ git,
+ john,
+ nasm,
+ nmap,
 # For our own msfdb
-  openssl,
-# Generic dependencies 
-  ${misc:Depends},
-  ${shlibs:Depends},
-  ruby-json (>= 1.8.3),
-# Conflict and break old packaging in moto...
-Conflicts: metasploit-common
-Breaks: metasploit (<= 4.11.4-2015071402-1kali0)
+ openssl,
+ postgresql,
+ python3,
+ rake,
+ ruby-json (>= 1.8.3),
+ wget,
+ ${misc:Depends},
+ ${ruby:Depends},
+ ${shlibs:Depends},
+Conflicts:
+ metasploit-common,
+Breaks:
+ metasploit (<= 4.11.4-2015071402-1kali0),
 Suggests:
- java7-runtime-headless,
  clamav,
  clamav-daemon,
+ java7-runtime-headless,
 Description: Framework for exploit development and vulnerability research
  The Metasploit Framework is an open source platform that supports
  vulnerability research, exploit development, and the creation of custom
