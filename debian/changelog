@@ -1,8 +1,9 @@
 metasploit-framework (6.2.6-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.2.6
+  * Temporary fix for msfvenom bash autocompletion
 
- -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Fri, 08 Jul 2022 09:58:45 +0200
+ -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Sat, 09 Jul 2022 10:04:53 +0200
 
 metasploit-framework (6.2.4-0kali2) kali-dev; urgency=medium
 

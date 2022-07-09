@@ -39,8 +39,8 @@ override_dh_install:
 	done
 	chmod -x debian/metasploit-framework/usr/share/metasploit-framework/data/wordlists/*
 	# install bash completion for msfvenom
-	mkdir -p debian/metasploit-framework/usr/share/bash-completion/completions
-	HOME=/tmp RUBYLIB=debian/metasploit-framework/usr/share/metasploit-framework/lib debian/generate-msfvenom-bash-completion.rb > debian/metasploit-framework/usr/share/bash-completion/completions/msfvenom
+	#mkdir -p debian/metasploit-framework/usr/share/bash-completion/completions
+	#HOME=/tmp RUBYLIB=debian/metasploit-framework/usr/share/metasploit-framework/lib debian/generate-msfvenom-bash-completion.rb > debian/metasploit-framework/usr/share/bash-completion/completions/msfvenom
 
 override_dh_shlibdeps:
 	dh_shlibdeps --exclude=/data/ --exclude=/modules/
