@@ -38,6 +38,11 @@ override_dh_install:
 	  sed -i $${binfile} -e '1,1s|#!.*ruby|#!/usr/share/metasploit-framework/ruby|' ; \
 	done
 	chmod -x debian/metasploit-framework/usr/share/metasploit-framework/data/wordlists/*
+
+	# temporarily rename the ssh module to fix issue with openssl 3
+	# https://github.com/rapid7/metasploit-framework/issues/16767
+	mv debian/metasploit-framework/usr/share/metasploit-framework/modules/payloads/singles/cmd/unix/reverse_ssh.rb debian/metasploit-framework/usr/share/metasploit-framework/modules/payloads/singles/cmd/unix/reverse_ssh_soft_deletion
+
 	# install bash completion for msfvenom
 	#mkdir -p debian/metasploit-framework/usr/share/bash-completion/completions
 	#HOME=/tmp RUBYLIB=debian/metasploit-framework/usr/share/metasploit-framework/lib debian/generate-msfvenom-bash-completion.rb > debian/metasploit-framework/usr/share/bash-completion/completions/msfvenom
