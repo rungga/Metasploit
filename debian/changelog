@@ -1,3 +1,10 @@
+metasploit-framework (6.2.7-0kali2) kali-dev; urgency=medium
+
+  * Revert "Add a temporary fix for openssl 3"
+  * Fix gem hrr_rb_ssh for openssl 3
+
+ -- Sophie Brun <sophie@offensive-security.com>  Wed, 20 Jul 2022 11:30:19 +0200
+
 metasploit-framework (6.2.7-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.2.7
