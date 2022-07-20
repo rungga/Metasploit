@@ -1,3 +1,9 @@
+metasploit-framework (6.2.7-0kali3) kali-dev; urgency=medium
+
+  * Readd script to generate bash autocompletion
+
+ -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Wed, 20 Jul 2022 21:08:07 +0200
+
 metasploit-framework (6.2.7-0kali2) kali-dev; urgency=medium
 
   * Revert "Add a temporary fix for openssl 3"
