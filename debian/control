@@ -56,7 +56,7 @@ Breaks:
 Suggests:
  clamav,
  clamav-daemon,
- java7-runtime-headless,
+ default-jre-headless,
 Description: Framework for exploit development and vulnerability research
  The Metasploit Framework is an open source platform that supports
  vulnerability research, exploit development, and the creation of custom
