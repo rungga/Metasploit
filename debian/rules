@@ -39,12 +39,6 @@ override_dh_install:
 	done
 	chmod -x debian/metasploit-framework/usr/share/metasploit-framework/data/wordlists/*
 
-	# Temporary fix for hrr_rb_ssh ruby gem
-	# https://github.com/rapid7/metasploit-framework/issues/16782
-	sed -i "s|SECRET_KEY = OpenSSL::PKey::EC.new('prime256v1').generate_key.to_pem|SECRET_KEY = OpenSSL::PKey::EC.generate('prime256v1').to_pem|" debian/metasploit-framework/usr/share/metasploit-framework/vendor/bundle/ruby/3.0.0/gems/hrr_rb_ssh-0.4.2/lib/hrr_rb_ssh/transport/server_host_key_algorithm/ecdsa_sha2_nistp256.rb
-	sed -i "s|SECRET_KEY = OpenSSL::PKey::EC.new('secp384r1').generate_key.to_pem|SECRET_KEY = OpenSSL::PKey::EC.generate('secp384r1').to_pem|" debian/metasploit-framework/usr/share/metasploit-framework/vendor/bundle/ruby/3.0.0/gems/hrr_rb_ssh-0.4.2/lib/hrr_rb_ssh/transport/server_host_key_algorithm/ecdsa_sha2_nistp384.rb
-	sed -i "s|SECRET_KEY = OpenSSL::PKey::EC.new('secp521r1').generate_key.to_pem|SECRET_KEY = OpenSSL::PKey::EC.generate('secp521r1').to_pem|" debian/metasploit-framework/usr/share/metasploit-framework/vendor/bundle/ruby/3.0.0/gems/hrr_rb_ssh-0.4.2/lib/hrr_rb_ssh/transport/server_host_key_algorithm/ecdsa_sha2_nistp521.rb
-
 	# install bash completion for msfvenom
 	mkdir -p debian/metasploit-framework/usr/share/bash-completion/completions
 	HOME=/tmp RUBYLIB=debian/metasploit-framework/usr/share/metasploit-framework/lib debian/generate-msfvenom-bash-completion.rb > debian/metasploit-framework/usr/share/bash-completion/completions/msfvenom
