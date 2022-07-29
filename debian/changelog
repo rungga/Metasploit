@@ -1,3 +1,11 @@
+metasploit-framework (6.2.9-0kali1) kali-dev; urgency=medium
+
+  * Remove temporary fix for hrr_rb_ssh ruby gem openssl3 issue
+  * Replace old java suggested dependency
+  * New upstream version 6.2.9
+
+ -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Fri, 29 Jul 2022 17:40:53 +0200
+
 metasploit-framework (6.2.8-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.2.8
