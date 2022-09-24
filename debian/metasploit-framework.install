@@ -5,4 +5,4 @@ debian/extra/ruby usr/share/metasploit-framework/
 debian/msfupdate usr/share/metasploit-framework
 debian/script-* usr/share/metasploit-framework/
 external/zsh/_* usr/share/zsh/vendor-completions/
-msfconsole msfd msf-json-rpc.ru msfrpc msfrpcd msfvenom msf-ws.ru usr/share/metasploit-framework
+msfconsole msfd msf-json-rpc.ru msfrpc msfrpcd msfvenom msf-ws.ru docs usr/share/metasploit-framework
