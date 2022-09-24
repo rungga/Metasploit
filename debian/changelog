@@ -1,3 +1,10 @@
+metasploit-framework (6.2.19-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 6.2.19
+  * Add docs to package
+
+ -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Sat, 24 Sep 2022 12:12:09 +0200
+
 metasploit-framework (6.2.18-0kali2) kali-dev; urgency=medium
 
   * Fix build armel: force sqlite3 to version 1.4.4
