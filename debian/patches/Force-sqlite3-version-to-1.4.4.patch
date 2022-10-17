@@ -99,11 +99,9 @@ make: *** [debian/rules:8: binary-arch] Error 2
  metasploit-framework.gemspec | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/metasploit-framework.gemspec b/metasploit-framework.gemspec
-index 5501874..b4bb2e5 100644
 --- a/metasploit-framework.gemspec
 +++ b/metasploit-framework.gemspec
-@@ -195,7 +195,7 @@ Gem::Specification.new do |spec|
+@@ -195,7 +195,7 @@
    # Needed by some modules
    spec.add_runtime_dependency 'rubyzip'
    # Needed for some post modules
