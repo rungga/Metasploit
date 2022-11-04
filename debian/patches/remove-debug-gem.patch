@@ -27,11 +27,9 @@ gem as it's in "development" group.
  Gemfile | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Gemfile b/Gemfile
-index 1127789..fb1697f 100644
 --- a/Gemfile
 +++ b/Gemfile
-@@ -19,7 +19,7 @@ group :development do
+@@ -19,7 +19,7 @@
    gem 'pry-byebug', '~> 3.9.0'
    # Ruby Debugging Library - rebuilt and included by default from Ruby 3.1 onwards.
    # Replaces the old lib/debug.rb and provides more features.
