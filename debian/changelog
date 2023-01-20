@@ -1,3 +1,9 @@
+metasploit-framework (6.2.36-0kali2) kali-dev; urgency=medium
+
+  * Fix nokogiri version to try to fix build on armel
+
+ -- Sophie Brun <sophie@offensive-security.com>  Fri, 20 Jan 2023 14:47:19 +0100
+
 metasploit-framework (6.2.36-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.2.36

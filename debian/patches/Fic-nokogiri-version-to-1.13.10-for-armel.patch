@@ -1,0 +1,21 @@
+From: Sophie Brun <sophie@offensive-security.com>
+Date: Fri, 20 Jan 2023 14:34:31 +0100
+Subject: Fic nokogiri version to 1.13.10 for armel
+
+---
+ metasploit-framework.gemspec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/metasploit-framework.gemspec b/metasploit-framework.gemspec
+index c1dc3e9..80aed8a 100644
+--- a/metasploit-framework.gemspec
++++ b/metasploit-framework.gemspec
+@@ -80,7 +80,7 @@ Gem::Specification.new do |spec|
+   # NTLM authentication
+   spec.add_runtime_dependency 'rubyntlm'
+   # Needed by anemone crawler
+-  spec.add_runtime_dependency 'nokogiri'
++  spec.add_runtime_dependency 'nokogiri', '1.13.10'
+   # Needed by db.rb and Msf::Exploit::Capture
+   spec.add_runtime_dependency 'packetfu'
+   # For sniffer and raw socket modules
