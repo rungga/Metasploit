@@ -2,7 +2,6 @@ From: Sophie Brun <sophie@offensive-security.com>
 Date: Thu, 20 Oct 2022 10:54:05 +0200
 Subject: Comment 'gem: debug' in Gemfile
 
-
 The DB init fails with:
 "
 [+] Creating initial database schema
@@ -27,10 +26,12 @@ gem as it's in "development" group.
  Gemfile | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/Gemfile b/Gemfile
+index 3195454..d224c38 100644
 --- a/Gemfile
 +++ b/Gemfile
-@@ -19,7 +19,7 @@
-   gem 'pry-byebug', '~> 3.9.0'
+@@ -18,7 +18,7 @@ group :development do
+   gem 'pry-byebug'
    # Ruby Debugging Library - rebuilt and included by default from Ruby 3.1 onwards.
    # Replaces the old lib/debug.rb and provides more features.
 -  gem 'debug', '>= 1.0.0'
