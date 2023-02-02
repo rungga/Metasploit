@@ -7,7 +7,7 @@ Subject: Fic nokogiri version to 1.13.10 for armel
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/metasploit-framework.gemspec b/metasploit-framework.gemspec
-index c1dc3e9..80aed8a 100644
+index f941778..0767a2d 100644
 --- a/metasploit-framework.gemspec
 +++ b/metasploit-framework.gemspec
 @@ -80,7 +80,7 @@ Gem::Specification.new do |spec|
