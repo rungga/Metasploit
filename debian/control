@@ -23,7 +23,7 @@ Build-Depends:
  ruby-json (>= 1.8.3),
  shared-mime-info,
  zlib1g-dev,
-Standards-Version: 4.6.1
+Standards-Version: 4.6.2
 Homepage: https://www.metasploit.com/
 Vcs-Git: https://gitlab.com/kalilinux/packages/metasploit-framework.git
 Vcs-Browser: https://gitlab.com/kalilinux/packages/metasploit-framework
