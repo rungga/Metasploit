@@ -100,7 +100,7 @@ make: *** [debian/rules:8: binary-arch] Error 2
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/metasploit-framework.gemspec b/metasploit-framework.gemspec
-index 1cf123a..f941778 100644
+index 23992de..e732fac 100644
 --- a/metasploit-framework.gemspec
 +++ b/metasploit-framework.gemspec
 @@ -197,7 +197,7 @@ Gem::Specification.new do |spec|

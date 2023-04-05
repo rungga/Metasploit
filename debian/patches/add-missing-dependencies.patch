@@ -11,7 +11,7 @@ Last-Update: 2023-02-02
  1 file changed, 5 insertions(+)
 
 diff --git a/metasploit-framework.gemspec b/metasploit-framework.gemspec
-index feba1aa..1cf123a 100644
+index 3bf12c3..23992de 100644
 --- a/metasploit-framework.gemspec
 +++ b/metasploit-framework.gemspec
 @@ -124,6 +124,11 @@ Gem::Specification.new do |spec|
