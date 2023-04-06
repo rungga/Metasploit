@@ -1,3 +1,11 @@
+metasploit-framework (6.3.10-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 6.3.10
+  * Refresh patches
+  * Update debian/oci8-gemspec.patch
+
+ -- Sophie Brun <sophie@offensive-security.com>  Thu, 06 Apr 2023 14:22:21 +0200
+
 metasploit-framework (6.3.4-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.3.4
