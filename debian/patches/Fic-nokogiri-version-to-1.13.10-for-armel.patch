@@ -8,7 +8,7 @@ Subject: Fic nokogiri version to 1.13.10 for armel
 
 --- a/metasploit-framework.gemspec
 +++ b/metasploit-framework.gemspec
-@@ -82,7 +82,7 @@
+@@ -83,7 +83,7 @@
    # NTLM authentication
    spec.add_runtime_dependency 'rubyntlm'
    # Needed by anemone crawler
