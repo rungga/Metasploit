@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   # only do a git ls-files if the .git folder exists and we have a git binary in PATH
   if File.directory?(File.join(File.dirname(__FILE__), ".git")) && Msf::Util::Helper.which("git")
     spec.files         = `git ls-files`.split($/).reject { |file|
-      file =~ /^external|^docs/
+      file =~ /^external|^docs|^\.solargraph\.yml/
     }
   end
   spec.bindir = '.'
@@ -219,6 +219,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'aws-sdk-s3'
   spec.add_runtime_dependency 'aws-sdk-ec2'
   spec.add_runtime_dependency 'aws-sdk-iam'
+  spec.add_runtime_dependency 'aws-sdk-ssm'
 
   # Needed for WebSocket Support
   spec.add_runtime_dependency 'faye-websocket'
