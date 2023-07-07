@@ -1,3 +1,9 @@
+metasploit-framework (6.3.24-0kali1) kali-dev; urgency=medium
+
+  * New upstream version 6.3.24
+
+ -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Fri, 07 Jul 2023 17:11:16 +0200
+
 metasploit-framework (6.3.23-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.3.23
