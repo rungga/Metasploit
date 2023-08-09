@@ -7,7 +7,7 @@ Subject: Add missing requirement Readline
  1 file changed, 2 insertions(+)
 
 diff --git a/lib/rex/ui/text/shell/history_manager.rb b/lib/rex/ui/text/shell/history_manager.rb
-index 9722ec1..185d7ae 100644
+index 9722ec1c9..185d7ae32 100644
 --- a/lib/rex/ui/text/shell/history_manager.rb
 +++ b/lib/rex/ui/text/shell/history_manager.rb
 @@ -1,5 +1,7 @@
