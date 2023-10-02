@@ -25,7 +25,9 @@ ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),amd64 i386))
 endif
 
 	# Build binary gems
-	bundle install --without development test --path vendor/bundle
+	bundle config set --local path vendor/bundle
+	bundle config set --local without 'development test'
+	bundle install
 	bundle config --local frozen true
 
 override_dh_gencontrol:

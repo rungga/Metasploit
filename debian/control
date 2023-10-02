@@ -16,6 +16,7 @@ Build-Depends:
  libsqlite3-dev,
  libxml2-dev,
  libxslt-dev,
+ libyaml-dev,
  oracle-instantclient-basic [amd64 i386],
  oracle-instantclient-devel (>= 19.3.0.0.0-0kali2) [amd64 i386],
  oracle-instantclient-sqlplus [amd64 i386],
