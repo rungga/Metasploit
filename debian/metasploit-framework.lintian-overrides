@@ -34,7 +34,6 @@ binary-from-other-architecture [usr/share/metasploit-framework/vendor/bundle/*]
 binary-has-unneeded-section * [usr/share/metasploit-framework/vendor/bundle/*]
 custom-library-search-path * [usr/share/metasploit-framework/vendor/bundle/*]
 elf-error * [usr/share/metasploit-framework/vendor/bundle/*]
-embedded-javascript-library * [usr/share/metasploit-framework/vendor/bundle/*]
 extra-license-file [usr/share/metasploit-framework/vendor/bundle/*]
 file-references-package-build-path [usr/share/metasploit-framework/vendor/bundle/*]
 hardening-no-bindnow [usr/share/metasploit-framework/vendor/bundle/*]
@@ -50,6 +49,9 @@ unstripped-binary-or-object [usr/share/metasploit-framework/vendor/bundle/*]
 unusual-interpreter * [usr/share/metasploit-framework/vendor/bundle/*]
 windows-devel-file-in-package [usr/share/metasploit-framework/vendor/bundle/*]
 metasploit-framework: embedded-library * [usr/share/metasploit-framework/vendor/bundle/*]
+font-in-non-font-package [usr/share/metasploit-framework/vendor/bundle/*]
+duplicate-font-file * [usr/share/metasploit-framework/vendor/bundle/*]
+font-outside-font-dir [usr/share/metasploit-framework/vendor/bundle/*]
 
 # The executable jars are a mistake
 missing-dep-on-jarwrapper

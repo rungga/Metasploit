@@ -26,7 +26,7 @@ endif
 
 	# Build binary gems
 	bundle config set --local path vendor/bundle
-	bundle config set --local without 'development test'
+	bundle config set --local without 'development test coverage'
 	bundle install
 	bundle config --local frozen true
 
