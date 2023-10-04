@@ -2,8 +2,10 @@ metasploit-framework (6.3.36-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.3.36
   * Update packaging
+  * Update lintian-overrides and debian/rules
+  * Fix metasm_shell
 
- -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Mon, 02 Oct 2023 15:52:24 +0200
+ -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Wed, 04 Oct 2023 14:58:37 +0200
 
 metasploit-framework (6.3.31-0kali1) kali-dev; urgency=medium
 
