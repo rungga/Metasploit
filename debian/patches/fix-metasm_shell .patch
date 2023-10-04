@@ -1,0 +1,282 @@
+From: Daniel Ruiz de Alegría <daniruiz@kali.org>
+Date: Wed, 04 Oct 2023 14:23:23 +0200
+Subject: Revert commit https://github.com/rapid7/metasploit-framework/commit/a60e048e789f874c9a5c6c83db768fef475010a5
+
+---
+ lib/metasploit/framework/spec/threads/suite.rb                 |  5 ++---
+ lib/msf/base/sessions/command_shell.rb                         |  6 +++---
+ lib/msf/core/framework.rb                                      | 11 ++---------
+ lib/msf/ui/console/command_dispatcher/developer.rb             |  8 ++++----
+ lib/rex/post/meterpreter/ui/console/command_dispatcher/core.rb |  4 ++--
+ lib/rex/ui/text/shell.rb                                       |  4 ++--
+ lib/rex/ui/text/shell/history_manager.rb                       | 63 +++++++++++++++++++++++++++++++++++++--------------------------
+ 7 files changed, 52 insertions(+), 49 deletions(-)
+
+--- a/lib/metasploit/framework/spec/threads/suite.rb
++++ b/lib/metasploit/framework/spec/threads/suite.rb
+@@ -96,7 +96,6 @@
+ 
+                       thread_list.each do |thread|
+                         thread_uuid = thread[Metasploit::Framework::Spec::Threads::Suite::UUID_THREAD_LOCAL_VARIABLE]
+-                        thread_name = thread[:tm_name]
+ 
+                         # unmanaged thread, such as the main VM thread
+                         unless thread_uuid
+@@ -105,10 +104,10 @@
+ 
+                         caller = caller_by_thread_uuid[thread_uuid]
+ 
+-                        error_lines << "Thread #{thread_uuid}'s (name=#{thread_name} status is #{thread.status.inspect} " \
++                        error_lines << "Thread #{thread_uuid}'s status is #{thread.status.inspect} " \
+                                        "and was started here:\n"
++
+                         error_lines.concat(caller)
+-                        error_lines << "The thread backtrace was:\n#{thread.backtrace ? thread.backtrace.join("\n") : 'nil (no backtrace)'}\n"
+                       end
+                     else
+                       error_lines << "Run `rake spec` to log where Thread.new is called."
+--- a/lib/msf/base/sessions/command_shell.rb
++++ b/lib/msf/base/sessions/command_shell.rb
+@@ -546,7 +546,7 @@
+     if expressions.empty?
+       print_status('Starting IRB shell...')
+       print_status("You are in the \"self\" (session) object\n")
+-      framework.history_manager.with_context(name: :irb) do
++      Rex::Ui::Text::Shell::HistoryManager.instance.with_context(name: :irb) do
+         Rex::Ui::Text::IrbShell.new(self).run
+       end
+     else
+@@ -585,7 +585,7 @@
+     print_status('Starting Pry shell...')
+     print_status("You are in the \"self\" (session) object\n")
+     Pry.config.history_load = false
+-    framework.history_manager.with_context(history_file: Msf::Config.pry_history, name: :pry) do
++    Rex::Ui::Text::Shell::HistoryManager.instance.with_context(history_file: Msf::Config.pry_history, name: :pry) do
+       self.pry
+     end
+   end
+@@ -746,7 +746,7 @@
+   # shell_write instead of operating on rstream directly.
+   def _interact
+     framework.events.on_session_interact(self)
+-    framework.history_manager.with_context(name: self.type.to_sym) {
++    Rex::Ui::Text::Shell::HistoryManager.instance.with_context(name: self.type.to_sym) {
+       _interact_stream
+     }
+   end
+--- a/lib/msf/core/framework.rb
++++ b/lib/msf/core/framework.rb
+@@ -62,8 +62,6 @@
+     # Allow specific module types to be loaded
+     types = options[:module_types] || Msf::MODULE_TYPES
+ 
+-    self.history_manager = Rex::Ui::Text::Shell::HistoryManager.new
+-
+     self.features = FeatureManager.instance
+     self.features.load_config
+ 
+@@ -192,13 +190,9 @@
+   #
+   # The framework instance's feature manager. The feature manager is responsible
+   # for configuring feature flags that can change characteristics of framework.
+-  # @return [Msf::FeatureManager]
++  #
+   attr_reader   :features
+ 
+-  # The framework instance's history manager, responsible for managing command history
+-  # in different contexts
+-  # @return [Rex::Ui::Text::Shell::HistoryManager]
+-  attr_reader :history_manager
+ 
+   #
+   # The framework instance's data service proxy
+@@ -287,8 +281,7 @@
+   attr_writer   :db # :nodoc:
+   attr_writer   :browser_profiles # :nodoc:
+   attr_writer   :analyze # :nodoc:
+-  attr_writer   :features  # :nodoc:
+-  attr_writer   :history_manager  # :nodoc:
++  attr_writer   :features # :nodoc:
+ 
+   private
+ 
+--- a/lib/msf/ui/console/command_dispatcher/developer.rb
++++ b/lib/msf/ui/console/command_dispatcher/developer.rb
+@@ -129,7 +129,7 @@
+     if expressions.empty?
+       print_status('Starting IRB shell...')
+ 
+-      framework.history_manager.with_context(name: :irb) do
++      Rex::Ui::Text::Shell::HistoryManager.instance.with_context(name: :irb) do
+         begin
+           if active_module
+             print_status("You are in #{active_module.fullname}\n")
+@@ -192,7 +192,7 @@
+     print_status('Starting Pry shell...')
+ 
+     Pry.config.history_load = false
+-    framework.history_manager.with_context(history_file: Msf::Config.pry_history, name: :pry) do
++    Rex::Ui::Text::Shell::HistoryManager.instance.with_context(history_file: Msf::Config.pry_history, name: :pry) do
+       if active_module
+         print_status("You are in the \"#{active_module.fullname}\" module object\n")
+         active_module.pry
+@@ -420,7 +420,7 @@
+     end
+ 
+     if opts.key?(:debug)
+-      framework.history_manager._debug = opts[:debug]
++      Rex::Ui::Text::Shell::HistoryManager.instance._debug = opts[:debug]
+       print_status("HistoryManager debugging is now #{opts[:debug] ? 'on' : 'off'}")
+     end
+ 
+@@ -430,7 +430,7 @@
+         'Indent'  => 1,
+         'Columns' => ['Id', 'File', 'Name']
+       )
+-      framework.history_manager._contexts.each.with_index do |context, id|
++      Rex::Ui::Text::Shell::HistoryManager.instance._contexts.each.with_index do |context, id|
+         table << [id, context[:history_file], context[:name]]
+       end
+ 
+--- a/lib/rex/post/meterpreter/ui/console/command_dispatcher/core.rb
++++ b/lib/rex/post/meterpreter/ui/console/command_dispatcher/core.rb
+@@ -599,7 +599,7 @@
+     if expressions.empty?
+       print_status('Starting IRB shell...')
+       print_status("You are in the \"client\" (session) object\n")
+-      framework.history_manager.with_context(name: :irb) do
++      Rex::Ui::Text::Shell::HistoryManager.instance.with_context(name: :irb) do
+         Rex::Ui::Text::IrbShell.new(client).run
+       end
+     else
+@@ -639,7 +639,7 @@
+     print_status("You are in the \"client\" (session) object\n")
+ 
+     Pry.config.history_load = false
+-    client.framework.history_manager.with_context(history_file: Msf::Config.pry_history, name: :pry) do
++    Rex::Ui::Text::Shell::HistoryManager.instance.with_context(history_file: Msf::Config.pry_history, name: :pry) do
+       client.pry
+     end
+   end
+--- a/lib/rex/ui/text/shell.rb
++++ b/lib/rex/ui/text/shell.rb
+@@ -130,7 +130,7 @@
+       # Pry is a development dependency, if not available suppressing history_load can be safely ignored.
+     end
+ 
+-    framework.history_manager.with_context(history_file: histfile, name: name) do
++    HistoryManager.instance.with_context(history_file: histfile, name: name) do
+       self.hist_last_saved = Readline::HISTORY.length
+ 
+       begin
+@@ -177,7 +177,7 @@
+       end
+     end
+   ensure
+-    framework.history_manager.flush
++    HistoryManager.instance.flush
+     self.hist_last_saved = Readline::HISTORY.length
+   end
+ 
+--- a/lib/rex/ui/text/shell/history_manager.rb
++++ b/lib/rex/ui/text/shell/history_manager.rb
+@@ -9,13 +9,15 @@
+ 
+ class HistoryManager
+ 
++  include Singleton
++
+   MAX_HISTORY = 2000
+ 
+   def initialize
+     @contexts = []
++    @write_mutex = Mutex.new
++    @write_queue = {}
+     @debug = false
+-    @write_queue = ::Queue.new
+-    @currently_processing = ::Queue.new
+   end
+ 
+   # Create a new history command context when executing the given block
+@@ -38,9 +40,7 @@
+ 
+   # Flush the contents of the write queue to disk. Blocks synchronously.
+   def flush
+-    until @write_queue.empty? && @currently_processing.empty?
+-      sleep 0.1
+-    end
++    sleep 0.1 until @write_queue.empty?
+ 
+     nil
+   end
+@@ -99,9 +99,16 @@
+     return unless readline_available?
+ 
+     clear_readline
+-    if File.exist?(history_file)
+-      File.readlines(history_file).each do |e|
+-        ::Readline::HISTORY << e.chomp
++    commands = from_storage_queue(history_file)
++    if commands
++      commands.reverse.each do |c|
++        ::Readline::HISTORY << c
++      end
++    else
++      if File.exist?(history_file)
++        File.readlines(history_file).each do |e|
++          ::Readline::HISTORY << e.chomp
++        end
+       end
+     end
+   end
+@@ -133,28 +140,32 @@
+   end
+ 
+   def write_history_file(history_file, cmds)
+-    write_queue_ref = @write_queue
+-    currently_processing_ref = @currently_processing
+-    @write_thread ||= Rex::ThreadFactory.spawn("HistoryManagerWriter", false) do
+-      while (event = write_queue_ref.pop)
+-        begin
+-          currently_processing_ref << event
+-
+-          history_file = event[:history_file]
+-          cmds = event[:cmds]
+-
+-          File.open(history_file, 'wb+') do |f|
+-            f.puts(cmds.reverse)
+-          end
+-        rescue => e
+-          elog(e)
+-        ensure
+-          currently_processing_ref.pop
++    entry_added = false
++    until entry_added
++      @write_mutex.synchronize do
++        if @write_queue[history_file].nil?
++          @write_queue[history_file] = cmds
++          entry_added = true
+         end
+       end
++      sleep 0.1 if !entry_added
++    end
++
++    Rex::ThreadFactory.spawn("#{history_file} Writer", false) do
++      File.open(history_file, 'wb+') do |f|
++        f.puts(cmds.reverse)
++      end
++
++      @write_mutex.synchronize do
++        @write_queue.delete(history_file)
++      end
+     end
++  end
+ 
+-    write_queue_ref << { type: :write, history_file: history_file, cmds: cmds }
++  def from_storage_queue(history_file)
++    @write_mutex.synchronize do
++      @write_queue[history_file]
++    end
+   end
+ end
+ 
