@@ -1,3 +1,11 @@
+metasploit-framework (6.3.37-0kali1) kali-dev; urgency=medium
+
+  * Remove duplicated patch
+  * New upstream version 6.3.37
+  * Refresh patches
+
+ -- Daniel Ruiz de Alegría <daniruiz@kali.org>  Fri, 06 Oct 2023 10:36:04 +0200
+
 metasploit-framework (6.3.36-0kali1) kali-dev; urgency=medium
 
   * New upstream version 6.3.36
