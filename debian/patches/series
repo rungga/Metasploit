@@ -1,4 +1,3 @@
-fix-metasm_shell.patch
 drop-installation-msfupdate.patch
 fix-usage-example.patch
 add-missing-dependencies.patch
